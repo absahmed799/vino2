@@ -11,25 +11,7 @@ Gestionnaire des bouteilles de vin à partir d’une application Web.
 
 ➡️ NOTE: Veuillez suivre les étapes suivantes pour configurer le projet sur votre machine.
 
-# ⌨️ Liste des commandes Git:
-
-### Serveur distant
-Pour définir un alias identifiant le serveur distant
-```sh
-git remote add vino2 https://github.com/absahmed799/vino2.git
-```
-Voir la liste des alias de serveur distant
-```sh
-git remote -v
-```
-Pousser mon dernier commit vers la branche main du dépôt distant vino2
-```sh
-git push vino2 main
-```
-Récupérer la dernière version de notre dépôt
-```sh
-git pull vino2 main 
-```
+# Liste des commandes Git:
 
 ### Création d'un dépôt
 - Initialise un dépôt vide, cette commande est exécuté une seule fois
@@ -81,7 +63,7 @@ Lancer le serveur Angular (Facultatif : requis uniquement pendant le développem
 ```sh
 $ ng serve
 ```
-⚠️⚠Ne fermez pas ce terminal!!!
+⚠️ Ne fermez pas ce terminal!!!
 
 Vérifiez si cela fonctionne dans le navigateur (Facultatif : requis uniquement pendant le développement front-end)
 
