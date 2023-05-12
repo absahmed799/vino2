@@ -15,10 +15,21 @@ Gestionnaire des bouteilles de vin à partir d’une application Web.
 
 ### Serveur distant
 Pour définir un alias identifiant le serveur distant
+```sh
 git remote add vino2 https://github.com/absahmed799/vino2.git
-git remote -v // voir la liste des alias de serveur distant
-git push vino2 main // pousser mon dernier commit vers la branche main du dépôt distant 41e
-git pull vino2 main // récupérer la dernière version de notre dépôt
+```
+Voir la liste des alias de serveur distant
+```sh
+git remote -v
+```
+Pousser mon dernier commit vers la branche main du dépôt distant vino2
+```sh
+git push vino2 main
+```
+Récupérer la dernière version de notre dépôt
+```sh
+git pull vino2 main 
+```
 
 ### Création d'un dépôt
 - Initialise un dépôt vide, cette commande est exécuté une seule fois
@@ -30,12 +41,12 @@ git pull vino2 main // récupérer la dernière version de notre dépôt
 
 ### Naviguer dans les branches
 - Pour changer le nom d'une branche
-    - `git branch -m «nom nouvelle branche»`
+    - `git branch -m nom-de-branche`
     - `git branch -m main`  // change le nom de la branche courante pour main
 - Pour créer une nouvelle branche
-    - `git branch « nouvelle branche »`
+    - `git branch nouvelle-branche`
 - Pour changer de branch 
-    - `git checkout « la branche »`
+    - `git checkout la-branche`
     - On ne peut pas changer de branche si la branche courante n'a pas été «commit» valider 
     - `git checkout « id du commit »`
     - `git checkout « étiquette du commit »`   
