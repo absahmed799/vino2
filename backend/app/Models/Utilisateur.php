@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Utilisateur extends Model
+class Utilisateur extends User
 {
     protected $table = 'utilisateurs';
     protected $fillable = ['name', 'email', 'role_id'];
@@ -15,7 +15,7 @@ class Utilisateur extends Model
         return $this->belongsTo(Role::class);
     }
 
-    // Define other relationships or additional methods here
+    // Définissez ici des relations ou des méthodes supplémentaires
 
      public function celliers()
     {

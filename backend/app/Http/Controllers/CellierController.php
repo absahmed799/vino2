@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CellierController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Afficher une liste de la ressource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class CellierController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stocker une ressource nouvellement créé dans le stockage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -39,7 +39,7 @@ class CellierController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Affiche la ressource spécifiée.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class CellierController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mettre à jour la ressource spécifiée dans le stockage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -76,7 +76,7 @@ class CellierController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime la ressource spécifiée du stockage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
