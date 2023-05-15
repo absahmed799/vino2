@@ -16,4 +16,9 @@ class Utilisateur extends Model
     }
 
     // Define other relationships or additional methods here
+
+     public function celliers()
+    {
+        return $this->hasMany(Cellier::class, 'utilisateur_id');
+    }
 }
