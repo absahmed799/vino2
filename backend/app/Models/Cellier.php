@@ -11,4 +11,12 @@ class Cellier extends Model
     protected $fillable = ['name'];
 
     // Define relationships or additional methods here
+
+     /**
+     * Un cellier est lié à un utilisateur
+     */
+    public function utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
+    }
 }
