@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cellier;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class CellierController extends Controller
@@ -13,7 +15,8 @@ class CellierController extends Controller
      */
     public function index()
     {
-        //
+        $celliers = Cellier::all();
+        return response()->json($celliers);
     }
 
     /**
@@ -24,7 +27,15 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'nom' => ['required', 'string'],
+            'user_id' => ['required', 'exists:users,id']
+        ]);
+
+        $cellier = Cellier::query()->create($request->all());
+
+        return response()->json($cellier, 201);
     }
 
     /**
@@ -35,7 +46,13 @@ class CellierController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $cellier = Cellier::query()->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
+        }
+
+        return response()->json($cellier);
     }
 
     /**
@@ -47,7 +64,15 @@ class CellierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $cellier = Cellier::query()->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
+        }
+
+        $cellier->update($request->all());
+
+        return response()->json($cellier);
     }
 
     /**
@@ -58,6 +83,14 @@ class CellierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $cellier = Cellier::query()->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
+        }
+
+        $cellier->forceDelete();
+
+        return response()->json(null, 204);
     }
 }
