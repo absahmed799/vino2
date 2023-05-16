@@ -27,16 +27,19 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'nom' => ['required', 'string'],
-            'user_id' => ['required', 'exists:users,id']
+            'utilisateur_id' => ['required', 'exists:utilisateurs,id'],
         ]);
 
-        $cellier = Cellier::query()->create($request->all());
+        $cellier = Cellier::create([
+            'nom' => $request->input('nom'),
+            'utilisateur_id' => $request->input('utilisateur_id'),
+        ]);
 
         return response()->json($cellier, 201);
     }
+
 
     /**
      * Affiche la ressource spécifiée.
@@ -65,15 +68,21 @@ class CellierController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $cellier = Cellier::query()->findOrFail($id);
+            $cellier = Cellier::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
         }
+
+        $this->validate($request, [
+            'nom' => ['required', 'string'],
+            'utilisateur_id' => ['required', 'exists:utilisateurs,id'],
+        ]);
 
         $cellier->update($request->all());
 
         return response()->json($cellier);
     }
+
 
     /**
      * Supprime la ressource spécifiée du stockage.
