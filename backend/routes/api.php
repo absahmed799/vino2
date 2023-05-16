@@ -50,7 +50,6 @@ Route::post('/bouteilles', [BouteilleController::class, 'store']);
 Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
 Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
