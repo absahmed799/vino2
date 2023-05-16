@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Bouteille;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class BouteilleController extends Controller
@@ -19,27 +21,71 @@ class BouteilleController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'bouteille_nom' => ['required', 'string'],
+            'image_url' => ['required', 'string'],
+            'code_SAQ' => ['required', 'integer'],
+            'description' => ['required', 'string'],
+            'prix_saq' => ['required', 'numeric'],
+            'saq_url' => ['required', 'string'],
+            'format' => ['required', 'string'],
+            'type_id' => ['required', 'integer'],
+            'pays_id' => ['required', 'integer'],
+        ]);
+
         $bouteille = Bouteille::create($request->all());
+
         return response()->json($bouteille, 201);
     }
 
+
     public function show($id)
     {
-        $bouteille = Bouteille::findOrFail($id);
+        try {
+            $bouteille = Bouteille::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Cette bouteille est inexistante!'], 404);
+        }
+
         return response()->json($bouteille);
     }
 
+
     public function update(Request $request, $id)
     {
-        $bouteille = Bouteille::findOrFail($id);
-        $bouteille->update($request->all());
-        return response()->json($bouteille);
+        try {
+            $bouteille = Bouteille::findOrFail($id);
+
+            $this->validate($request, [
+                'bouteille_nom' => ['required', 'string'],
+                'image_url' => ['required', 'string'],
+                'code_SAQ' => ['required', 'integer'],
+                'description' => ['required', 'string'],
+                'prix_saq' => ['required', 'numeric'],
+                'saq_url' => ['required', 'string'],
+                'format' => ['required', 'string'],
+                'type_id' => ['required', 'integer'],
+                'pays_id' => ['required', 'integer'],
+            ]);
+
+            $bouteille->update($request->all());
+
+            return response()->json($bouteille);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Cette bouteille est inexistante!'], 404);
+        }
     }
 
     public function destroy($id)
     {
-        $bouteille = Bouteille::findOrFail($id);
+        try {
+            $bouteille = Bouteille::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Cette bouteille est inexistante!'], 404);
+        }
+
         $bouteille->delete();
-        return response()->json(null, 204);
+
+        return response()->json(['message' => 'La bouteille a été supprimée avec succès.']);
     }
 }
