@@ -49,7 +49,6 @@ Route::get('/bouteilles/{id}', [BouteilleController::class, 'show']);
 Route::post('/bouteilles', [BouteilleController::class, 'store']);
 Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
 Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
-// Routes for BouteilleCellierController
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
