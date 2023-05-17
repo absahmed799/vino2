@@ -2,62 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cellier;
+use App\Models\BouteilleCellier;
 use Illuminate\Http\Request;
 
 class BouteilleCellierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Cellier $cellier)
     {
-        //
+        $bouteillesCellier = $cellier->bouteillesCellier;
+        return response()->json($bouteillesCellier);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request, Cellier $cellier)
     {
-        //
+        $bouteilleCellier = new BouteilleCellier($request->all());
+        $cellier->bouteillesCellier()->save($bouteilleCellier);
+        return response()->json($bouteilleCellier, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Cellier $cellier, BouteilleCellier $bouteilleCellier)
     {
-        //
+        $this->authorize('view', $bouteilleCellier);
+
+        return response()->json($bouteilleCellier);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cellier $cellier, BouteilleCellier $bouteilleCellier)
     {
-        //
+        $this->authorize('update', $bouteilleCellier);
+
+        $bouteilleCellier->update($request->all());
+        return response()->json($bouteilleCellier);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Cellier $cellier, BouteilleCellier $bouteilleCellier)
     {
-        //
+        $this->authorize('delete', $bouteilleCellier);
+
+        $bouteilleCellier->delete();
+        return response()->json(null, 204);
     }
 }
