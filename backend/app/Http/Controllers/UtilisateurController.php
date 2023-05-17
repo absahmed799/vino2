@@ -6,59 +6,61 @@ use Illuminate\Http\Request;
 
 class UtilisateurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $utilisateur = Utilisateur::all();
-        return response()->json($utilisateur);
+  
+        public function index()
+        {
+            $utilisateur = Utilisateur::all();
+            return view('utilisateur.index', compact('utilisateur'));
+        }
+    
+        public function create()
+        {
+            return view('utilisateur.create');
+        }
+    
+        public function store(Request $request)
+        {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:utilisateur',
+                'password' => 'required|min:6',
+            ]);
+    
+            Utilisateur::create($request->all());
+    
+            return redirect()->route('utilisateur.index')
+                ->with('success', 'Utilisateur created successfully.');
+        }
+    
+        public function show(Utilisateur $utilisateur)
+        {
+            return view('utilisateur.show', compact('utilisateur'));
+        }
+    
+        public function edit(Utilisateur $utilisateur)
+        {
+            return view('utilisateur.edit', compact('utilisateur'));
+        }
+    
+        public function update(Request $request, Utilisateur $utilisateur)
+        {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:utilisateur,email,' . $utilisateur->id,
+                'password' => 'nullable|min:6',
+            ]);
+    
+            $utilisateur->update($request->all());
+    
+            return redirect()->route('utilisateur.index')
+                ->with('success', 'Utilisateur updated successfully.');
+        }
+    
+        public function destroy(Utilisateur $utilisateur)
+        {
+            $utilisateur->delete();
+    
+            return redirect()->route('utilisateur.index')
+                ->with('success', 'Utilisateur deleted successfully.');
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-}
