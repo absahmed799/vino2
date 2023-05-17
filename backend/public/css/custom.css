@@ -1,0 +1,411 @@
+/*
+Parametres de CSS personalisées customs 
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	border: none;
+	outline: none;
+	scroll-behavior: smooth;
+	font-family: "Roboto", "RobotoDraft", sans-serif;
+  }
+  
+  header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.5rem 8rem;
+	display: flex;
+	align-items: center;
+	z-index: 100;
+	border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+	background-color: white;
+  }
+  
+  .logo {
+	font-weight: 600;
+	cursor: default;
+  }
+  
+  .logo img {
+	width: 10%;
+  }
+  
+  .text_logo {
+	margin-left: 1rem;
+  }
+  
+  #menu-icon {
+	display: none;
+	font-size: 3.6rem;
+	color: #222222;
+  }
+  
+  .navbar {
+	width: 100%;
+	text-align: end;
+  }
+  
+  .navbar a {
+	display: inline-block;
+	font-size: 1.2rem;
+	margin-left: 1.2rem;
+  }
+  
+  section,
+  .section {
+	min-height: 100vh;
+	padding: 10rem 9% 2rem;
+  }
+  
+  .bouteille-cellier {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+  }
+  
+  .bouteille {
+	flex: 1 1 25rem;
+	padding: 1rem 1rem 1rem;
+	border-radius: 0.8rem;
+	background-color: white;
+	align-items: center;
+	display: grid;
+  }
+  
+  .bouteille .head-card {
+	text-align: center;
+	margin-bottom: 25.5px;
+  }
+  
+  .bouteille .body-card {
+	display: flex;
+	align-items: center;
+  }
+  
+  .bouteille .body-card p {
+	margin-bottom: 1.1rem;
+	font-weight: bold;
+  }
+  
+  .bouteille .body-card .description {
+	margin-left: 1rem;
+  }
+  
+  .bouteille .footer-card {
+	text-align: center;
+  }
+  
+  .btnCustom {
+	margin-right: 1.2rem;
+	margin-left: 1.2rem;
+	background-color: green;
+	color: white;
+  }
+  
+  .btn {
+	display: inline-block;
+	padding: 1rem 1rem;
+	border-radius: 4rem;
+	font-size: 1rem;
+	letter-spacing: 0.1rem;
+	font-weight: 600;
+  }
+  
+  section.modifier,
+  .section {
+	display: block;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  section.modifier .nouvelleBouteille,
+  .section .nouvelleBouteille {
+	padding: 2rem;
+	background-color: white;
+	border-radius: 0.8rem;
+	margin: 0 22rem;
+  }
+  
+  section.modifier h1,
+  .section h1 {
+	text-align: center;
+  }
+  
+  /* Form */
+  form,
+  .input-box {
+	max-width: 70rem;
+	text-align: center;
+	margin: 1rem auto;
+  }
+  
+  form .input-box,
+  .input-box {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	text-align: left;
+  }
+  
+  form .input-box input,
+  .input-box input,
+  input {
+	width: 100%;
+	padding: 1rem;
+	font-size: 1rem;
+	color: black;
+	background: #e2e2e2;
+	border-radius: 0.4rem;
+	margin: 0.7rem 0;
+  }
+  
+  .obligatoire {
+	font-weight: bold;
+	color: red;
+  }
+  
+  .obligatoire_champ {
+	margin-top: 1.5rem;
+	text-align: right;
+	font-weight: bold;
+  }
+  
+  .btnUpdate {
+	margin-top: 2rem;
+	color: white;
+	background-color: green;
+  }
+  
+  .listeAutoComplete {
+	text-align: left;
+	margin-left: 2rem;
+	margin-bottom: 2rem;
+  }
+  
+  .name_bottle {
+	text-align: left;
+	margin-top: 1rem;
+  }
+  
+  footer {
+	position: relative;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 2rem 9%;
+  }
+  
+  footer p {
+	display: inline;
+	padding-right: 50px;
+	/*font-size : 10px;*/
+  }
+  
+  /* Media Queries*/
+  
+  @media (min-width: 360px) {
+	html,
+	body {
+	  font-size: 90%;
+	}
+  
+	header {
+	  padding: 0.5rem 1rem;
+	  font-size: 1.2rem;
+	}
+  
+	#menu-icon {
+	  display: block;
+	}
+  
+	.navbar {
+	  position: absolute;
+	  top: 100%;
+	  left: 0;
+	  width: 100%;
+	  padding: 1rem 3%;
+	  background: white;
+	  border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+	  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	  display: none;
+	}
+  
+	.navbar.active {
+	  display: block;
+	}
+  
+	.navbar a {
+	  display: block;
+	  font-size: 1.1rem;
+	  margin: 1rem;
+	}
+  
+	section,
+	.section {
+	  padding: 7rem 3% 2rem;
+	}
+  
+	section.modifier .nouvelleBouteille,
+	.section .nouvelleBouteille {
+	  margin: 0;
+	}
+  
+	.logo img {
+	  width: 20%;
+	}
+  
+	.bouteille .body-card p {
+	  margin-bottom: 0.3rem;
+	}
+  
+	form .input-box,
+	.input-box {
+	  display: block;
+	}
+  
+	.btn {
+	  font-size: 0.8rem;
+	}
+  
+	footer {
+	  padding: 1rem 6%;
+	}
+  
+	footer p {
+	  font-size: 1rem;
+	}
+  }
+  
+  @media (min-width: 430px) {
+	section,
+	.section {
+	  padding-top: 11rem;
+	}
+  }
+  
+  @media (min-width: 600px) {
+	.logo img {
+	  width: 13%;
+	}
+  
+	section,
+	.section {
+	  padding-top: 10rem;
+	}
+  
+	form .input-box,
+	.input-box {
+	  display: flex;
+	}
+  
+	.input-box p {
+	  width: 49%;
+	  margin-right: 1px;
+	}
+  }
+  
+  @media (min-width: 768px) {
+	html,
+	body {
+	  font-size: 1rem;
+	}
+  
+	header {
+	  font-size: 1rem;
+	}
+  
+	header a {
+	  text-align: center;
+	}
+  
+	#menu-icon {
+	  display: none;
+	}
+  
+	.navbar {
+	  width: 100%;
+	  text-align: end;
+	  display: flex;
+	  border-top: 0;
+	  padding: 0;
+	  justify-content: space-around;
+	  font-size: 0.5rem;
+	}
+  
+	.navbar a {
+	  display: inline-block;
+	  font-size: 1.2rem;
+	}
+  
+	.navbar.active {
+	  display: flex;
+	  justify-content: center;
+	}
+  
+	.logo img {
+	  width: 6%;
+	}
+  
+	section,
+	.section {
+	  padding: 10rem 9% 2rem;
+	}
+  
+	.btn {
+	  font-size: 1.1rem;
+	}
+  
+	.bouteille .body-card p {
+	  margin-bottom: 0.9rem;
+	}
+  }
+  
+  @media (min-width: 912px) {
+	.btn {
+	  font-size: 0.9rem;
+	}
+  }
+  
+  @media (min-width: 1024px) {
+	header {
+	  font-size: 1.2rem;
+	}
+  
+	.logo {
+	  text-align: left;
+	}
+  
+	.navbar {
+	  position: relative;
+	  box-shadow: 0 0 0;
+	}
+  }
+  
+  @media (min-width: 1280px) {
+	html,
+	body {
+	  font-size: 90%;
+	}
+  
+	section,
+	.section {
+	  padding: 10rem 9% 2rem;
+	}
+  
+	section.modifier .nouvelleBouteille,
+	.section .nouvelleBouteille {
+	  margin: 0 10rem;
+	}
+  }
+  
