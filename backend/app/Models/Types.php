@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Types extends Model
 {
     protected $table = 'types';
-    protected $fillable = ['name'];
+    
+    protected $fillable = ['nom'];
+    public $timestamps = false;
 
     // Define relationships or additional methods here
 }
