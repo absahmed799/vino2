@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\Utilisateur;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,22 @@ class CellierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $celliers = Cellier::all();
-        return response()->json($celliers);
+        // Récupérer l'ID de l'utilisateur à partir de la requête
+        $utilisateurId = $request->input('utilisateur_id');
+
+        try {
+            // Rechercher l'utilisateur
+            $utilisateur = Utilisateur::findOrFail($utilisateurId);
+
+            // Récupérer les celliers de l'utilisateur
+            $celliers = $utilisateur->celliers;
+
+            return response()->json($celliers);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
     }
 
     /**
@@ -47,15 +60,21 @@ class CellierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        try {
-            $cellier = Cellier::query()->findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
-        }
+        // Récupérer l'ID de l'utilisateur à partir de la requête
+        $utilisateurId = $request->input('utilisateur_id');
 
-        return response()->json($cellier);
+        try {
+            // Rechercher le cellier en utilisant à la fois l'ID du cellier et l'ID de l'utilisateur
+            $cellier = Cellier::where('id', $id)
+                ->where('utilisateur_id', $utilisateurId)
+                ->firstOrFail();
+
+            return response()->json($cellier);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+        }
     }
 
     /**
@@ -68,9 +87,11 @@ class CellierController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $cellier = Cellier::findOrFail($id);
+            $cellier = Cellier::where('id', $id)
+                ->where('utilisateur_id', $request->input('utilisateur_id'))
+                ->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
+            return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
         }
 
         $this->validate($request, [
@@ -90,16 +111,18 @@ class CellierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         try {
-            $cellier = Cellier::query()->findOrFail($id);
+            $cellier = Cellier::where('id', $id)
+                ->where('utilisateur_id', $request->input('utilisateur_id'))
+                ->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce cellier est inexistant!'], 404);
+            return response()->json(false, 404);
         }
 
         $cellier->forceDelete();
 
-        return response()->json(null, 204);
+        return response()->json(true, 204);
     }
 }
