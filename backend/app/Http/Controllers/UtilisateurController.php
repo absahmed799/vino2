@@ -43,10 +43,18 @@ class UtilisateurController extends Controller
     }
 
 
-    public function show(Utilisateur $utilisateur)
+    public function show($id)
     {
-        //return view('utilisateur.show', compact('utilisateur'));
-    }
+        try {
+            $utilisateur = Utilisateur::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => '⛔ Cette utilisateur est inexistante!'], 404);
+        }
+
+        return response()->json([
+            'message' => '👤 Utilisateur id: '. $id . '.',
+            'utilisateur' => $utilisateur
+        ]);    }
 
     public function edit(Utilisateur $utilisateur)
     {
@@ -69,7 +77,8 @@ class UtilisateurController extends Controller
             return response()->json([
                 'message' => '✅ Utilisateur modifié avec succès.',
                 'utilisateur' => $utilisateur
-            ]);        } catch (ModelNotFoundException $e) {
+            ]);
+        } catch (ModelNotFoundException $e) {
             return response()->json(['message' => '⛔ Cette utilisateur est inexistante!'], 404);
         }
     }
