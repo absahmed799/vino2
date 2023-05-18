@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SAQController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/import-products', 'SAQController@importProducts')->name('importProducts');
+Route::get('/import-products', [SAQController::class, 'importProducts'])->name('importProducts');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
 
 Route::get('/', function () {
     return view('welcome');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bouteille;
 use App\Models\Pays;
-use App\Models\Type;
+use App\Models\Types;
 use DOMDocument;
 use stdClass;
 
@@ -153,7 +153,7 @@ class SAQController extends Controller
             'raison' => '',
         ];
 
-        $type = Type::where('nom', $bte->desc->type)->first();
+        $type = Types::where('nom', $bte->desc->type)->first();
 
         if ($type) {
             $existingBottle = Bouteille::where('code_SAQ', $bte->desc->code_SAQ)->exists();
