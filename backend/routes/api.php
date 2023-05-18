@@ -50,11 +50,11 @@ Route::post('/bouteilles', [BouteilleController::class, 'store']);
 Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
 Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
 // Routes for BouteilleCellierController
-Route::get('/celliers/{cellier}/bouteilles', 'BouteilleCellierController@index');
-Route::post('/celliers/{cellier}/bouteilles', 'BouteilleCellierController@store');
-Route::get('/celliers/{cellier}/bouteilles/{bouteilleCellier}', 'BouteilleCellierController@show');
-Route::put('/celliers/{cellier}/bouteilles/{bouteilleCellier}', 'BouteilleCellierController@update');
-Route::delete('/celliers/{cellier}/bouteilles/{bouteilleCellier}', 'BouteilleCellierController@destroy');
+Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class, 'index']);
+Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
+Route::get('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'show']);
+Route::put('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'update']);
+Route::delete('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
