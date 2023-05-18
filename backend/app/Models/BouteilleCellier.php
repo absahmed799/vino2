@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Bouteille;
-use App\Models\Cellier;
 
 class BouteilleCellier extends Model
 {
@@ -22,13 +19,11 @@ class BouteilleCellier extends Model
 
     public function bouteille()
     {
-        return $this->belongsTo(Bouteille::class,'bouteille_id');
+        return $this->belongsTo(Bouteille::class, 'bouteille_id');
     }
 
     public function cellier()
     {
-        return $this->belongsTo(Cellier::class,'cellier_id');
+        return $this->belongsTo(Cellier::class, 'cellier_id');
     }
-
-    // Define other relationships or additional methods here
 }

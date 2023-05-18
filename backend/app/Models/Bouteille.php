@@ -28,17 +28,3 @@ class Bouteille extends Model
 
 
 
-
-    
-
-    //public function type(): BelongsTo
-    //{
-    //    return $this->belongsTo(Types::class);
-    //}
-    //
-
-    //public function country(): BelongsTo
-    //{
-    //    return $this->belongsTo(Pays::class, 'pays_id');
-    //}
-
