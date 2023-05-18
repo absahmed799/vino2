@@ -10,6 +10,7 @@ use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleCellierController;
 use App\Http\Controllers\ListeAchatController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,14 @@ use App\Http\Controllers\ListeAchatController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Routes pour AuthenticationController
+Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+    Route::get('/utilisateur', [AuthenticationController::class, 'utilisateur'])->name('utilisateur');
+});
+
 Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class, 'index']);
 // Routes for UtilisateurController
 Route::get('/utilisateurs', [UtilisateurController::class, 'index']);
