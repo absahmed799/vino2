@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Role;
+use App\Models\Cellier;
+
+
 
 class Utilisateur extends User
 {
     protected $table = 'utilisateurs';
-    protected $fillable = ['name', 'email', 'role_id'];
+    protected $fillable = ['nom', 'courriel', 'mot_de_passe','role_id'];
 
     public function role()
     {

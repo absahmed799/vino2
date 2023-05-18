@@ -12,7 +12,6 @@ class Pays extends Model
 
     protected $table = 'pays';
     protected $fillable = ['nom'];
-
     public $timestamps = false;
 }
 
