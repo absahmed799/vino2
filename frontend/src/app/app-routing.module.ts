@@ -17,8 +17,10 @@ import { ModifierBouteilleComponent } from './bouteille/modifier-bouteille/modif
 //import { AuthServService } from './serv/auth-serv.service';
 
 const routes: Routes = [
+  //Routes pour Accueil
   { path:"", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
- 
+  { path:"accueil", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
+ //Routes pour cellier
   { path:"cellier", component:ListeCellierComponent, /* canActivate:[GardienRouteGuard]*/},
   { path:"cellier/ajouter", component:AjouterCellierComponent, /* canActivate:[GardienRouteGuard]*/},
   { path:"cellier/:id", component:ModifierCellierComponent, /* canActivate:[GardienRouteGuard]*/},
@@ -27,9 +29,12 @@ const routes: Routes = [
   { path:"cellier/:id/bouteille/ajouter", component: LoginComponent },
   { path:"cellier/:id/bouteille/:id", component: AfficherBouteilleComponent },
   { path:"cellier/:id/bouteille/:id/edit", component: ModifierBouteilleComponent  },
+  
+  // Routes pour Login / Enregistrer
   { path:"login", component: LoginComponent },
-  { path:"login", component: LoginComponent },
-  { path:"register", component: EnregistrerComponent },
+  { path:"enregistrer", component: EnregistrerComponent },
+
+  // Route pour une page non trouvée (Erreur 404)
   { path:"**", component:NonTrouverComponent, /* canActivate:[GardienRouteGuard]*/},
   
 ];
