@@ -10,37 +10,87 @@ class BouteilleCellierController extends Controller
 {
     public function index(Cellier $cellier)
     {
-        $bouteillesCellier = $cellier->bouteillesCellier;
+        $id_cellier = $cellier->id;
+        $bouteillesCellier = BouteilleCellier::where('cellier_id', $id_cellier)->get();
         return response()->json($bouteillesCellier);
     }
 
     public function store(Request $request, Cellier $cellier)
     {
-        $bouteilleCellier = new BouteilleCellier($request->all());
-        $cellier->bouteillesCellier()->save($bouteilleCellier);
+        $bouteilleCellier = BouteilleCellier::create([
+            'millesime' => $request->input('millesime'),
+            'quantite' => $request->input('quantite'),
+            'date_achat' => $request->input('date_achat'),
+            'garde_jusqua' => $request->input('garde_jusqua'),
+            'note' => $request->input('note'),
+            'cellier_id' => $cellier->id,
+            'bouteille_id' => $request->input('bouteille_id'),
+        ]);
+
         return response()->json($bouteilleCellier, 201);
     }
 
-    public function show(Cellier $cellier, BouteilleCellier $bouteilleCellier)
+    public function show(Cellier $cellier, $id_bouteille)
     {
-        $this->authorize('view', $bouteilleCellier);
+        $bouteilleCellier = BouteilleCellier::where('cellier_id', $cellier->id)
+            ->where('bouteille_id', $id_bouteille)
+            ->first();
+
+        if (!$bouteilleCellier) {
+            return response()->json(['error' => 'Bouteille not found'], 404);
+        }
 
         return response()->json($bouteilleCellier);
     }
 
-    public function update(Request $request, Cellier $cellier, BouteilleCellier $bouteilleCellier)
+    public function update(Request $request, Cellier $cellier, $bouteille_id)
     {
-        $this->authorize('update', $bouteilleCellier);
+        // Trouver le bouteilleCellier associé au cellier et à l'ID de la bouteille
+        $bouteilleCellier = BouteilleCellier::where('cellier_id', $cellier->id)
+            ->where('bouteille_id', $bouteille_id)
+            ->first();
 
-        $bouteilleCellier->update($request->all());
-        return response()->json($bouteilleCellier);
+        // Vérifier si le bouteilleCellier existe
+        if (!$bouteilleCellier) {
+            return response()->json(['error' => 'Bouteille not found'], 404);
+        }
+
+        // Accéder à la bouteille à partir du bouteilleCellier
+        $bouteille = $bouteilleCellier->bouteille;
+
+        // Valider les données de la requête
+        $this->validate($request, [
+            'bouteille_nom' => ['required', 'string'],
+            'image_url' => ['required', 'string'],
+            'code_SAQ' => ['required', 'integer'],
+            'description' => ['required', 'string'],
+            'prix_saq' => ['required', 'numeric'],
+            'saq_url' => ['required', 'string'],
+            'format' => ['required', 'string'],
+            'type_id' => ['required', 'integer'],
+            'pays_id' => ['required', 'integer'],
+        ]);
+
+        // Mettre à jour les attributs de la bouteille
+        $bouteille->update($request->all());
+
+        return response()->json($bouteille);
     }
 
-    public function destroy(Cellier $cellier, BouteilleCellier $bouteilleCellier)
+    public function destroy(Cellier $cellier, $bouteille_id)
     {
-        $this->authorize('delete', $bouteilleCellier);
+        // Trouver le bouteilleCellier associé au cellier et à l'ID de la bouteille
+        $bouteilleCellier = BouteilleCellier::where('cellier_id', $cellier->id)
+            ->where('bouteille_id', $bouteille_id)
+            ->first();
 
+        if (!$bouteilleCellier) {
+            return response()->json(['error' => 'Bouteille not found'], 404);
+        }
+
+        // Supprimer le bouteilleCellier
         $bouteilleCellier->delete();
-        return response()->json(null, 204);
+
+        return response()->json(['message' => 'Bouteille deleted']);
     }
 }

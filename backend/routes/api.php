@@ -21,6 +21,7 @@ use App\Http\Controllers\ListeAchatController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class, 'index']);
 // Routes for UtilisateurController
 Route::get('/utilisateurs', [UtilisateurController::class, 'index']);
 Route::post('/utilisateurs', [UtilisateurController::class, 'store']);
@@ -50,11 +51,11 @@ Route::post('/bouteilles', [BouteilleController::class, 'store']);
 Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
 Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
 // Routes for BouteilleCellierController
-Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class, 'index']);
+
 Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
-Route::get('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'show']);
-Route::put('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'update']);
-Route::delete('/celliers/{cellier}/bouteilles/{bouteilleCellier}', [BouteilleCellierController::class,'destroy']);
+Route::get('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'show']);
+Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'update']);
+Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
