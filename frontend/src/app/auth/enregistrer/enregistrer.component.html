@@ -1,1 +1,30 @@
-<p>enregistrer works!</p>
+<div class="container">
+
+    <h2 class="login-title">Enregistrer</h2>
+
+    <form class="login-form">
+       <div>
+            <label for="nom">Nom </label>
+            <input id="nom" type="text" placeholder="Votre Nom" name="nom" required />
+        </div>
+
+        <div>
+            <label for="courriel">Courriel </label>
+            <input id="courriel" type="email" name="courriel"  placeholder="courriel@example.com" required />
+        </div>
+
+        <div>
+            <label for="mot_de_passe">Mot de passe </label>
+            <input id="mot_de_passe" type="password" name="mot_de_passe" placeholder="Mot de passe" required />
+        </div>
+        <div>
+            <label for="mot_de_passe">Confirmation du mot de passe </label>
+            <input id="mot_de_passe" type="password" name="mot_de_passe" placeholder="Confirmation du mot de passe" required />
+        </div>
+
+        <button class="btn btn--form" type="submit">
+            Enregistrer
+        </button>
+        <p><small><a routerLink="/login">Avez-vous une compte?</a></small></p>
+    </form>
+</div>
