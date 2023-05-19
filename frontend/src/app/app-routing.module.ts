@@ -17,10 +17,12 @@ import { ModifierBouteilleComponent } from './bouteille/modifier-bouteille/modif
 //import { AuthServService } from './serv/auth-serv.service';
 
 const routes: Routes = [
+  
   //Routes pour Accueil
   { path:"", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
   { path:"accueil", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
- //Routes pour cellier
+ 
+  //Routes pour cellier
   { path:"cellier", component:ListeCellierComponent, /* canActivate:[GardienRouteGuard]*/},
   { path:"cellier/ajouter", component:AjouterCellierComponent, /* canActivate:[GardienRouteGuard]*/},
   { path:"cellier/:id", component:ModifierCellierComponent, /* canActivate:[GardienRouteGuard]*/},

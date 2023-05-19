@@ -20,6 +20,17 @@ import { SupprimerBouteilleComponent } from './bouteille/supprimer-bouteille/sup
 import { AfficherBouteilleComponent } from './bouteille/afficher-bouteille/afficher-bouteille.component';
 import { AccueilComponent } from './layout/accueil/accueil.component';
 import { NonTrouverComponent } from './layout/non-trouver/non-trouver.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+// Importez les modules Angula Material spécifiques dont nous avons besoin:
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +55,17 @@ import { NonTrouverComponent } from './layout/non-trouver/non-trouver.component'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+
+    // Importez les modules Angular Material ici:
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
