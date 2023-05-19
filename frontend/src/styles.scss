@@ -1,4 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* COULEURS */
+:root {
+    --couleurBlack: #000000;
+    --couleurVert1: #1FAB89;
+    --couleurVert2: #62D2A2;
+    --couleurVert3: #9DF3C4;
+    --couleurVert4: #D7FBE8;
+}
+
+/* Des @import: */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+/* Des styles globales: */
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Format des liens <a> */
+a {
+    color: var(--couleurBlack);
+    text-decoration: none
+}
+
+a:hover {
+    color: var(--couleurVert1);
+    text-decoration: underline
+}
+
+/* ======================= */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
