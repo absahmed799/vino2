@@ -1,34 +1,43 @@
-<div class="mat-typography">
+<app-entete></app-entete>
 
-    <h2>Enregistrer</h2>
+<div class="body">
+  <h5 class="smtitle">S'inscrire</h5>
 
-    <form>
-        <mat-form-field>
-            <mat-label>Nom</mat-label>
-            <input matInput id="nom" type="text" placeholder="Votre Nom" name="nom" required />
-        </mat-form-field>
+  <form class="example-form" [formGroup]="enregistrer" (ngSubmit)="enregistrerSubmit()">
+    <input type="hidden" formControlName="role_id" >
 
-        <mat-form-field>
-            <mat-label>Courriel</mat-label>
-            <input matInput id="courriel" type="email" name="courriel" placeholder="courriel@example.com" required />
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="nom">
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Mot de passe</mat-label>
-            <input matInput id="mot_de_passe" type="password" name="mot_de_passe" placeholder="Mot de passe" required />
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Courriel</mat-label>
+      <input matInput formControlName="courriel">
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Confirmation du mot de passe</mat-label>
-            <input matInput id="confirmation_mot_de_passe" type="password" name="confirmation_mot_de_passe"
-                placeholder="Confirmation du mot de passe" required />
-        </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="'password'" formControlName="mot_de_passe" >
+    </mat-form-field>
 
-        <div>
-            <button mat-raised-button class="btn btn--form" type="submit">Enregistrer</button>
-        </div>
-        
-        <p><small><a routerLink="/login">Avez-vous un compte?</a></small></p>
-    </form>
+    <mat-form-field>
+      <mat-label>Confirmation du mot de passe</mat-label>
+      <input matInput type="password" formControlName="confirm_password" >
+      <mat-error *ngIf="enregistrer.hasError('passwordsDoNotMatch')">
+        Les mots de passe ne correspondent pas
+      </mat-error>
+    </mat-form-field>
+    <p class="passwordsDoNotMatch" *ngIf="passwordsDoNotMatch">Les mots de passe ne correspondent pas</p>
 
+    <div class="footer">
+      <div class="menu">
+        <button type="submit" class="">Enregistrer</button>
+      </div>
+      <p class="error-login" *ngIf="error">{{ message_error }}</p>
+      <div class="redirect">
+        <p class="reg_login"><small><a routerLink="/login">Login</a></small></p>
+      </div>
+    </div>
+  </form>
 </div>

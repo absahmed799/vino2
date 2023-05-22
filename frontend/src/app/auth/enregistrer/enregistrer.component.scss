@@ -1,0 +1,74 @@
+@media (min-width: 220px) {
+  .body .smtitle {
+    padding: 10% 0;
+  }
+
+  .mat-mdc-form-field {
+    display: flex;
+  }
+
+  form .passwordsDoNotMatch {
+    color: red;
+    font-style: italic;
+  }
+
+  .footer .menu {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 0;
+    background: rgb(230 255 241);
+    width: 47%;
+    padding: 3%;
+    border-radius: 6rem;
+    box-shadow: 2px 1rem 1rem rgb(4 4 4 / 25%);
+  }
+
+  .footer .menu button {
+    color: rgba(0, 0, 0, 0.82);
+    background: rgb(230 255 241);
+    position: relative;
+  }
+
+  .footer .menu button.active::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: #5fcb9c;
+    position: absolute;
+    bottom: -1px;
+    left: 40%;
+    border-radius: 50%;
+  }
+
+  .footer .menu button i {
+    background: rgb(230 255 241);
+  }
+
+  .footer .menu button.active {
+    color: #5fcb9c;
+  }
+
+  .footer .redirect {
+    padding-top: 5%;
+  }
+
+  .footer .redirect p {
+    padding:2% 0;
+    font-size: 1rem;
+    text-align: center;
+    color: #000000;
+  }
+
+  .footer .redirect p a {
+    color: rgb(0, 0, 0)
+  }
+
+  .footer .error-login {
+    margin-top: 20px;
+    color: red;
+    font-style: italic;
+  }
+
+
+}
