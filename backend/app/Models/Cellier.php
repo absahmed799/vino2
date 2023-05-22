@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Utilisateur;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Cellier extends Model
 {
@@ -20,4 +21,16 @@ class Cellier extends Model
     {
         return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
     }
+
+    public function bouteilles(): BelongsToMany
+    {
+        return $this->belongsToMany(Bouteille::class, 'bouteilles_celliers')
+            ->withPivot([
+                'millesime',
+                'quantite',
+                'date_achat',
+                'note',
+            ])->withTimestamps();
+    }
+
 }

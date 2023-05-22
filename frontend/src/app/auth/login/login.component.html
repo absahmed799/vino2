@@ -1,24 +1,31 @@
-<div class="mat-typography">
+<app-entete></app-entete>
 
-    <h2>Login</h2>
+<div class="body">
+  <h5 class="smtitle">Login</h5>
 
-    <form>
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
 
-        <mat-form-field>
-            <mat-label>Courriel</mat-label>
-            <input matInput id="courriel" type="email" name="courriel" placeholder="courriel@example.com" required />
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Courriel</mat-label>
+      <input matInput value="" formControlName="email" placeholder="courriel@example.com" required>
+      <mat-error *ngIf="error">{{ message_error}}</mat-error>
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Mot de passe</mat-label>
-            <input matInput id="mot_de_passe" type="password" name="mot_de_passe" placeholder="Mot de passe" required />
-        </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="'password'" formControlName="password" placeholder="Mot de passe" required>
+      <mat-error *ngIf="error">{{ message_error}}</mat-error>
+    </mat-form-field>
 
-        <div>
-            <button mat-raised-button class="btn btn--form" type="submit">Connecter</button>
-        </div>
-        
-        <p><small><a routerLink="/enregistrer">Voulez-vous s'enregistrer?</a></small></p>
-
-    </form>
+    <div class="footer">
+      <div class="menu">
+        <button type="submit" [disabled]="!loginForm.valid">Connecter</button>
+      </div>
+      <p class="error-login" *ngIf="error">{{ message_error }}</p>
+      <div class="redirect">
+        <p><a routerLink="/enregistrer">Enregistrer</a></p>
+        <p><a routerLink="/">Accueil</a></p>
+      </div>
+    </div>
+  </form>
 </div>

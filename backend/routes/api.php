@@ -28,9 +28,26 @@ Route::post('/login', [AuthenticationController::class, 'login'])->name('login')
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::get('/utilisateur', [AuthenticationController::class, 'utilisateur'])->name('utilisateur');
+
+    // Il faut être connecté pour interagir avec les celliers
+    // Routes for CellierController
+    Route::get('/celliers', [CellierController::class, 'index']);
+    Route::get('/celliers/{id}', [CellierController::class, 'show']);
+    Route::post('/celliers', [CellierController::class, 'store']);
+    Route::put('/celliers/{id}', [CellierController::class, 'update']);
+    Route::delete('/celliers/{id}', [CellierController::class, 'destroy']);
+
+    Route::get('/celliers/{id}/bouteilles', [BouteilleCellierController::class, 'index']);
+
+    // Routes for BouteilleController
+    Route::get('/bouteilles', [BouteilleController::class, 'index']);
+    Route::get('/bouteilles/{id}', [BouteilleController::class, 'show']);
+    Route::post('/bouteilles', [BouteilleController::class, 'store']);
+    Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
+    Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
 });
 
-Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class, 'index']);
+
 // Routes for UtilisateurController
 Route::get('/utilisateurs', [UtilisateurController::class, 'index']);
 Route::post('/utilisateurs', [UtilisateurController::class, 'store']);
@@ -47,18 +64,8 @@ Route::get('/pays/{id}', [PaysController::class, 'show']);
 // Routes for TypesController
 Route::get('/types', [TypesController::class, 'index']);
 Route::get('/types/{id}', [TypesController::class, 'show']);
-// Routes for CellierController
-Route::get('/celliers', [CellierController::class, 'index']);
-Route::get('/celliers/{id}', [CellierController::class, 'show']);
-Route::post('/celliers', [CellierController::class, 'store']);
-Route::put('/celliers/{id}', [CellierController::class, 'update']);
-Route::delete('/celliers/{id}', [CellierController::class, 'destroy']);
-// Routes for BouteilleController
-Route::get('/bouteilles', [BouteilleController::class, 'index']);
-Route::get('/bouteilles/{id}', [BouteilleController::class, 'show']);
-Route::post('/bouteilles', [BouteilleController::class, 'store']);
-Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
-Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
+
+
 // Routes for BouteilleCellierController
 
 Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);

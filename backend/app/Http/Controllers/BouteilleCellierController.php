@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Cellier;
 use App\Models\BouteilleCellier;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class BouteilleCellierController extends Controller
 {
-    public function index(Cellier $cellier)
+    public function index(int $id)
     {
-        $id_cellier = $cellier->id;
-        $bouteillesCellier = BouteilleCellier::where('cellier_id', $id_cellier)->get();
-        return response()->json($bouteillesCellier);
+        try {
+            // Rechercher le cellier en utilisant à la fois l'ID du cellier
+            $cellier = Cellier::with(['bouteilles', 'bouteilles.type', 'bouteilles.pays'])
+                ->withCount('bouteilles')
+                ->findOrFail($id);
+            return response()->json($cellier);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+        }
     }
 
     public function store(Request $request, Cellier $cellier)

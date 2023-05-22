@@ -6,6 +6,7 @@ use App\Models\Utilisateur;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 
 class UtilisateurController extends Controller
 {
@@ -23,6 +24,23 @@ class UtilisateurController extends Controller
 
     public function store(Request $request)
     {
+        \Log::debug('request', $request->all());
+        try {
+            $this->validate($request, [
+                'nom' => 'required',
+                'courriel' => 'required|unique:utilisateurs,courriel',
+                'mot_de_passe' => 'required',
+                'role_id' => 'required|exists:roles,id'
+            ], [
+                'courriel.unique' => 'Ce courriel est déjà existant !'
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 422);
+        }
+
+
         $nom = $request->input('nom');
         $courriel = $request->input('courriel');
         $motDePasse = $request->input('mot_de_passe');
@@ -31,7 +49,7 @@ class UtilisateurController extends Controller
         $utilisateur = new Utilisateur();
         $utilisateur->nom = $nom;
         $utilisateur->courriel = $courriel;
-        $utilisateur->mot_de_passe = $motDePasse;
+        $utilisateur->mot_de_passe = Hash::make($motDePasse);
         $utilisateur->role_id = $role_id;
 
         $utilisateur->save();
@@ -52,9 +70,10 @@ class UtilisateurController extends Controller
         }
 
         return response()->json([
-            'message' => '👤 Utilisateur id: '. $id . '.',
+            'message' => '👤 Utilisateur id: ' . $id . '.',
             'utilisateur' => $utilisateur
-        ]);    }
+        ]);
+    }
 
     public function edit(Utilisateur $utilisateur)
     {

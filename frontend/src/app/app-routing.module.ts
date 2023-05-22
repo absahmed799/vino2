@@ -10,6 +10,9 @@ import { NonTrouverComponent } from './layout/non-trouver/non-trouver.component'
 import { ListeBouteilleComponent } from './bouteille/liste-bouteille/liste-bouteille.component';
 import { AfficherBouteilleComponent } from './bouteille/afficher-bouteille/afficher-bouteille.component';
 import { ModifierBouteilleComponent } from './bouteille/modifier-bouteille/modifier-bouteille.component';
+import {AuthGuard} from "./auth/AuthGuard";
+import {GuestGuard} from "./auth/GuestGuard";
+import {AjouterBouteilleComponent} from "./bouteille/ajouter-bouteille/ajouter-bouteille.component";
 
 
 //import { GardienRouteGuard } from './gardien-route.guard';
@@ -17,28 +20,26 @@ import { ModifierBouteilleComponent } from './bouteille/modifier-bouteille/modif
 //import { AuthServService } from './serv/auth-serv.service';
 
 const routes: Routes = [
-  
-  //Routes pour Accueil
-  { path:"", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
-  { path:"accueil", component:AccueilComponent,/* canActivate:[GardienRouteGuard]*/},
- 
-  //Routes pour cellier
-  { path:"cellier", component:ListeCellierComponent, /* canActivate:[GardienRouteGuard]*/},
-  { path:"cellier/ajouter", component:AjouterCellierComponent, /* canActivate:[GardienRouteGuard]*/},
-  { path:"cellier/:id", component:ModifierCellierComponent, /* canActivate:[GardienRouteGuard]*/},
- 
-  { path:"cellier/:id/bouteille", component: ListeBouteilleComponent },
-  { path:"cellier/:id/bouteille/ajouter", component: LoginComponent },
-  { path:"cellier/:id/bouteille/:id", component: AfficherBouteilleComponent },
-  { path:"cellier/:id/bouteille/:id/edit", component: ModifierBouteilleComponent  },
-  
-  // Routes pour Login / Enregistrer
-  { path:"login", component: LoginComponent },
-  { path:"enregistrer", component: EnregistrerComponent },
+    //Routes pour cellier
+  { path:"cellier", component:ListeCellierComponent,  canActivate: [AuthGuard]},
+  { path:"cellier/ajouter", component:AjouterCellierComponent, canActivate: [AuthGuard]},
+  { path:"cellier/:id", component:ModifierCellierComponent, canActivate: [AuthGuard]},
 
-  // Route pour une page non trouvée (Erreur 404)
-  { path:"**", component:NonTrouverComponent, /* canActivate:[GardienRouteGuard]*/},
-  
+  { path:"cellier/:id/bouteille", component: ListeBouteilleComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:id/bouteille/ajouter", component: AjouterBouteilleComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:id/bouteille/:id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:id/bouteille/:id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
+
+    //Routes pour Accueil
+  { path:"", component:AccueilComponent, canActivate:[GuestGuard]},
+
+    // Routes pour Login / Enregistrer
+  { path:"login", component: LoginComponent, canActivate:[GuestGuard]},
+  { path:"enregistrer", component: EnregistrerComponent, canActivate:[GuestGuard]},
+
+    // Route pour une page non trouvée (Erreur 404)
+  { path:"**", component:NonTrouverComponent, canActivate:[GuestGuard]},
+
 ];
 
 @NgModule({

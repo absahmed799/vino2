@@ -22,14 +22,24 @@ import { AccueilComponent } from './layout/accueil/accueil.component';
 import { NonTrouverComponent } from './layout/non-trouver/non-trouver.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from "@angular/forms";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { EnteteAuthComponent } from './layout/entete-auth/entete-auth.component';
+import { FooterAuthComponent } from './layout/footer-auth/footer-auth.component';
 
-// Importez les modules Angula Material spécifiques dont nous avons besoin:
+// Importez les modules Angular Material spécifiques dont nous avons besoin:
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from "@angular/material/select";
+import {MatCardModule} from "@angular/material/card";
+import {MatMenuModule} from "@angular/material/menu";
+import { AuthInterceptor } from './AuthInterceptor';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -51,7 +61,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SupprimerBouteilleComponent,
     AfficherBouteilleComponent,
     AccueilComponent,
-    NonTrouverComponent
+    NonTrouverComponent,
+    EnteteAuthComponent,
+    FooterAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -59,15 +71,24 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
 
     // Importez les modules Angular Material ici:
     MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatCardModule,
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

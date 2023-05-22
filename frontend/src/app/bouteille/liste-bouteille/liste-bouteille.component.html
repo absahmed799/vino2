@@ -1,1 +1,41 @@
-<p>liste-bouteille works!</p>
+<app-entete-auth></app-entete-auth>
+
+<div class="body">
+  <div class="search-box">
+    <i class="bx bx-search-alt"></i>
+    <input type="text" name="search" id="search" placeholder="Vin rouge" />
+  </div>
+
+  <div class="title">
+    <p>{{ cellier?.nom }}</p>
+    <a [routerLink]="['ajouter']" ><span>Ajouter une bouteille</span><i class='bx bx-plus'></i></a>
+  </div>
+
+  <div class="card">
+    <p class="empty-cellier" *ngIf="cellier?.bouteilles.length === 0">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p>
+    <mat-card class="card-cellier" *ngFor="let bouteille of cellier?.bouteilles">
+      <mat-card-header>
+        <mat-card-title>
+          {{ bouteille.type.nom }}
+        </mat-card-title>
+        <a><i class='bx bx-x' ></i></a>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="description">
+          <p><strong>{{ bouteille.bouteille_nom.substring(0, 9) + "..." }}</strong></p>
+          <p>{{ bouteille.pays.nom }}</p>
+          <p><strong>{{ bouteille.format }}</strong></p>
+          <span><strong>$ {{ bouteille.prix_saq * bouteille.pivot.quantite }}</strong></span>
+        </div>
+        <img mat-card-image [src]="bouteille.image_url" alt="Photo of a Shiba Inu">
+      </mat-card-content>
+      <mat-card-footer>
+        <a><i class='bx bx-plus'></i></a>
+        <span>{{ bouteille.pivot.quantite }}</span>
+        <a><i class='bx bx-minus' ></i></a>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+
+<app-footer-auth></app-footer-auth>

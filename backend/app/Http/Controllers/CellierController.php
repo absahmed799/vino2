@@ -5,26 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Cellier;
 use App\Models\Utilisateur;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CellierController extends Controller
 {
     /**
      * Afficher une liste de la ressource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
-        // Récupérer l'ID de l'utilisateur à partir de la requête
-        $utilisateurId = $request->input('utilisateur_id');
+        // Vu qu'il est dans un middleware Auth on peut récupérer l'utilisateur connecté directement via la facade Auth
+//        // Récupérer l'ID de l'utilisateur à partir de la requête
+//        $utilisateurId = $request->input('utilisateur_id');
 
         try {
             // Rechercher l'utilisateur
-            $utilisateur = Utilisateur::findOrFail($utilisateurId);
+            $utilisateur = Auth::user();
 
             // Récupérer les celliers de l'utilisateur
-            $celliers = $utilisateur->celliers;
+            $celliers = $utilisateur->celliers()->withCount('bouteilles')->get();
 
             return response()->json($celliers);
         } catch (ModelNotFoundException $e) {
@@ -36,18 +40,16 @@ class CellierController extends Controller
      * Stocker une ressource nouvellement créé dans le stockage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->validate($request, [
             'nom' => ['required', 'string'],
-            'utilisateur_id' => ['required', 'exists:utilisateurs,id'],
         ]);
 
-        $cellier = Cellier::create([
+        $cellier = Auth::user()->celliers()->create([
             'nom' => $request->input('nom'),
-            'utilisateur_id' => $request->input('utilisateur_id'),
         ]);
 
         return response()->json($cellier, 201);
@@ -58,18 +60,13 @@ class CellierController extends Controller
      * Affiche la ressource spécifiée.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
-        // Récupérer l'ID de l'utilisateur à partir de la requête
-        $utilisateurId = $request->input('utilisateur_id');
-
         try {
             // Rechercher le cellier en utilisant à la fois l'ID du cellier et l'ID de l'utilisateur
-            $cellier = Cellier::where('id', $id)
-                ->where('utilisateur_id', $utilisateurId)
-                ->firstOrFail();
+            $cellier = Cellier::findOrFail($id);
 
             return response()->json($cellier);
         } catch (ModelNotFoundException $e) {
@@ -82,22 +79,19 @@ class CellierController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nom' => ['required', 'string'],
+        ]);
+
         try {
-            $cellier = Cellier::where('id', $id)
-                ->where('utilisateur_id', $request->input('utilisateur_id'))
-                ->firstOrFail();
+            $cellier = Cellier::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
         }
-
-        $this->validate($request, [
-            'nom' => ['required', 'string'],
-            'utilisateur_id' => ['required', 'exists:utilisateurs,id'],
-        ]);
 
         $cellier->update($request->all());
 
@@ -108,15 +102,13 @@ class CellierController extends Controller
     /**
      * Supprime la ressource spécifiée du stockage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy($id, Request $request)
+    public function destroy(int $id)
     {
         try {
-            $cellier = Cellier::where('id', $id)
-                ->where('utilisateur_id', $request->input('utilisateur_id'))
-                ->firstOrFail();
+            $cellier = Cellier::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return response()->json(false, 404);
         }
