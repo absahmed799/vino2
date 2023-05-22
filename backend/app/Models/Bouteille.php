@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Types;
 use App\Models\Pays;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Bouteille extends Model
 {
@@ -24,6 +25,18 @@ class Bouteille extends Model
     }
 
     // Define other relationships or additional methods here
+
+    public function celliers(): BelongsToMany
+    {
+        return $this->belongsToMany(Cellier::class, 'bouteilles_celliers')
+            ->withPivot([
+                'millesime',
+                'quantite',
+                'date_achat',
+                'garde_jusqua',
+                'note',
+            ])->withTimestamps();
+    }
 }
 
 

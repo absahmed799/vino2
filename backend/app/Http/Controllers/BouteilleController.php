@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bouteille;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BouteilleController extends Controller
@@ -11,11 +12,12 @@ class BouteilleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        $bouteilles = Bouteille::all();
+        $bouteilles = Bouteille::with(['type', 'pays'])
+        ->get();
         return response()->json($bouteilles);
     }
 

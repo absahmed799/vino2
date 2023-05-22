@@ -24,7 +24,7 @@ class CreateUtilisateursTable extends Migration
         DB::table('utilisateurs')->insert([
             'nom' => 'Admin',
             'courriel' => 'admin@example.com',
-            'mot_de_passe' => '123456',
+            'mot_de_passe' => \Illuminate\Support\Facades\Hash::make('50505'),
             'role_id' => 1,
         ]);
     }
