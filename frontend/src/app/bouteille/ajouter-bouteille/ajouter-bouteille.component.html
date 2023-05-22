@@ -1,1 +1,70 @@
-<p>ajouter-bouteille works!</p>
+<app-entete-auth></app-entete-auth>
+<div class="body">
+  <p><strong>Ajouter un vin</strong></p>
+  <span>Rechercher une bouteille</span>
+  <div class="search-box">
+    <i class="bx bx-search-alt"></i>
+    <input type="text"
+           placeholder="Recherche"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.bouteille_nom" (click)="autoCompleteForm(option)">
+        {{ option.bouteille_nom }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <form >
+    <mat-form-field class="">
+      <mat-label>Nom du vin</mat-label>
+      <input matInput type="text"  [value]="bouteilleSelected?.bouteille_nom" >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Millesime</mat-label>
+      <input matInput type="number" >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Type</mat-label>
+      <input matInput type="text" [value]="bouteilleSelected?.type.nom"  >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Pays</mat-label>
+      <input matInput type="text" [value]="bouteilleSelected?.pays.nom" >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Garde</mat-label>
+      <input matInput type="text"  >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Date d'achat</mat-label>
+      <input matInput type="date" [matDatepicker]="picker">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Quantité</mat-label>
+      <input matInput type="number"  >
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Note</mat-label>
+      <input matInput type="text"  >
+    </mat-form-field>
+
+    <div class="button">
+      <button type="submit" >Ajouter</button>
+    </div>
+  </form>
+</div>
+
+
+<app-footer-auth></app-footer-auth>
