@@ -1,1 +1,19 @@
-<p>ajouter-cellier works!</p>
+<app-entete-auth></app-entete-auth>
+
+<div class="body">
+  <p><strong>Ajouter un Cellier</strong></p>
+
+  <form class="ajouter-cellier"  [formGroup]="ajouterCellier" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom du Cellier</mat-label>
+      <input matInput value="" formControlName="nom" placeholder="" required>
+    </mat-form-field>
+
+    <div class="button">
+      <button type="submit">Ajouter</button>
+    </div>
+  </form>
+</div>
+
+<app-footer-auth></app-footer-auth>
