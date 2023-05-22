@@ -1,0 +1,52 @@
+@media (min-width: 220px) {
+  .footer {
+    position: fixed;
+    bottom: 0;
+    padding: 2% 9% 1rem;
+    font-size: 1.6rem;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .footer .menu {
+    display: flex;
+    justify-content: space-around;
+    background: rgb(230 255 241);
+    width: 100%;
+    padding: 5%;
+    border-radius: 6rem;
+    box-shadow: 2px 1rem 1rem rgb(4 4 4 / 25%);
+  }
+
+  .footer .menu a,
+  .footer .menu button {
+    color: rgb(0 0 0 / 37%);
+    background: rgb(230 255 241);
+    position: relative;
+  }
+
+  .footer .menu a.active::before,
+  .footer .menu button.active::before{
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: #5fcb9c;
+    position: absolute;
+    bottom: -1px;
+    left: 40%;
+    border-radius: 50%;
+    align-items: center;
+  }
+
+  .footer .menu a i,
+  .footer .menu button i{
+    background: rgb(230 255 241);
+  }
+
+  .footer .menu a.active,
+  .footer .menu button.active{
+    color: #5fcb9c;
+  }
+
+}

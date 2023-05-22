@@ -1,0 +1,12 @@
+@media (min-width: 220px) {
+  .header {
+    position: relative;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    padding: 10% 5%;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+  }
+}

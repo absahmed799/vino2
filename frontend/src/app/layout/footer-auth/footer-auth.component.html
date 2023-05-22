@@ -1,0 +1,11 @@
+<div class="footer">
+  <div class="menu">
+    <a  ><i class="bx bxs-grid"></i></a>
+    <a routerLink="/cellier" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="bx bxs-home"></i></a>
+    <a [matMenuTriggerFor]="profile" routerLinkActive="active"><i class="bx bxs-user-circle"></i></a>
+          <mat-menu #profile="matMenu">
+            <button mat-menu-item>Nom: <strong> {{ nom }}</strong></button>
+            <button mat-menu-item (click)="deconnexion()">Déconnexion</button>
+          </mat-menu>
+  </div>
+</div>

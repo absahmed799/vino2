@@ -1,0 +1,156 @@
+@media (min-width: 220px) {
+  .body {
+    min-height: 70vh;
+    padding: 40% 9% 4rem;
+  }
+
+  .body i {
+    font-size: 1.6rem;
+    color: rgba(20, 20, 20, 0.658);
+  }
+
+  .body .smtitle {
+    padding:10% 0;
+    margin-top: 15px
+  }
+
+  .body {
+    padding: 30% 9% 2%;
+  }
+
+  .body .produit h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .body .produit .resume-produit {
+    display: flex;
+    margin-top: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .body .produit .resume-produit img {
+    width: 45%;
+    height: 150px;
+  }
+
+  .body .produit .resume-produit .resume h2 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 100;
+    color: rgb(0 0 0 / 62%);
+  }
+
+  .body .produit .resume-produit .resume .details .element {
+    display: grid;
+    background: rgb(201 255 232 / 55%);
+    padding: 5%;
+    border-radius: 5%;
+    margin-bottom: 2%;
+    width: 7rem;
+    font-size: 0.9rem;
+  }
+  .body .produit .resume-produit .resume .details .action-add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .body .produit .resume-produit .resume .details .element i {
+    color: white;
+    background: #1fab89;
+    border-radius: 50%;
+    font-size: 1.5rem;
+  }
+
+  .body .produit .resume-produit .resume .details .element span {
+    color: rgba(0, 0, 0, 1);
+    font-weight: bold;
+  }
+
+  .body .produit .resume-produit .resume .details p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  .body .description-note .card {
+    margin: 10% 0;
+    border-radius: 0.8rem;
+    padding: 4%;
+    background: rgb(157 243 196 / 88%);
+  }
+
+  .body .description-note .card h2 {
+    text-align: center;
+    font-size: 1.11rem;
+    margin-bottom: 5%;
+    font-weight: bold;
+  }
+
+  .body .description-note .card p {
+    font-size: 0.9rem;
+    color: rgb(0 0 0 / 76%);
+  }
+
+  .body .produit .resume-produit img.flag-italy {
+    width: 20%;
+    margin-left: 5px;
+  }
+
+  .body .produit .resume-produit span.flag {
+    display: flex;
+  }
+}
+
+@media (min-width: 600px) {
+  .body {
+    background-size: 100% 20%;
+  }
+
+  .body i {
+    font-size: 3.5rem;
+  }
+
+  .body .smtitle {
+    padding:10% 0;
+    font-size: 3.5rem;
+  }
+
+  .body .produit h1 {
+    font-size: 2.5rem;
+  }
+
+  .body .produit .resume-produit img {
+    width: 45%;
+    height: 250px;
+  }
+
+  .body .produit .resume-produit .resume h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8%;
+  }
+
+  .body .produit .resume-produit .resume .details .element {
+    width: 15rem;
+    font-size: 1.3rem;
+  }
+
+  .body .produit .resume-produit .resume .details p {
+    font-size: 1.9rem;
+  }
+
+  .body .description-note .card h2 {
+    font-size: 1.8rem;
+  }
+
+  .body .description-note .card p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .body .produit .resume-produit .resume .details .element {
+    font-size: 1.5rem;
+  }
+}

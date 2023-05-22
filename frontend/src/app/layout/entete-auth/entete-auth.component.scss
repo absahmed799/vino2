@@ -1,0 +1,46 @@
+@media (min-width: 220px) {
+  .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5% 5%;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    justify-content: space-between;
+    background-position: center;
+  }
+
+  .header a {
+    color: rgb(0 0 0 / 72%);
+    font-size: 1.3rem;
+  }
+
+  .header a .arrow-left {
+    background-color: white;
+    padding: 5%;
+    border-radius: 50%;
+  }
+
+  .header a .bxs-cart {
+    position: relative;
+  }
+
+  .header a .bxs-cart::after {
+    content: attr(data-content);
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    color: white;
+    right: 0;
+    border-radius: 50%;
+    line-height: 10px;
+    text-align: center;
+    font-size: 10px;
+  }
+
+}
