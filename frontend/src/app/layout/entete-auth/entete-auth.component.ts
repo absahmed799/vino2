@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-entete-auth',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./entete-auth.component.scss']
 })
 export class EnteteAuthComponent {
+  constructor(private location: Location) {}
 
+  retourner(): void {
+    this.location.back();
+  }
 }

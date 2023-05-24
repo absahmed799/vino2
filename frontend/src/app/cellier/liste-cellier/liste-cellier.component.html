@@ -1,47 +1,46 @@
 <app-entete-auth></app-entete-auth>
 
+<div class="body">
+  <!-- <div class="search-box">
+        <mat-icon>search</mat-icon><input type="text" name="search" id="search" placeholder="Rechercher" />
+      </div> -->
 
-  
-    <div class="body">
-      <div class="search-box">
-        <i class="bx bx-search-alt"></i>
-        <input type="text" name="search" id="search" placeholder="Red Wine" />
-      </div>
-    
-      <div class="title">
-        <p>Mes Celliers</p>
-        <a routerLink="/cellier/ajouter"><i class='bx bx-plus'></i></a>
-      </div>
+  <div class="title">
+    <h2>Mes Celliers</h2>
+    <a routerLink="/cellier/ajouter"><i class='bx bx-plus'></i></a>
+  </div>
 
-    <mat-card *ngIf="loading; else cellierList">
+  <mat-card *ngIf="loading; else cellierList">
     <mat-card-content>
       <div class="loading-image">
-        <img src="../../../assets/loading.gif" alt="Loading Image">
+        <!-- <img src="../../../assets/loading.gif" alt="Loading Image"> -->
+        <mat-icon>hourglass_top</mat-icon>
       </div>
-     </mat-card-content>
+
+    </mat-card-content>
   </mat-card>
   <ng-template #cellierList>
-      <div class="card">
-        <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer de Cellier....</p>
-        <mat-card class="card-cellier" *ngFor="let cellier of ListeCelliers">
-          <mat-card-header>
-            <mat-card-title>{{ cellier.nom }}</mat-card-title>
-            <a (click)="openDialog(cellier.id, cellier.nom)"><i class='bx bx-x' ></i></a>
-          </mat-card-header>
-          <mat-card-content>
-            <span>{{ cellier.sumQuantite }}</span>
-            <img mat-card-image src="https://www.saq.com/media/catalog/product/1/3/13584455-1_1674499266.png?quality=80&fit=bounds&height=166&width=111&canvas=111:166" alt="Photo of a Shiba Inu">
-          </mat-card-content>
-          <mat-card-footer>
-            <a [routerLink]="['/cellier', cellier.id, 'bouteille']" mat-button>Afficher</a>
-            <a [routerLink]="['/cellier', cellier.id]" mat-button>Editer</a>
-          </mat-card-footer>
-        </mat-card>
-      </div>
-     </ng-template> 
+    <div class="card">
+      <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer de Cellier....</p>
+      <mat-card class="card-cellier" *ngFor="let cellier of ListeCelliers">
+        <mat-card-header>
+          <mat-card-title>{{ cellier.nom }}</mat-card-title>
+          <a (click)="openDialog(cellier.id, cellier.nom)"><i class='bx bx-x'></i></a>
+        </mat-card-header>
+        <mat-card-content>
+          <span>{{ cellier.sumQuantite }}</span>
+          <img mat-card-image src="../../../assets/wine_3bottles.svg" alt="Image de bouteilles">
+        </mat-card-content>
+        <mat-card-footer>
+          <a [routerLink]="['/cellier', cellier.id, 'bouteille']" mat-button>Afficher</a>
+          <a [routerLink]="['/cellier', cellier.id]" mat-button>Modifier</a>
+        </mat-card-footer>
+      </mat-card>
     </div>
-  
-  
+  </ng-template>
+</div>
+
+
 
 
 
