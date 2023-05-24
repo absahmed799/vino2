@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 export interface DialogData {
   id: string;
@@ -17,13 +18,13 @@ export class SupprimerCellierComponent {
 
   id: any
   nom: any
-  private urlBackend: string = 'http://127.0.0.1:8000/api/celliers';
+ 
 
   constructor(
     public dialogRef: MatDialogRef<SupprimerCellierComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
-    private router: Router
+    private router: Router, private api:ApiVinoService
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +37,8 @@ export class SupprimerCellierComponent {
   }
 
   supprimerCellier(id: any) {
-    console.log(id)
-    this.http.delete(this.urlBackend + '/' + id).subscribe();
+    
+    this.api.supprimerCellier(id).subscribe();
     this.dialogRef.close();
     this.router.navigate(['/cellier'])
   }

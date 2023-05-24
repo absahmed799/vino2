@@ -67,10 +67,11 @@ Route::get('/types/{id}', [TypesController::class, 'show']);
 
 
 // Routes for BouteilleCellierController
-
+//Route::put('/celliers/{cellier}/bouteilles/{bouteille_id/updateQuantity}', [BouteilleCellierController::class,'updateQuantity']);
 Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
 Route::get('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'show']);
 Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'update']);
+Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}/quantite', [BouteilleCellierController::class,'updateQuantity']);
 Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

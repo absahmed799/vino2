@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cellier;
 use App\Models\Utilisateur;
+use App\Models\BouteilleCellier;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ class CellierController extends Controller
 
             // Récupérer les celliers de l'utilisateur
             $celliers = $utilisateur->celliers()->withCount('bouteilles')->get();
-
+            foreach ($celliers as $cellier) {
+                $sumQuantite = BouteilleCellier::where('cellier_id', $cellier->id)->sum('quantite');
+                $cellier->sumQuantite = $sumQuantite;
+            }
             return response()->json($celliers);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Utilisateur non trouvé'], 404);

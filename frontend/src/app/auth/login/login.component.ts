@@ -6,6 +6,7 @@ import {catchError, flatMap, map, retry, tap} from 'rxjs/operators';
 import {EMPTY, of, throwError} from "rxjs";
 import {AuthService} from "../auth-service";
 import {Router} from "@angular/router";
+import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 @Component({
   selector: 'app-login',
@@ -26,25 +27,15 @@ export class LoginComponent {
   error = false;
   message_error = '';
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router , private api:ApiVinoService) {
   }
 
   submitLogin() {
-    let httpOption = {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-      })
-    };
+    
+console.log(this.loginForm.value);
 
-    this.http.post<any>(this.urlBackend + '/login', this.loginForm.value, httpOption).pipe(
-      catchError(error => {
-        let handledError = this.handleError(error);
-        // Traiter l'erreur ici
-        this.error = true;
-        this.message_error = handledError;
-        return EMPTY;
-      })
-    ).subscribe((result: any) => {
+   
+    this.api.login(this.loginForm.value).subscribe((result: any) => {
       this.error = false;
       this.authService.setBearerToken(result.access_token);
       this.authService.setUserData(result.utilisateur.nom);

@@ -7,32 +7,32 @@
   </div>
 
   <div class="title">
-    <p>{{ cellier?.nom }}</p>
+   <!--<p>{{ bouteille.bouteille?.nom }}</p>--> 
     <a [routerLink]="['ajouter']" ><span>Ajouter une bouteille</span><i class='bx bx-plus'></i></a>
   </div>
 
   <div class="card">
-    <p class="empty-cellier" *ngIf="cellier?.bouteilles.length === 0">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p>
-    <mat-card class="card-cellier" *ngFor="let bouteille of cellier?.bouteilles">
+    <!--<p class="empty-cellier" *ngIf="!bouteilles">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p>-->
+    <mat-card class="card-cellier" *ngFor="let bouteille of bouteilles">
       <mat-card-header>
         <mat-card-title>
-          {{ bouteille.type.nom }}
+          {{ bouteille.bouteille.nom }}
         </mat-card-title>
         <a><i class='bx bx-x' ></i></a>
       </mat-card-header>
       <mat-card-content>
         <div class="description">
-          <p><strong>{{ bouteille.bouteille_nom.substring(0, 9) + "..." }}</strong></p>
-          <p>{{ bouteille.pays.nom }}</p>
-          <p><strong>{{ bouteille.format }}</strong></p>
-          <span><strong>$ {{ bouteille.prix_saq * bouteille.pivot.quantite }}</strong></span>
+          <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 10) + "..." }}</strong></p>
+          <p>{{ bouteille.bouteille.pays}}</p>
+          <p><strong>{{ bouteille.bouteille.format }}</strong></p>
+          <span><strong>$ {{ bouteille.bouteille.prix_saq  }}</strong></span>
         </div>
-        <img mat-card-image [src]="bouteille.image_url" alt="Photo of a Shiba Inu">
+        <img mat-card-image [src]="bouteille.bouteille.image_url" alt="Photo of a Shiba Inu">
       </mat-card-content>
       <mat-card-footer>
-        <a><i class='bx bx-plus'></i></a>
-        <span>{{ bouteille.pivot.quantite }}</span>
-        <a><i class='bx bx-minus' ></i></a>
+        <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteille( bouteille.quantite + 1,bouteille.cellier_id,bouteille.bouteille_id)"></i></a>
+        <span>{{ bouteille.quantite }}</span>
+        <a><i class='bx bx-minus' (click)="modifierQuantiteBouteille( bouteille.quantite - 1,bouteille.cellier_id,bouteille.bouteille_id)"></i></a>
       </mat-card-footer>
     </mat-card>
   </div>

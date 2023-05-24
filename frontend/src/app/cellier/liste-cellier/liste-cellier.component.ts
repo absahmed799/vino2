@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../auth/auth-service";
 import {MatDialog} from "@angular/material/dialog";
 import {SupprimerCellierComponent} from "../supprimer-cellier/supprimer-cellier.component";
+import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 @Component({
   selector: 'app-liste-cellier',
@@ -11,27 +12,23 @@ import {SupprimerCellierComponent} from "../supprimer-cellier/supprimer-cellier.
   styleUrls: ['./liste-cellier.component.scss']
 })
 export class ListeCellierComponent {
-  private urlBackend: string = 'http://127.0.0.1:8000/api/celliers';
-  ListeCelliers: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService, public dialog: MatDialog) {
+  ListeCelliers: any[] = [];
+  loading: boolean = true;
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService, public dialog: MatDialog ,private api:ApiVinoService) {
+   
   }
 
   ngOnInit(): void {
-    this.getAllCelliers()
+     this.api.listeCelliers().subscribe((liste:any)=>{
+      console.log(liste);
+      
+      this.loading = false;
+      this.ListeCelliers = liste;
+    })
   }
 
-  getAllCelliers () {
-    let httpOption = {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        'Authorization': "Bearer " + this.authService.getBearerToken()
-      })
-    };
-      this.http.get(this.urlBackend, httpOption).subscribe((results: any) => {
-        this.ListeCelliers = results
-      });
-  }
+ 
 
   openDialog(id: bigint, nom: string): void {
     const dialogRef = this.dialog.open(SupprimerCellierComponent, {
@@ -39,7 +36,7 @@ export class ListeCellierComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getAllCelliers()
+      this.ngOnInit()
     });
   }
 }
