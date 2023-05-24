@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Cellier extends Model
 {
     protected $table = 'celliers';
-    protected $fillable = ['nom','utilisateur_id'];
+    protected $fillable = ['nom', 'utilisateur_id'];
 
     // Définissez ici des relations ou des méthodes supplémentaires
 
-     /**
+    /**
      * Un cellier est lié à un utilisateur
      */
     public function utilisateur()

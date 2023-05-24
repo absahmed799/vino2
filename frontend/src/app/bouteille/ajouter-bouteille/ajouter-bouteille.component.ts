@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormControl,FormGroup, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, Observable, of, pipe, startWith} from "rxjs";
 import {map, switchMap, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
+import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 @Component({
   selector: 'app-ajouter-bouteille',
@@ -15,11 +16,24 @@ export class AjouterBouteilleComponent implements OnInit{
   bouteilles: any[] = [];
   filteredOptions: Observable<any> | undefined;
   bouteilleSelected: any;
-
-  constructor(private http: HttpClient) {
+  dateFormControl = new FormControl();
+  formAjout:FormGroup;
+  
+  constructor(private http: HttpClient , private api:ApiVinoService) {
+     this.formAjout = new FormGroup({
+      quantite: new FormControl(""),
+      nom: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      date_achat: new FormControl("",[Validators.required, Validators.minLength(3)]),
+      //prix: new FormControl("",[Validators.required, Validators.min(0)]),
+      garde: new FormControl("", [Validators.required]),
+      millesime: new FormControl(""),
+      type: new FormControl(""),
+      pays: new FormControl(""),
+    })
   }
 
   ngOnInit() {
+   
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -50,5 +64,9 @@ export class AjouterBouteilleComponent implements OnInit{
 
   autoCompleteForm(option: any) {
     this.bouteilleSelected = option;
+  }
+
+  ajouterBouteille(){
+    //this.api.ajouterBouteille()
   }
 }
