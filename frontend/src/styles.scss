@@ -36,7 +36,8 @@ $frontend-theme: mat.define-light-theme((
 
 /* COULEURS */
 :root {
-  --couleurBlack: #000000;
+  --couleurNoir: #000000;
+  --couleurBlanc: #FFFFFF;
   --couleurVert1: #1FAB89;
   --couleurVert2: #62D2A2;
   --couleurVert3: #9DF3C4;
@@ -55,13 +56,13 @@ body{
 
 /* Format des liens <a> */
 a {
-  color: var(--couleurBlack);
+  color: var(--couleurNoir);
   text-decoration: none
 }
 
 a:hover {
   color: var(--couleurVert1);
-  text-decoration: underline
+  // text-decoration: underline
 }
 
 /* ======================= */
@@ -80,13 +81,20 @@ html, body {
   height: 100%;
 }
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-image: url(assets/vino-logo-background.svg), url(assets/vino-background.png);
-  background-size: 25%, 100%;
+  background: linear-gradient(to right bottom, var(--couleurVert2), var(--couleurBlanc));
   background-repeat: no-repeat;
-  min-height: 100vh;
-  background-position: center 10px, center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+
+  // margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background-image: url(assets/vino-logo-background.svg), url(assets/vino-background.png);
+  // background-size: 25%, 100%;
+  // background-repeat: no-repeat;
+  // min-height: 100vh;
+  // background-position: center 10px, center;
 }
 
 .body {
