@@ -1,4 +1,20 @@
 @media (min-width: 220px) {
+
+  .logo-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .logo-container img {
+    max-width: 100%;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+  }
+  
   .body {
     min-height: 70vh;
     padding: 40% 9% 4rem;
