@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ListeAchat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ModelNotFoundException;
 
 class ListeAchatController extends Controller
 {
