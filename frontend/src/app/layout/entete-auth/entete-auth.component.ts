@@ -26,9 +26,7 @@ export class EnteteAuthComponent {
   getPanierItems() {
     
       this.http.get<any>(this.urlBackend + '/liste-achat')
-        .pipe(
-          //tap(data => this.panierItems = data)
-        )
+       
   }
 
 
