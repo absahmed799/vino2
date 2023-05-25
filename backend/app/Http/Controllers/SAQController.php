@@ -173,6 +173,7 @@ class SAQController extends Controller
                 $bouteille->format = $bte->desc->format;
                 $bouteille->type_id = $type->id;
                 $bouteille->pays_id = $pays->id;
+                $bouteille->utilisateur_id = 1;
 
                 if ($bouteille->save()) {
                     $retour->succes = true;

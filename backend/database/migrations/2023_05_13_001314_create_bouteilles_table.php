@@ -19,8 +19,10 @@ class CreateBouteillesTable extends Migration
             $table->string('format');
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('pays_id');
+            $table->unsignedBigInteger('utilisateur_id');
             $table->timestamps();
 
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('pays_id')->references('id')->on('pays');
         });
