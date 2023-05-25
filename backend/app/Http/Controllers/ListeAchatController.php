@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListeAchat;
 use Illuminate\Http\Request;
 
 class ListeAchatController extends Controller
@@ -21,13 +22,13 @@ class ListeAchatController extends Controller
             // Rechercher l'utilisateur
             $utilisateur = Auth::user();
 
-            // Récupérer les celliers de l'utilisateur
-            $celliers = $utilisateur->celliers()->withCount('bouteilles')->get();
-            foreach ($celliers as $cellier) {
-                $sumQuantite = BouteilleCellier::where('cellier_id', $cellier->id)->sum('quantite');
-                $cellier->sumQuantite = $sumQuantite;
+            // Récupérer les listeachants de l'utilisateur
+            $listeachants = $utilisateur->listeachants()->withCount('bouteilles')->get();
+            foreach ($listeachants as $listeachant) {
+                $sumQuantite = BouteilleListeAchat::where('listeachant_id', $listeachant->id)->sum('quantite');
+                $listeachant->sumQuantite = $sumQuantite;
             }
-            return response()->json($celliers);
+            return response()->json($listeachants);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Utilisateur non trouvé'], 404);
         }
@@ -45,11 +46,11 @@ class ListeAchatController extends Controller
             'nom' => ['required', 'string'],
         ]);
 
-        $cellier = Auth::user()->celliers()->create([
+        $listeachant = Auth::user()->listeachants()->create([
             'nom' => $request->input('nom'),
         ]);
 
-        return response()->json($cellier, 201);
+        return response()->json($listeachant, 201);
     }
 
 
@@ -62,12 +63,12 @@ class ListeAchatController extends Controller
     public function show($id)
     {
         try {
-            // Rechercher le cellier en utilisant à la fois l'ID du cellier et l'ID de l'utilisateur
-            $cellier = Cellier::findOrFail($id);
+            // Rechercher le listeachant en utilisant à la fois l'ID du listeachant et l'ID de l'utilisateur
+            $listeachant = ListeAchat::findOrFail($id);
 
-            return response()->json($cellier);
+            return response()->json($listeachant);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
         }
     }
 
@@ -85,14 +86,14 @@ class ListeAchatController extends Controller
         ]);
 
         try {
-            $cellier = Cellier::findOrFail($id);
+            $listeachant = ListeAchat::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce cellier est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
         }
 
-        $cellier->update($request->all());
+        $listeachant->update($request->all());
 
-        return response()->json($cellier);
+        return response()->json($listeachant);
     }
 
 
@@ -105,12 +106,12 @@ class ListeAchatController extends Controller
     public function destroy(int $id)
     {
         try {
-            $cellier = Cellier::findOrFail($id);
+            $listeachant = ListeAchat::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return response()->json(false, 404);
         }
 
-        $cellier->forceDelete();
+        $listeachant->forceDelete();
 
         return response()->json(true, 204);
     }
