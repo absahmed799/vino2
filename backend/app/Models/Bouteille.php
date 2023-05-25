@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Bouteille extends Model
 {
     protected $table = 'bouteilles';
-    protected $fillable = ['bouteille_nom', 'image_url', 'code_SAQ', 'description', 'prix_saq', 'saq_url', 'format', 'type_id', 'pays_id'];
+    protected $fillable = ['bouteille_nom', 'image_url', 'code_SAQ', 'description', 'prix_saq', 'saq_url', 'format', 'type_id', 'pays_id', 'utilisateur_id'];
 
     public function type(): BelongsTo
     {
@@ -22,6 +22,10 @@ class Bouteille extends Model
     public function pays(): BelongsTo
     {
         return $this->belongsTo(Pays::class, 'pays_id');
+    }
+    public function utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
     }
 
     // Define other relationships or additional methods here

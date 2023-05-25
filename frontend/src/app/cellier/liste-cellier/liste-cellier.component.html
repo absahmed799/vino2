@@ -10,9 +10,9 @@
 
   <mat-card *ngIf="loading; else cellierList">
     <mat-card-content>
-      <div class="loading-image">
-        <!-- <img src="../../../assets/loading.gif" alt="Loading Image"> -->
-        <mat-icon>hourglass_top</mat-icon>
+      <div class="loading-image center">
+        <img src="assets/loading.gif" alt="Loading Image"> 
+        <!-- <mat-icon>hourglass_top</mat-icon>-->
       </div>
 
     </mat-card-content>
@@ -27,7 +27,7 @@
         </mat-card-header>
         <mat-card-content>
           <span>{{ cellier.sumQuantite }}</span>
-          <img mat-card-image src="assets/wine_3bottles.svg" alt="Image de bouteilles">
+          <img mat-card-image src="assets/vin-cellier.png" alt="Image de bouteilles">
         </mat-card-content>
         <mat-card-footer>
           <a [routerLink]="['/cellier', cellier.id, 'bouteille']" mat-button>Afficher</a>
