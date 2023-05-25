@@ -14,7 +14,7 @@ class BouteilleCellierController extends Controller
     {
         
             $bouteillesCellier = BouteilleCellier::where('cellier_id', $cellier)->get();
-            $vin=$bouteillesCellier;
+            
             foreach ($bouteillesCellier as $bouteilleCellier) {
                 $bouteille = Bouteille::find($bouteilleCellier->bouteille_id);
                 $bouteilleCellier->bouteille = $bouteille;
