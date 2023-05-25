@@ -11,7 +11,7 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
   styleUrls: ['./ajouter-bouteille.component.scss']
 })
 export class AjouterBouteilleComponent implements OnInit{
-  private urlBackend: string = 'http://127.0.0.1:8000/api';
+  
   myControl = new FormControl('');
   bouteilles: any[] = [];
   filteredOptions: Observable<any> | undefined;
@@ -29,6 +29,8 @@ export class AjouterBouteilleComponent implements OnInit{
       millesime: new FormControl(""),
       type: new FormControl(""),
       pays: new FormControl(""),
+      note: new FormControl(""),
+      id: new FormControl("")
     })
   }
 
@@ -44,18 +46,9 @@ export class AjouterBouteilleComponent implements OnInit{
     );
   }
 
-  getBouteilles() {
-    return this.bouteilles.length ?
-      of(this.bouteilles) :
-      this.http.get<any>(this.urlBackend + '/bouteilles')
-        .pipe(
-          tap(data => this.bouteilles = data)
-        )
-  }
 
   private _filter(value: string): Observable<any[]> {
-
-    return this.getBouteilles().pipe(
+    return this.api.getBouteilles().pipe(
       map(response => response.filter((option: { bouteille_nom: string; }) => {
         return option.bouteille_nom.toLowerCase().includes(value.toLowerCase())
       }))
@@ -67,6 +60,7 @@ export class AjouterBouteilleComponent implements OnInit{
   }
 
   ajouterBouteille(){
-    //this.api.ajouterBouteille()
+    console.log(this.formAjout.value);    
   }
+ 
 }
