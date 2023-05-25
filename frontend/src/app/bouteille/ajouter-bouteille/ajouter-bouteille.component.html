@@ -17,10 +17,13 @@
       <mat-label>Nom du vin</mat-label>
       <input matInput type="text" formControlName="nom" [value]="bouteilleSelected?.bouteille_nom">
     </mat-form-field>
-
+    <mat-form-field class="invisible">
+      <mat-label>id</mat-label>
+      <input matInput type="text" formControlName="id" [value]="bouteilleSelected?.id">
+    </mat-form-field>
     <mat-form-field class="">
       <mat-label>Millesime</mat-label>
-      <input matInput type="number" formControlName="millesime">
+      <input matInput type="number" formControlName="millesime" >
     </mat-form-field>
 
     <mat-form-field class="">
@@ -63,3 +66,28 @@
 
 
 <app-footer-auth></app-footer-auth>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
