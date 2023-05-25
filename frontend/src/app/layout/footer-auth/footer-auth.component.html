@@ -1,0 +1,20 @@
+<div class="footer">
+  <div class="menu">
+
+    <a [matMenuTriggerFor]="menu" routerLinkActive="active"><mat-icon>menu</mat-icon></a>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item><mat-icon>info</mat-icon>À Propos</button>
+      <button mat-menu-item><mat-icon>flag</mat-icon>Signaler une erreur</button>
+    </mat-menu>
+    
+    <a routerLink="/cellier" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"><mat-icon>home</mat-icon></a>
+
+    <a [matMenuTriggerFor]="profile" routerLinkActive="active"><mat-icon>settings</mat-icon></a>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item><mat-icon>person</mat-icon>Nom: <strong> {{ nom }}</strong></button>
+      <button mat-menu-item (click)="deconnexion()"><mat-icon>logout</mat-icon>Déconnexion</button>
+    </mat-menu>
+
+  </div>
+</div>

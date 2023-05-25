@@ -1,0 +1,17 @@
+<div class="body">
+  <p><strong>Modifer un Cellier</strong></p>
+
+  <form class="modifier-cellier"  [formGroup]="modifierCellier" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Nom du Cellier</mat-label>
+      <input matInput [value]="nom" formControlName="nom" placeholder="" required>
+    </mat-form-field>
+
+    <div class="button">
+      <button type="submit">Modifier</button>
+    </div>
+  </form>
+</div>
+
+<app-footer-auth></app-footer-auth>

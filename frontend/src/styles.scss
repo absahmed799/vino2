@@ -1,0 +1,108 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$frontend-primary: mat.define-palette(mat.$indigo-palette);
+$frontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$frontend-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$frontend-theme: mat.define-light-theme((
+  color: (
+    primary: $frontend-primary,
+    accent: $frontend-accent,
+    warn: $frontend-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($frontend-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+/* COULEURS */
+:root {
+  --couleurNoir: #000000;
+  --couleurBlanc: #FFFFFF;
+  --couleurVert1: #1FAB89;
+  --couleurVert2: #62D2A2;
+  --couleurVert3: #9DF3C4;
+  --couleurVert4: #D7FBE8;
+}
+
+/* Des @import: */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+/* Des styles globales: */
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Format des liens <a> */
+a {
+  color: var(--couleurNoir);
+  text-decoration: none
+}
+
+a:hover {
+  color: var(--couleurVert1);
+  // text-decoration: underline
+}
+
+/* ======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: "Roboto", "RobotoDraft", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  background: linear-gradient(to right bottom, var(--couleurVert2), var(--couleurBlanc));
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+
+  // margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background-image: url(assets/vino-logo-background.svg), url(assets/vino-background.png);
+  // background-size: 25%, 100%;
+  // background-repeat: no-repeat;
+  // min-height: 100vh;
+  // background-position: center 10px, center;
+}
+
+.body {
+  min-height: 70vh;
+  padding: 20% 9% 4rem;
+  justify-content: space-between;
+}
+
+//.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+//  background-color: white;
+//}

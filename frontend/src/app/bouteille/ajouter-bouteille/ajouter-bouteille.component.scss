@@ -1,0 +1,50 @@
+.body {
+  padding-top: 10%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: rgb(230 255 241);
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  box-shadow: 3px 1rem 1rem rgba(0, 0, 0, 0.2);
+  opacity: 0.7;
+}
+
+.search-box i {
+  background: rgb(230 255 241);
+  font-size: 1.4rem;
+  color: rgba(20, 20, 20, 0.658);
+}
+
+.search-box input {
+  background: rgb(230 255 241);
+  width: 90%;
+  font-size: 1rem;
+  color: black;
+  padding-left: 3%;
+}
+
+form {
+  margin-top: 5%;
+  overflow: auto;
+  height: 58vh;
+}
+
+form mat-form-field {
+  width: 100%;
+}
+
+div.button {
+  text-align: center;
+}
+
+div.button button {
+  background: #e7fff2;
+  width: 60%;
+  padding: 1rem;
+  font-size: 1.3rem;
+  border-radius: 6rem;
+  box-shadow: 2px 1rem 1rem rgb(4 4 4 / 25%);
+}

@@ -1,0 +1,29 @@
+<div class="body">
+  <h2 class="smtitle">Login</h2>
+
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Courriel</mat-label>
+      <input matInput value="" formControlName="email" placeholder="courriel@example.com" required>
+      <mat-error *ngIf="error">{{ message_error}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="'password'" formControlName="password" placeholder="Mot de passe" required>
+      <mat-error *ngIf="error">{{ message_error}}</mat-error>
+    </mat-form-field>
+
+    <div class="footer">
+      <div class="menu">
+        <button type="submit" [disabled]="!loginForm.valid">Connecter</button>
+      </div>
+      <p class="error-login" *ngIf="error">{{ message_error }}</p>
+      <div class="redirect">
+        <p><a routerLink="/enregistrer">Enregistrer</a></p>
+        <p><a routerLink="/">Accueil</a></p>
+      </div>
+    </div>
+  </form>
+</div>

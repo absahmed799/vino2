@@ -1,0 +1,43 @@
+<div class="header" *ngIf="estUtilisateurConnecte()">
+
+  <button mat-icon-button class="mat-rounded" (click)="retourner()"
+    routerLinkActive="actif"><mat-icon>arrow_back</mat-icon></button>
+
+  <!-- <a href="#"><i class="arrow-left bx bx-left-arrow-alt"></i></a> -->
+
+  <a href="/accueil"><img src="assets/vino-logo-black.svg" alt="Vino logo" width="150"></a>
+
+  <button mat-icon-button class="mat-rounded" (click)="openCartModal()" routerLink="#"
+    routerLinkActive="actif"><mat-icon>shopping_basket</mat-icon></button>
+
+  <!-- <a href="#"><i class="bx bxs-cart" data-content="0"></i></a> -->
+  
+  
+</div>
+<!-- Contenu du modal -->
+<ng-template #cartModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Mon panier</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of panierItems">
+          <p>Nom de l'article : {{ item.nom }}</p>
+          <p>Quantité : {{ item.quantite }}</p>
+          <!-- Ajoutez d'autres détails de l'article ici -->
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modalService.dismissAll()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<!--<div class="search-box">
+    <mat-icon>search</mat-icon><input type="text" name="search" id="search" placeholder="Rechercher" />
+  </div> -->

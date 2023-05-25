@@ -1,0 +1,126 @@
+@media (min-width: 220px) {
+  .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5% 5%;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    justify-content: space-between;
+    background-position: center;
+  }
+
+  .header a {
+    color: rgb(0 0 0 / 72%);
+    font-size: 1.3rem;
+  }
+
+  .header a .arrow-left {
+    background-color: white;
+    padding: 5%;
+    border-radius: 50%;
+  }
+
+  .header a .bxs-cart {
+    position: relative;
+  }
+
+  .header a .bxs-cart::after {
+    content: attr(data-content);
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    color: white;
+    right: 0;
+    border-radius: 50%;
+    line-height: 10px;
+    text-align: center;
+    font-size: 10px;
+  }
+  
+  /* Champ de recherche */
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #e6fff1;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    box-shadow: 3px 1rem 1rem #00000033;
+    opacity: 0.7;
+  }
+
+  .search-box i {
+    background: #e6fff1;
+    font-size: 1.4rem;
+    color: #141414a8;
+  }
+
+  .search-box input {
+    background: #e6fff1;
+    width: 90%;
+    font-size: 1rem;
+    color: black;
+    padding-left: 3%;
+    
+  }
+
+  //style pour mon modal
+
+  .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px #00000033;
+    max-width: 800px; /* Définir la largeur maximale de la boîte modale */
+  }
+  
+  .modal-content {
+    width: 100%; /* Assurer que le contenu de la boîte modale occupe toute la largeur disponible */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 10px 0;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #2e8f23;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5dd060;
+  }
+  
+}

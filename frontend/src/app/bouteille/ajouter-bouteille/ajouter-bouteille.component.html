@@ -1,0 +1,65 @@
+<div class="body">
+  <p><strong>Ajouter un vin</strong></p>
+  <div class="search-box">
+    <i class="bx bx-search-alt"></i>
+    <input type="text" placeholder="Rechercher une bouteille" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.bouteille_nom"
+        (click)="autoCompleteForm(option)">
+        {{ option.bouteille_nom }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <form [formGroup]="formAjout" class="formulaire">
+    <mat-form-field class="">
+      <mat-label>Nom du vin</mat-label>
+      <input matInput type="text" formControlName="nom" [value]="bouteilleSelected?.bouteille_nom">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Millesime</mat-label>
+      <input matInput type="number" formControlName="millesime">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Type</mat-label>
+      <input matInput type="text" formControlName="type" [value]="bouteilleSelected?.type.nom">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Pays</mat-label>
+      <input matInput type="text" formControlName="pays" [value]="bouteilleSelected?.pays.nom">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Garde</mat-label>
+      <input matInput type="text" formControlName="garde">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Date d'achat</mat-label>
+      <input matInput type="date" formControlName="date_achat">
+
+
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Quantité</mat-label>
+      <input matInput type="number" formControlName="quantite">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Note</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+
+    <div class="button">
+      <button (click)="ajouterBouteille()">Ajouter</button>
+    </div>
+  </form>
+</div>
+
+
+<app-footer-auth></app-footer-auth>
