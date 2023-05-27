@@ -1,8 +1,8 @@
 <div class="body">
-  <h5 class="smtitle">S'inscrire</h5>
+  <h2 class="smtitle center">Enregistrer</h2>
 
   <form class="example-form" [formGroup]="enregistrer" (ngSubmit)="enregistrerSubmit()">
-    <input type="hidden" formControlName="role_id" >
+    <input type="hidden" formControlName="role_id">
 
     <mat-form-field class="example-full-width">
       <mat-label>Nom</mat-label>
@@ -16,25 +16,27 @@
 
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
-      <input matInput [type]="'password'" formControlName="mot_de_passe" >
+      <input matInput [type]="'password'" formControlName="mot_de_passe">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Confirmation du mot de passe</mat-label>
-      <input matInput type="password" formControlName="confirm_password" >
-      <mat-error *ngIf="enregistrer.hasError('passwordsDoNotMatch')">
+      <input matInput type="password" formControlName="confirm_password">
+      <!-- <mat-error *ngIf="enregistrer.hasError('passwordsDoNotMatch')">
         Les mots de passe ne correspondent pas
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
-    <p class="passwordsDoNotMatch" *ngIf="passwordsDoNotMatch">Les mots de passe ne correspondent pas</p>
+    <p class="passwordsDoNotMatch" *ngIf="passwordsDoNotMatch">Les mots de passe ne correspondent pas...</p>
 
-    <div class="footer">
-      <div class="menu">
+    <div class="footer center">
+      <button mat-raised-button class="mat-button-rounded" routerLinkActive="actif">Enregistrer</button>
+      <!-- <div class="menu">
         <button type="submit" class="">Enregistrer</button>
-      </div>
+      </div> -->
       <p class="error-login" *ngIf="error">{{ message_error }}</p>
       <div class="redirect">
-        <p class="reg_login"><small><a routerLink="/login">Login</a></small></p>
+
+        <p class="reg_login"><small><a routerLink="/login">Avez-vous une compte?</a></small></p>
       </div>
     </div>
   </form>

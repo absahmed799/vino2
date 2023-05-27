@@ -1,16 +1,22 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, map, tap} from "rxjs/operators";
-import { Observable, of } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  public urlBackend: string = 'http://127.0.0.1:8000/api';
-  private estConnecte: boolean = false
+  urlApi: string;
+  private estConnecte: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private apiVinoService: ApiVinoService
+  ) {
+    // URL du API backend dans le service api-vino
+    this.urlApi = this.apiVinoService.urlApi;
   }
 
   setBearerToken(token: string) {
@@ -30,18 +36,17 @@ export class AuthService {
   }
 
   verifConnection(): Observable<boolean> {
-
-    return this.http.get<any>(this.urlBackend + '/utilisateur').pipe(
-      catchError(error => {
+    return this.http.get<any>(this.urlApi + '/utilisateur').pipe(
+      catchError((error) => {
         // console.log(error)
         return of(false);
       }),
-      tap(result => {
+      tap((result) => {
         if (result === false) {
           this.estConnecte = false;
         }
       }),
-      map(result => {
+      map((result) => {
         this.setUserData(result.nom);
         if (result !== false) {
           this.estConnecte = true;
@@ -54,7 +59,7 @@ export class AuthService {
   }
 
   removeBearerToken(): void {
-    this.http.post<any>(this.urlBackend + '/logout', {}).subscribe();
-    sessionStorage.removeItem('bearer_token')
+    this.http.post<any>(this.urlApi + '/logout', {}).subscribe();
+    sessionStorage.removeItem('bearer_token');
   }
 }
