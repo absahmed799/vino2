@@ -10,7 +10,7 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
   styleUrls: ['./liste-bouteille.component.scss'],
 })
 export class ListeBouteilleComponent {
-  public urlBackend: string = 'http://127.0.0.1:8000/api';
+  urlApi: string;
   id: any;
   bouteilles: any;
   cellier: any;
@@ -20,8 +20,11 @@ export class ListeBouteilleComponent {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private api: ApiVinoService
-  ) {}
+    private apiVinoService: ApiVinoService
+  ) {
+    // URL du API backend dans le service api-vino
+    this.urlApi = this.apiVinoService.urlApi;
+  }
 
   ngOnInit() {
     // ID du cellier à partir des paramètres de l'URL
@@ -29,7 +32,7 @@ export class ListeBouteilleComponent {
     console.log(this.id);
 
     // Méthode du service pour récupérer les données du cellier
-    this.api.getCellierParid(this.id).subscribe(
+    this.apiVinoService.getCellierParid(this.id).subscribe(
       (response: any) => {
         this.cellier = response; // Stocker les données du cellier dans la variable
       },
@@ -38,11 +41,12 @@ export class ListeBouteilleComponent {
       }
     );
 
-    //this.http.get<any>(this.urlBackend + '/celliers/' + this.id + '/bouteilles')
-    this.api.listebouteilleCellier(this.id).subscribe((result: any) => {
-      console.log(result);
-      this.bouteilles = result;
-    });
+    this.apiVinoService
+      .listebouteilleCellier(this.id)
+      .subscribe((result: any) => {
+        console.log(result);
+        this.bouteilles = result;
+      });
   }
 
   modifierQuantiteBouteille(quantite: number, cellier: any, bouteille: any) {
@@ -50,7 +54,7 @@ export class ListeBouteilleComponent {
     console.log(bouteille);
     console.log(quantite);
 
-    this.api
+    this.apiVinoService
       .modifierQuantite({ quantite: quantite }, cellier, bouteille)
       .subscribe((result: any) => {
         console.log(result);

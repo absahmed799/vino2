@@ -1,6 +1,7 @@
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './layout/accueil/accueil.component';
+import { AProposComponent } from './layout/a-propos/a-propos.component';
 import { ListeCellierComponent } from './cellier/liste-cellier/liste-cellier.component';
 import { AjouterCellierComponent } from './cellier/ajouter-cellier/ajouter-cellier.component';
 import { ModifierCellierComponent } from './cellier/modifier-cellier/modifier-cellier.component';
@@ -34,6 +35,9 @@ const routes: Routes = [
   { path:"", component:AccueilComponent, canActivate:[GuestGuard]},
   { path:"accueil", component:AccueilComponent, canActivate:[GuestGuard]},
 
+    //Route pour A Propos
+    { path:"a-propos", component:AProposComponent, canActivate:[AuthGuard]},
+
     // Routes pour Login / Enregistrer
   { path:"login", component: LoginComponent, canActivate:[GuestGuard]},
   { path:"enregistrer", component: EnregistrerComponent, canActivate:[GuestGuard]},
@@ -44,7 +48,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

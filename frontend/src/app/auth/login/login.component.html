@@ -1,5 +1,5 @@
 <div class="body">
-  <h2 class="smtitle">Login</h2>
+  <h2 class="smtitle center">Login</h2>
 
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
 
@@ -15,14 +15,19 @@
       <mat-error *ngIf="error">{{ message_error}}</mat-error>
     </mat-form-field>
 
-    <div class="footer">
-      <div class="menu">
+    <small class="error-login" *ngIf="error">{{ erreurMessage }}</small>
+
+    <div class="footer center">
+      <button mat-raised-button class="mat-button-rounded"
+        routerLinkActive="actif">Connexion</button>
+
+      <!-- <div class="menu">
         <button type="submit" [disabled]="!loginForm.valid">Connecter</button>
-      </div>
-      <p class="error-login" *ngIf="error">{{ message_error }}</p>
+      </div> -->
+      <p class="erreur" *ngIf="error">{{ message_error }}</p>
       <div class="redirect">
-        <p><a routerLink="/enregistrer">Enregistrer</a></p>
-        <p><a routerLink="/">Accueil</a></p>
+        <p><a routerLink="/enregistrer">Voulez-vous s'enregistrer?</a></p>
+        <p><a routerLink="/accueil">Accueil</a></p>
       </div>
     </div>
   </form>
