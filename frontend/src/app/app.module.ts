@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EnteteAuthComponent } from './layout/entete-auth/entete-auth.component';
 import { FooterAuthComponent } from './layout/footer-auth/footer-auth.component';
+import { AProposComponent } from './layout/a-propos/a-propos.component';
 
 // Importez les modules Angular Material spécifiques dont nous avons besoin:
 import { MatIconModule } from '@angular/material/icon';
@@ -40,8 +41,6 @@ import { AuthInterceptor } from './AuthInterceptor';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-import { AProposComponent } from './layout/a-propos/a-propos.component';
-
 
 @NgModule({
   declarations: [
