@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ListeAchat extends Model
 {
     protected $table = 'liste_achats';
-    protected $fillable = ['bouteille_id', 'quantity'];
+    protected $fillable = ['bouteille_id', 'utilisateur_id', 'quantite'];
 
     public function bouteille()
     {
-        return $this->belongsTo(Bouteille::class);
+        return $this->belongsTo(Bouteille::class, 'bouteille_id');
     }
 
-    // Define other relationships or additional methods here
+    public function utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
+    }
+
 }

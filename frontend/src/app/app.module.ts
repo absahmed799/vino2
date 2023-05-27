@@ -62,8 +62,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     AfficherBouteilleComponent,
     AccueilComponent,
     NonTrouverComponent,
+    FooterAuthComponent,
     EnteteAuthComponent,
-    FooterAuthComponent
+
   ],
   imports: [
     BrowserModule,

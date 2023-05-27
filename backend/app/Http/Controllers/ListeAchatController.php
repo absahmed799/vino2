@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ListeAchat;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ModelNotFoundException;
+use App\Models\ListeAchat;
+use Illuminate\Support\Facades\Auth;
+
 
 class ListeAchatController extends Controller
 {
@@ -13,107 +14,95 @@ class ListeAchatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Vu qu'il est dans un middleware Auth on peut récupérer l'utilisateur connecté directement via la facade Auth
-//        // Récupérer l'ID de l'utilisateur à partir de la requête
-//        $utilisateurId = $request->input('utilisateur_id');
+        //
+    }
 
-        try {
-            // Rechercher l'utilisateur
-            $utilisateur = Auth::user();
+    // gestion de la quantité de bouteille pour chaque utilisateur
 
-            // Récupérer les listeachants de l'utilisateur
-            $listeachants = $utilisateur->listeachants()->withCount('bouteilles')->get();
-            foreach ($listeachants as $listeachant) {
-                $sumQuantite = BouteilleListeAchat::where('listeachant_id', $listeachant->id)->sum('quantite');
-                $listeachant->sumQuantite = $sumQuantite;
+    public function gestionQuantite($utilisateurId, $bouteilleId, $action)
+    {
+        $listeAchat = ListeAchat::firstOrNew([
+            'utilisateur_id' => $utilisateurId,
+            'bouteille_id' => $bouteilleId
+        ]);
+
+        // Vérifier l'action et ajuster la quantité en conséquence
+        if ($action === 'ajouter') {
+            $listeAchat->quantite += 1;
+        } elseif ($action === 'soustraire') {
+            $listeAchat->quantite -= 1;
+            if ($listeAchat->quantite < 0) {
+                $listeAchat->quantite = 0;
             }
-            return response()->json($listeachants);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
         }
+
+        $listeAchat->save();
+
+        // Autres opérations ou retours de réponse selon vos besoins
     }
 
     /**
-     * Stocker une ressource nouvellement créé dans le stockage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nom' => ['required', 'string'],
-        ]);
-
-        $listeachant = Auth::user()->listeachants()->create([
-            'nom' => $request->input('nom'),
-        ]);
-
-        return response()->json($listeachant, 201);
+        //
     }
 
-
     /**
-     * Affiche la ressource spécifiée.
+     * Display the specified resource.
      *
      * @param  int  $id
-     * @return JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        try {
-            // Rechercher le listeachant en utilisant à la fois l'ID du listeachant et l'ID de l'utilisateur
-            $listeachant = ListeAchat::findOrFail($id);
+        // Récupérer l'utilisateur authentifié
+        $utilisateur = auth()->user();
 
-            return response()->json($listeachant);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+        // Vérifier si l'utilisateur est authentifié
+        if ($utilisateur) {
+            // Récupérer le panier de l'utilisateur en fonction de son ID
+            $panier = $utilisateur->panier;
+
+            // Retourner le panier en tant que réponse JSON
+            return response()->json($panier);
+        } else {
+            // Retourner une erreur ou une réponse appropriée si l'utilisateur n'est pas authentifié
+            // ...
         }
     }
 
     /**
-     * Mettre à jour la ressource spécifiée dans le stockage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $bouteilleId, $quantite)
     {
-        $this->validate($request, [
-            'nom' => ['required', 'string'],
-        ]);
+        $utilisateurId = Auth::id();
 
-        try {
-            $listeachant = ListeAchat::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
-        }
+        // Appel de la fonction ajouterQuantite en passant l'ID de l'utilisateur
+        $this->gestionQuantite($utilisateurId, $bouteilleId, $quantite);
 
-        $listeachant->update($request->all());
-
-        return response()->json($listeachant);
+        // Autres opérations ou retours de réponse selon vos besoins
     }
 
-
     /**
-     * Supprime la ressource spécifiée du stockage.
+     * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return JsonResponse
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
-        try {
-            $listeachant = ListeAchat::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(false, 404);
-        }
-
-        $listeachant->forceDelete();
-
-        return response()->json(true, 204);
+        //
     }
 }

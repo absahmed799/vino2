@@ -17,3 +17,24 @@
 <!--<div class="search-box">
     <mat-icon>search</mat-icon><input type="text" name="search" id="search" placeholder="Rechercher" />
   </div> -->
+    <!-- Contenu du modal -->
+<ng-template #cartModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Mon panier</h4>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of panierItems">
+          <p>Nom de l'article : {{ item.nom }}</p>
+          <p>Quantité : {{ item.quantite }}</p>
+          <!-- Ajoutez d'autres détails de l'article ici -->
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Fermer</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
