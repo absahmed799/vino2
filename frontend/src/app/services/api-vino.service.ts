@@ -1,60 +1,71 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class ApiVinoService {
-  private url :string = "http://127.0.0.1:8000/api/";
-  constructor( private http:HttpClient) {
-    
-   
-   }
-  login(utilisateur:any){
+  public urlApi: string = 'http://127.0.0.1:8000/api'; // URL du API backend
+  constructor(private http: HttpClient) {}
+
+  login(utilisateur: any) {
     let headers = new HttpHeaders({
-        'Content-type': 'application/json',
-      })
-    
-    return this.http.post(this.url+'login',utilisateur, )
+      'Content-type': 'application/json',
+    });
+
+    return this.http.post(this.urlApi + '/login', utilisateur);
   }
-  listeCelliers(){
-   
-    
-    
-    return this.http.get(this.url+'celliers',)
+
+  listeCelliers() {
+    return this.http.get(this.urlApi + '/celliers');
   }
-  ajouterCellier(cellier:string){
-    
-    return this.http.post(this.url+'user/celliers',cellier,)
+
+  ajouterCellier(cellier: string) {
+    return this.http.post(this.urlApi + '/user/celliers', cellier);
   }
-  listebouteilleCellier(cellier_id:any){
-    
-    return this.http.get(this.url+"celliers/"+cellier_id+"/bouteilles")
+
+  listebouteilleCellier(cellier_id: any) {
+    return this.http.get(
+      this.urlApi + '/celliers/' + cellier_id + '/bouteilles'
+    );
   }
-  getCellierParid(cellier_id:any){
-    
-    return this.http.get(this.url+"celliers/"+cellier_id,)
+
+  getCellierParid(cellier_id: any) {
+    return this.http.get(this.urlApi + '/celliers/' + cellier_id);
   }
-  editCellier(cellier_id:any,cellier:any){
-    
-    return this.http.put(this.url+"celliers/"+cellier_id,cellier,)
+
+  editCellier(cellier_id: any, cellier: any) {
+    return this.http.put(this.urlApi + '/celliers/' + cellier_id, cellier);
   }
-  supprimerCellier(cellier_id:any){
-    
-    return this.http.delete(this.url+"celliers/"+cellier_id,)
+
+  supprimerCellier(cellier_id: any) {
+    return this.http.delete(this.urlApi + '/celliers/' + cellier_id);
   }
-  modifierQuantite(quantite:any ,cellier_id:any ,bouteille_id:any){
-  console.log(quantite);
-  
-  return this.http.put(this.url+"celliers/"+cellier_id+"/bouteilles/"+bouteille_id+"/quantite" ,quantite)
+
+  modifierQuantite(quantite: any, cellier_id: any, bouteille_id: any) {
+    console.log(quantite);
+
+    return this.http.put(
+      this.urlApi +
+        '/celliers/' +
+        cellier_id +
+        '/bouteilles/' +
+        bouteille_id +
+        '/quantite',
+      quantite
+    );
   }
+
   getBouteilles() {
-    return this.http.get<any>(this.url+'bouteilles')    
+    return this.http.get<any>(this.urlApi + '/bouteilles');
   }
-  logout(){
-     return this.http.delete(this.url+"logout")
+
+  logout() {
+    return this.http.delete(this.urlApi + '/logout');
   }
-  profile(){
-    return this.http.get<any>(this.url + 'utilisateur')
+
+  profile() {
+    return this.http.get<any>(this.urlApi + '/utilisateur');
   }
 }

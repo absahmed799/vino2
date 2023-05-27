@@ -40,6 +40,7 @@ import { AuthInterceptor } from './AuthInterceptor';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { AProposComponent } from './layout/a-propos/a-propos.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     AccueilComponent,
     NonTrouverComponent,
     EnteteAuthComponent,
-    FooterAuthComponent
+    FooterAuthComponent,
+    AProposComponent,
   ],
   imports: [
     BrowserModule,

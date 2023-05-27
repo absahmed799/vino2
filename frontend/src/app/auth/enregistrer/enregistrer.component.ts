@@ -4,6 +4,8 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {EMPTY} from "rxjs";
 import {Router} from "@angular/router";
+import { ApiVinoService } from 'src/app/services/api-vino.service';
+
 
 @Component({
   selector: 'app-enregistrer',
@@ -11,7 +13,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./enregistrer.component.scss']
 })
 export class EnregistrerComponent {
-  private urlBackend: string = 'http://127.0.0.1:8000/api';
+  //private urlApi: string = 'http://127.0.0.1:8000/api';
+  urlApi: string;
   error = false;
   message_error = '';
 
@@ -37,7 +40,9 @@ export class EnregistrerComponent {
     role_id: new FormControl(2)
   }, { validators: this.checkPasswordsMatch })
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private apiVinoService: ApiVinoService) {
+    // URL du API backend dans le service api-vino
+    this.urlApi = this.apiVinoService.urlApi;
   }
 
   enregistrerSubmit() {
@@ -47,7 +52,7 @@ export class EnregistrerComponent {
           'Content-type': 'application/json',
         })
       };
-      let response = this.http.post<any>(this.urlBackend + '/utilisateurs', this.enregistrer.value, httpOption).pipe(
+      let response = this.http.post<any>(this.urlApi + '/utilisateurs', this.enregistrer.value, httpOption).pipe(
         catchError(error => {
           let handledError = this.handleError(error);
           // Traiter l'erreur ici

@@ -1,3 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -31,8 +33,6 @@ $frontend-theme: mat.define-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($frontend-theme);
-
-/* You can add global styles to this file, and also import other style files */
 
 /* COULEURS */
 :root {
@@ -101,6 +101,31 @@ body {
   min-height: 70vh;
   padding: 20% 9% 4rem;
   justify-content: space-between;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.mat-button-rounded {
+  border-radius: 50px !important;
+}
+
+.mat-raised-button {
+  background-color: white !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+}
+
+.erreur {
+  color: red !important;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.conteneur {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 //.mdc-text-field--filled:not(.mdc-text-field--disabled) {
