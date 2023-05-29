@@ -9,12 +9,18 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./entete-auth.component.scss'],
 })
 export class EnteteAuthComponent {
-  constructor(private location: Location, private authService: AuthService) {}
+  estUtilisateurConnecte$: Observable<boolean>;
+
+  constructor(private location: Location, private authService: AuthService) {
+    this.estUtilisateurConnecte$ = this.authService.verifConnection();
+  }
 
   // Vérifier si l'utilisateur est connecté
-  estUtilisateurConnecte(): Observable<boolean> {
-    return this.authService.verifConnection();
+  estUtilisateurConnecte(): boolean {
+    return this.authService.estConnecte;
   }
+  
+  
 
   retourner(): void {
     this.location.back();
