@@ -48,7 +48,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  // Utilisation de # dans l'URL
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
