@@ -9,7 +9,7 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 })
 export class AuthService {
   urlApi: string;
-  private estConnecte: boolean = false;
+  estConnecte: boolean = false;
   profil: BehaviorSubject<string>;
   profil$: Observable<string>;
 
@@ -52,22 +52,14 @@ export class AuthService {
   verifConnection(): Observable<boolean> {
     return this.http.get<any>(this.urlApi + '/utilisateur').pipe(
       catchError((error) => {
-        // console.log(error)
         return of(false);
       }),
       tap((result) => {
-        if (result === false) {
-          this.estConnecte = false;
-        }
+        this.estConnecte = result !== false;
       }),
       map((result) => {
         this.setUserData(result.nom);
-        if (result !== false) {
-          this.estConnecte = true;
-          return this.estConnecte;
-        } else {
-          return result;
-        }
+        return result !== false;
       })
     );
   }
