@@ -11,6 +11,8 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\BouteilleCellierController;
 use App\Http\Controllers\ListeAchatController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\SAQController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,7 @@ use App\Http\Controllers\AuthenticationController;
 // Routes pour AuthenticationController
 Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/import-products', [SAQController::class, 'importProducts'])->name('importProducts');
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::get('/utilisateur', [AuthenticationController::class, 'utilisateur'])->name('utilisateur');
 
