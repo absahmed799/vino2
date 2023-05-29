@@ -52,6 +52,10 @@ export class LoginComponent {
         this.authService.setBearerToken(result.access_token);
         this.authService.setUserData(result.utilisateur.nom);
         this.router.navigate(['/cellier']);
+
+        this.apiVinoService.profile().subscribe((profil) => {
+          this.authService.setProfil(profil.role_id);
+        });
       });
   }
 

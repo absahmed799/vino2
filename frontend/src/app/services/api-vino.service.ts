@@ -68,4 +68,8 @@ export class ApiVinoService {
   profile() {
     return this.http.get<any>(this.urlApi + '/utilisateur');
   }
+
+  importationSaq() {
+    return this.http.get<any>(this.urlApi + '/import-products');
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 export class AuthService {
   urlApi: string;
   private estConnecte: boolean = false;
+  profil: BehaviorSubject<string>;
+  profil$: Observable<string>;
 
   constructor(
     private http: HttpClient,
@@ -17,6 +19,18 @@ export class AuthService {
   ) {
     // URL du API backend dans le service api-vino
     this.urlApi = this.apiVinoService.urlApi;
+
+    // Profil de utilisateur
+    this.profil = new BehaviorSubject<string>('');
+    this.profil$ = this.profil.asObservable();
+  }
+
+  setProfil(profil: any) {
+    this.profil.next(profil);
+  }
+
+  getProfil(): Observable<any> {
+    return this.profil;
   }
 
   setBearerToken(token: string) {

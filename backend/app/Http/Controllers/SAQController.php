@@ -7,6 +7,8 @@ use App\Models\Pays;
 use App\Models\Types;
 use DOMDocument;
 use stdClass;
+use Illuminate\Support\Facades\Auth;
+
 
 class SAQController extends Controller
 {
@@ -19,15 +21,21 @@ class SAQController extends Controller
 
     public function importProducts()
     {
-        $page = 1;
-        $nombreProduit = 48; //48 ou 96
+        $utilisateur = Auth::user();
 
-        for ($i = 0; $i < 5; $i++)
-        {
-            $nombre = $this->getProduits($nombreProduit, $page + $i);
+        if ($utilisateur->role_id == "1") {
+
+            $page = 1;
+            $nombreProduit = 48; //48 ou 96
+
+            for ($i = 0; $i < 5; $i++) {
+                $nombre = $this->getProduits($nombreProduit, $page + $i);
+            }
+
+            return response()->json(['message' => 'Importation reussit!'], 200);
+        } else {
+            return response()->json(['message' => 'Utilisateur non authorisé'], 401);
         }
-
-        return redirect()->back();
     }
 
     public function getProduits($nombre = 24, $page = 1)
@@ -58,17 +66,16 @@ class SAQController extends Controller
         self::$_status = curl_getinfo($s, CURLINFO_HTTP_CODE);
 
         $doc = new DOMDocument();
-        $doc -> recover = true;
-        $doc -> strictErrorChecking = false;
-        @$doc -> loadHTML(self::$_webpage);
-        $elements = $doc -> getElementsByTagName("li");
+        $doc->recover = true;
+        $doc->strictErrorChecking = false;
+        @$doc->loadHTML(self::$_webpage);
+        $elements = $doc->getElementsByTagName("li");
         $i = 0;
         foreach ($elements as $key => $noeud) {
             if (str_contains($noeud->getAttribute('class'), "product-item")) {
                 $info = self::recupereInfo($noeud);
-                $retour = $this -> ajouteProduit($info);
+                $retour = $this->ajouteProduit($info);
                 if (!$retour->succes) {
-
                 } else {
                     $i++;
                 }
@@ -80,57 +87,54 @@ class SAQController extends Controller
 
     private function nettoyerEspace($chaine)
     {
-        return preg_replace('/\s+/', ' ',$chaine);
+        return preg_replace('/\s+/', ' ', $chaine);
     }
     private function recupereInfo($noeud)
     {
         $info = new stdClass();
 
-        $images= $noeud ;
+        $images = $noeud;
 
-        foreach ($noeud-> getElementsByTagName("img") as $key => $image) {
+        foreach ($noeud->getElementsByTagName("img") as $key => $image) {
             if (str_contains($image->getAttribute('class'), "product-image-photo")) {
-                $info -> img = $image-> getAttribute('src');
+                $info->img = $image->getAttribute('src');
             }
-        }
+        };
+        $a_titre = $noeud->getElementsByTagName("a")->item(0);
+        $info->url = $a_titre->getAttribute('href');
 
-        ;
-        $a_titre = $noeud -> getElementsByTagName("a") -> item(0);
-        $info -> url = $a_titre->getAttribute('href');
-
-        $nom = $noeud -> getElementsByTagName("a")->item(1)->textContent;
-        $info -> nom = self::nettoyerEspace(trim($nom));
+        $nom = $noeud->getElementsByTagName("a")->item(1)->textContent;
+        $info->nom = self::nettoyerEspace(trim($nom));
         // Type, format et pays
-        $aElements = $noeud -> getElementsByTagName("strong");
+        $aElements = $noeud->getElementsByTagName("strong");
         foreach ($aElements as $node) {
-            if ($node -> getAttribute('class') == 'product product-item-identity-format') {
-                $info -> desc = new stdClass();
-                $info -> desc -> texte = $node -> textContent;
+            if ($node->getAttribute('class') == 'product product-item-identity-format') {
+                $info->desc = new stdClass();
+                $info->desc->texte = $node->textContent;
                 $info->desc->texte = self::nettoyerEspace($info->desc->texte);
                 $aDesc = explode("|", $info->desc->texte); // Type, Format, Pays
-                if (count ($aDesc) == 3) {
+                if (count($aDesc) == 3) {
 
-                    $info -> desc -> type = trim($aDesc[0]);
-                    $info -> desc -> format = trim($aDesc[1]);
-                    $info -> desc -> pays = trim($aDesc[2]);
+                    $info->desc->type = trim($aDesc[0]);
+                    $info->desc->format = trim($aDesc[1]);
+                    $info->desc->pays = trim($aDesc[2]);
                 }
 
-                $info -> desc -> texte = trim($info -> desc -> texte);
+                $info->desc->texte = trim($info->desc->texte);
             }
         }
 
         //Code SAQ
-        $aElements = $noeud -> getElementsByTagName("div");
+        $aElements = $noeud->getElementsByTagName("div");
         foreach ($aElements as $node) {
-            if ($node -> getAttribute('class') == 'saq-code') {
-                if(preg_match("/\d+/", $node -> textContent, $aRes))
-                {
-                    $info -> desc -> code_SAQ = trim($aRes[0]);
+            if ($node->getAttribute('class') == 'saq-code') {
+                if (preg_match("/\d+/", $node->textContent, $aRes)) {
+                    $info->desc->code_SAQ = trim($aRes[0]);
                 }
             }
         }
 
-        $aElements = $noeud -> getElementsByTagName("span");
+        $aElements = $noeud->getElementsByTagName("span");
         foreach ($aElements as $node) {
             $aElements = $noeud->getElementsByTagName("span");
             foreach ($aElements as $node) {
