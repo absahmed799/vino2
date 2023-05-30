@@ -1,172 +1,116 @@
-@media (min-width: 220px) {
-
-  .logo-container {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-  
-  .logo-container img {
-    max-width: 100%;
-    max-height: 100px;
-    width: auto;
-    height: auto;
-  }
-  
-  .body {
-    min-height: 70vh;
-    padding: 40% 9% 4rem;
-  }
-
-  .body i {
-    font-size: 1.6rem;
-    color: rgba(20, 20, 20, 0.658);
-  }
-
-  .body .smtitle {
-    padding:10% 0;
-    margin-top: 15px
-  }
-
-  .body {
-    padding: 30% 9% 2%;
-  }
-
-  .body .produit h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-  }
-
-  .body .produit .resume-produit {
-    display: flex;
-    margin-top: 0.5rem;
-    justify-content: space-between;
-  }
-
-  .body .produit .resume-produit img {
-    width: 45%;
-    height: 150px;
-  }
-
-  .body .produit .resume-produit .resume h2 {
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 100;
-    color: rgb(0 0 0 / 62%);
-  }
-
-  .body .produit .resume-produit .resume .details .element {
-    display: grid;
-    background: rgb(201 255 232 / 55%);
-    padding: 5%;
-    border-radius: 5%;
-    margin-bottom: 2%;
-    width: 7rem;
-    font-size: 0.9rem;
-  }
-  .body .produit .resume-produit .resume .details .action-add {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .body .produit .resume-produit .resume .details .element i {
-    color: white;
-    background: #1fab89;
-    border-radius: 50%;
-    font-size: 1.5rem;
-  }
-
-  .body .produit .resume-produit .resume .details .element span {
-    color: rgba(0, 0, 0, 1);
-    font-weight: bold;
-  }
-
-  .body .produit .resume-produit .resume .details p {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.3rem;
-  }
-
-  .body .description-note .card {
-    margin: 10% 0;
-    border-radius: 0.8rem;
-    padding: 4%;
-    background: white;
-  }
-
-  .body .description-note .card h2 {
-    text-align: center;
-    font-size: 1.11rem;
-    margin-bottom: 5%;
-    font-weight: bold;
-  }
-
-  .body .description-note .card p {
-    font-size: 0.9rem;
-    color: rgb(0 0 0 / 76%);
-  }
-
-  .body .produit .resume-produit img.flag-italy {
-    width: 20%;
-    margin-left: 5px;
-  }
-
-  .body .produit .resume-produit span.flag {
-    display: flex;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 5%;
+  box-sizing: border-box;
 }
 
-@media (min-width: 600px) {
-  .body {
-    background-size: 100% 20%;
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+.description-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notes.card {
+  margin: 2% 0;
+  border-radius: 0.8rem;
+  padding: 4%;
+  background: white;
+}
+
+.notes.card h2 {
+  text-align: center;
+  font-size: 1.11rem;
+  margin-bottom: 5%;
+  font-weight: bold;
+}
+
+.notes.card p {
+  font-size: 0.9rem;
+  line-height: 26pt;
+  color: rgba(0, 0, 0, 0.76);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2%;
+}
+
+.footer button {
+  margin-bottom: 1rem;
+}
+
+.footer p {
+  font-size: 1rem;
+  text-align: center;
+  color: #000000;
+}
+
+.center {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 10% 20%;
   }
 
-  .body i {
-    font-size: 3.5rem;
+  .logo-container {
+    margin-top: 100px;
   }
 
-  .body .smtitle {
-    padding:10% 0;
-    font-size: 3.5rem;
-  }
-
-  .body .produit h1 {
+  .notes.card h2 {
     font-size: 2.5rem;
-  }
-
-  .body .produit .resume-produit img {
-    width: 45%;
-    height: 250px;
-  }
-
-  .body .produit .resume-produit .resume h2 {
-    font-size: 1.8rem;
     margin-bottom: 8%;
   }
 
-  .body .produit .resume-produit .resume .details .element {
-    width: 15rem;
-    font-size: 1.3rem;
+  .notes.card p {
+    font-size: 2rem;
   }
 
-  .body .produit .resume-produit .resume .details p {
-    font-size: 1.9rem;
-  }
-
-  .body .description-note .card h2 {
-    font-size: 1.8rem;
-  }
-
-  .body .description-note .card p {
-    font-size: 1.5rem;
+  .center {
+    font-size: 2rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .body .produit .resume-produit .resume .details .element {
-    font-size: 1.5rem;
+@media (min-width: 1200px) {
+  .container {
+    padding: 15% 25%;
+  }
+
+  .logo-container {
+    margin-top: 150px;
+  }
+
+  .notes.card h2 {
+    font-size: 3.5rem;
+  }
+
+  .notes.card p {
+    font-size: 2.5rem;
+  }
+
+  .center {
+    font-size: 2.5rem;
   }
 }

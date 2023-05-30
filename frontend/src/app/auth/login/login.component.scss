@@ -1,4 +1,19 @@
 @media (min-width: 220px) {
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .logo-container img {
+    max-width: 100%;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+  }
+  
   .body .smtitle {
     padding: 10% 0;
   }

@@ -1,23 +1,21 @@
-<div class="body">
-  <div class="header">
-    <div class="logo-container">
-        <a href="accueil"><img src="assets/vino-logo-black.svg" alt="Vino logo"></a>
-      </div>      
-</div>
-   <!-- <div class="produit">
-   <div class="resume-produit">
-      <img src="../../../assets/vin.svg" alt="vin.png" />
-      <img src="../../../assets/cellar-dospng.png" alt="cellar.png" />
-      <img src="../../../assets/vin.svg" alt="vin.png" />
-    </div>
-  </div> -->
+<div class="container">
+  <div class="logo-container">
+    <a href="accueil"><img src="assets/vino-logo-black.svg" alt="Vino logo"></a>
+  </div>
+
   <div class="description-note">
     <div class="notes card center">
       <h2>Bienvenue sur Vino!</h2>
-      <p>
-        Un gestionnaire de cellier de vin à partir d’une application Web.
-      </p>
+      <p>Un gestionnaire de cellier de vin à partir d’une application Web.</p>
     </div>
   </div>
+
+  <div class="footer">
+    <button routerLink="/login" mat-raised-button class="mat-button-rounded" routerLinkActive="actif">Login</button>
+    <small><a routerLink="/enregistrer">Voulez-vous vous s'enregistrer ?</a></small>
+  </div>
+
+  <div class="center">
+    <small><a routerLink="/a-propos" routerLinkActive="active">À Propos de Vino</a></small>
+  </div>
 </div>
-<app-footer></app-footer>
