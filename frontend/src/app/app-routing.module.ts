@@ -38,7 +38,7 @@ const routes: Routes = [
   { path:"accueil", component:AccueilComponent, canActivate:[GuestGuard]},
 
     //Route pour A Propos
-    { path:"a-propos", component:AProposComponent, canActivate:[AuthGuard]},
+    { path:"a-propos", component:AProposComponent},
 
     // Routes pour Login / Enregistrer
   { path:"login", component: LoginComponent, canActivate:[GuestGuard]},

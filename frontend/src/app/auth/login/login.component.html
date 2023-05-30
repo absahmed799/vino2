@@ -1,4 +1,7 @@
 <div class="body">
+  <div class="logo-container">
+    <a href="accueil"><img src="assets/vino-logo-black.svg" alt="Vino logo"></a>
+  </div>      
   <h2 class="smtitle center">Login</h2>
 
   <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
@@ -21,9 +24,6 @@
       <button mat-raised-button class="mat-button-rounded"
         routerLinkActive="actif">Connexion</button>
 
-      <!-- <div class="menu">
-        <button type="submit" [disabled]="!loginForm.valid">Connecter</button>
-      </div> -->
       <p class="erreur" *ngIf="error">{{ message_error }}</p>
       <div class="redirect">
         <p><a routerLink="/enregistrer">Voulez-vous s'enregistrer?</a></p>
