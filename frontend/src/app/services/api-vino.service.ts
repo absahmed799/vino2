@@ -72,4 +72,23 @@ export class ApiVinoService {
   importationSaq() {
     return this.http.get<any>(this.urlApi + '/import-products');
   }
+  ajouterBouteille(cellier_id: number, body: object) {
+    return this.http.post(this.urlApi + '/celliers/'+ cellier_id +'/bouteilles', body);
+  }
+
+  supprimerBouteille(bouteiile_id: number, cellier_id: number) {
+    return this.http.delete(this.urlApi + '/celliers/' + cellier_id + '/bouteilles/' + bouteiile_id);
+  }
+
+  afficherBouittelleCellier(cellier_id:any ,bouteille_id:any){
+    return this.http.get(this.urlApi+"/celliers/"+cellier_id+"/bouteilles/"+bouteille_id)
+  }
+
+  modifierBouteilleCellier(cellier_id: any, bouteille_id: any, body: object) {
+    return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteilles/'+bouteille_id, body);
+  }
+  afficherBouittelleNonLister(cellier_id: any, body:object){
+    return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteille', body);
+  
+  }
 }

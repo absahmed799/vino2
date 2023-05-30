@@ -1,1 +1,10 @@
-<p>supprimer-bouteille works!</p>
+<h1 mat-dialog-title>Suppression de Bouteille</h1>
+<div mat-dialog-content>
+  Voulez-vous suppimer
+  <hr>
+  <strong>{{ nom }}</strong> ?
+</div>
+<div mat-dialog-actions class="modal-footer">
+  <button mat-button (click)="fermerBouteille()">Annuler</button>
+  <button mat-button class="supprimer" (click)="supprimerBouteille(bouteille_id, cellier_id)" >Supprimer</button>
+</div>

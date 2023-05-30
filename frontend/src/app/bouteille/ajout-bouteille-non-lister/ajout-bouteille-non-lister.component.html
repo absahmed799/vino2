@@ -1,26 +1,12 @@
 
 <div class="body">
-  <div class="title">
-    <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
-     <a [routerLink]="['nonlister']" ><span>Ajouter une bouteille Non lister</span><mat-icon>add_circle</mat-icon></a>
-   </div>
   <p><strong>Ajouter un vin</strong></p>
-  <div class="search-box">
-    <i class="bx bx-search-alt"></i>
-    <input type="text" placeholder="Rechercher une bouteille" matInput [formControl]="myControl"
-      [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.bouteille_nom"
-        (click)="autoCompleteForm(option)">
-        {{ option.bouteille_nom }}
-      </mat-option>
-    </mat-autocomplete>
-  </div>
+  
 
   <form [formGroup]="formAjout" class="formulaire" (ngSubmit)="ajouterBouteille()">
     <mat-form-field class="">
       <mat-label>Nom du vin</mat-label>
-      <input matInput type="text" disabled [value]="bouteilleSelected?.bouteille_nom">
+      <input matInput type="text" formControlName="nom">
     </mat-form-field>
 
   
@@ -32,14 +18,22 @@
 
     <mat-form-field class="">
       <mat-label>Type</mat-label>
-      <input matInput type="text" disabled [value]="bouteilleSelected?.type.nom">
+      <input matInput type="text"formControlName="type">
     </mat-form-field>
 
     <mat-form-field class="">
       <mat-label>Pays</mat-label>
-      <input matInput type="text" disabled [value]="bouteilleSelected?.pays.nom">
+      <input matInput type="text" formControlName="pays">
+    </mat-form-field>
+    <mat-form-field class="">
+      <mat-label>Description</mat-label>
+      <input matInput type="text"formControlName="description">
     </mat-form-field>
 
+    <mat-form-field class="">
+      <mat-label>Prix</mat-label>
+      <input matInput type="number" formControlName="prix">
+    </mat-form-field>
     <mat-form-field class="">
       <mat-label>Garde</mat-label>
       <input matInput type="text" formControlName="garde_jusqua">

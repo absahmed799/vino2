@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\SAQController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -48,6 +49,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/bouteilles', [BouteilleController::class, 'store']);
     Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
     Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
+    Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
+    Route::get('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'show']);
+    Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'update']);
+    Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}/quantite', [BouteilleCellierController::class,'updateQuantity']);
+    Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
+    Route::put('/celliers/{cellier}/bouteille', [BouteilleController::class,'store']);
 });
 
 
@@ -71,11 +78,6 @@ Route::get('/types/{id}', [TypesController::class, 'show']);
 
 // Routes for BouteilleCellierController
 //Route::put('/celliers/{cellier}/bouteilles/{bouteille_id/updateQuantity}', [BouteilleCellierController::class,'updateQuantity']);
-Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
-Route::get('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'show']);
-Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'update']);
-Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}/quantite', [BouteilleCellierController::class,'updateQuantity']);
-Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
