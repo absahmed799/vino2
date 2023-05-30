@@ -41,6 +41,7 @@ import { AuthInterceptor } from './AuthInterceptor';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     SupprimerCellierComponent,
     ListeBouteilleComponent,
     AjouterBouteilleComponent,
+   
     ModifierBouteilleComponent,
     SupprimerBouteilleComponent,
     AfficherBouteilleComponent,
@@ -65,6 +67,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     EnteteAuthComponent,
     FooterAuthComponent,
     AProposComponent,
+    AjoutBouteilleNonListerComponent,
   ],
   imports: [
     BrowserModule,

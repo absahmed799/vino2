@@ -14,6 +14,7 @@ import { ModifierBouteilleComponent } from './bouteille/modifier-bouteille/modif
 import {AuthGuard} from "./auth/AuthGuard";
 import {GuestGuard} from "./auth/GuestGuard";
 import {AjouterBouteilleComponent} from "./bouteille/ajouter-bouteille/ajouter-bouteille.component";
+import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
 
 
 //import { GardienRouteGuard } from './gardien-route.guard';
@@ -28,8 +29,9 @@ const routes: Routes = [
 
   { path:"cellier/:id/bouteille", component: ListeBouteilleComponent, canActivate: [AuthGuard] },
   { path:"cellier/:id/bouteille/ajouter", component: AjouterBouteilleComponent, canActivate: [AuthGuard] },
-  { path:"cellier/:id/bouteille/:id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
-  { path:"cellier/:id/bouteille/:id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
+  { path:"cellier/:id/bouteille/ajouter/nonlister", component: AjoutBouteilleNonListerComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:cellier_id/bouteille/:bouteille_id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:cellier_id/bouteille/:bouteille_id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
 
     //Routes pour Accueil
   { path:"", component:AccueilComponent, canActivate:[GuestGuard]},

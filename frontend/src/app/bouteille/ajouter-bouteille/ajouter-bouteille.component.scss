@@ -2,6 +2,33 @@
   padding-top: 10%;
 }
 
+.body .title {
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body .title p {
+  font-weight: bolder;
+}
+
+.body .title a {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.body .title a i {
+  background-color: #5fcb9c;
+  border-radius: 50%;
+  color: white;
+}
+
+.body .title a span {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
 .search-box {
   display: flex;
   align-items: center;
