@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { EnregistrerComponent } from './auth/enregistrer/enregistrer.component';
-import { EnteteComponent } from './layout/entete/entete.component';
+
 import { FooterComponent } from './layout/footer/footer.component';
 import { MenuComponent } from './layout/menu/menu.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -48,7 +48,7 @@ import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-no
     AppComponent,
     LoginComponent,
     EnregistrerComponent,
-    EnteteComponent,
+   
     FooterComponent,
     MenuComponent,
     NavigationComponent,

@@ -5,6 +5,7 @@ import {map, switchMap, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import { ApiVinoService } from 'src/app/services/api-vino.service';
 import {ActivatedRoute, Router} from "@angular/router";
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-ajout-bouteille-non-lister',
@@ -19,11 +20,11 @@ export class AjoutBouteilleNonListerComponent implements OnInit{
   bouteilleSelected: any;
   dateFormControl = new FormControl();
   formAjout:FormGroup;
-
+  paysList: any[] = []; 
   cellier_id: any
 
   constructor(private http: HttpClient , private api:ApiVinoService,
-     private route: ActivatedRoute, private router: Router) {
+     private route: ActivatedRoute, private router: Router , private authService: AuthService) {
      this.formAjout = new FormGroup({
      nom:new FormControl("", Validators.required),
      pays:new FormControl("", Validators.required),
@@ -37,17 +38,26 @@ export class AjoutBouteilleNonListerComponent implements OnInit{
       note: new FormControl("", Validators.required),
       
     })
+
+
   }
 
   ngOnInit() {
 
-    this.cellier_id = this.route.snapshot.paramMap.get('id');
+    this.authService.getId_cellier().subscribe((id) => {
+      this.cellier_id = id;
+    });
+    this.getPaysList();
 
   
   }
 
-
-
+getPaysList() {
+    this.api.getPaysList()
+      .subscribe((data: any) => {
+        this.paysList = data;
+      });
+  }
  
 
   ajouterBouteille(){
@@ -56,20 +66,23 @@ export class AjoutBouteilleNonListerComponent implements OnInit{
       let valueForm = this.formAjout.value;
    
       let body = {
-        nom:this.formAjout.value.nom,
-        type:this.formAjout.value.type ,
-        pays:this.formAjout.value.pays ,
-        description:this.formAjout.value.description,
-        prix:this.formAjout.value.prix ,
-        millesime: this.formAjout.value.millesime,
-        garde_jusqua: this.formAjout.value.garde_jusqua,
+        nom:this.formAjout.value.nom.toString(),
+        type:this.formAjout.value.type.toString() ,
+        pays:this.formAjout.value.pays.toString() .toString(),
+        description:this.formAjout.value.description.toString(),
+        prix:this.formAjout.value.prix.toString() ,
+        millesime: this.formAjout.value.millesime.toString(),
+        garde_jusqua: this.formAjout.value.garde_jusqua.toString(),
         date_achat: this.formAjout.value.date_achat?.getTime(),
-        quantite: this.formAjout.value.quantite,
-        note: this.formAjout.value.note,
-        bouteille_id: this.bouteilleSelected.id
+        quantite: this.formAjout.value.quantite.toString(),
+        note: this.formAjout.value.note.toString(),
+        cellier_id:this.cellier_id.toString()
+        
+        
       }
+console.log(body);
 
-      this.api.afficherBouittelleNonLister(this.cellier_id,body)
+      this.api.ajouterBouittelleNonLister(this.cellier_id,body)
         .subscribe((result: any) => {
         this.router.navigate(['/cellier/' + this.cellier_id +'/bouteille'])
       })
