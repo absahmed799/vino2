@@ -95,4 +95,17 @@ export class ApiVinoService {
   getPaysList() {
     return this.http.get(`${this.urlApi}/pays`);
   }
+
+  getBouteilleListeAchat(){
+    return this.http.get(this.urlApi+"/listeAchat")
+  }
+
+  ajouterBouteilleListeAchat( body: object) {
+    return this.http.post(this.urlApi + '/listeAchat/ajouter', body);
+  }
+
+  supprimerBouteilleListeAchat(bouteille_id: number) {
+    return this.http.delete(this.urlApi + '/listeAchat/bouteilles/' + bouteille_id);
+  }
+
 }

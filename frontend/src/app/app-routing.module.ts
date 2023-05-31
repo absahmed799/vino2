@@ -15,6 +15,8 @@ import {AuthGuard} from "./auth/AuthGuard";
 import {GuestGuard} from "./auth/GuestGuard";
 import {AjouterBouteilleComponent} from "./bouteille/ajouter-bouteille/ajouter-bouteille.component";
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
+import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
+import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
 
 
 //import { GardienRouteGuard } from './gardien-route.guard';
@@ -32,13 +34,14 @@ const routes: Routes = [
   { path:"cellier/:id/bouteille/ajouter/nonlister", component: AjoutBouteilleNonListerComponent, canActivate: [AuthGuard] },
   { path:"cellier/:cellier_id/bouteille/:bouteille_id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
   { path:"cellier/:cellier_id/bouteille/:bouteille_id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
-
+  { path:"listeAchat", component:ListeAchatComponent, canActivate: [AuthGuard] },
+  { path:"listeAchat/ajouter", component:AjoutBouteilleComponent, canActivate: [AuthGuard] },
     //Routes pour Accueil
   { path:"", component:AccueilComponent, canActivate:[GuestGuard]},
   { path:"accueil", component:AccueilComponent, canActivate:[GuestGuard]},
 
     //Route pour A Propos
-    { path:"a-propos", component:AProposComponent},
+  { path:"a-propos", component:AProposComponent},
 
     // Routes pour Login / Enregistrer
   { path:"login", component: LoginComponent, canActivate:[GuestGuard]},

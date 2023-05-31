@@ -55,6 +55,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}/quantite', [BouteilleCellierController::class,'updateQuantity']);
     Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
     Route::put('/celliers/{cellier}/bouteille', [BouteilleController::class,'store']);
+    Route::get('/listeAchat', [ListeAchatController::class, 'index']);
+    Route::post('/listeAchat/ajouter', [ListeAchatController::class, 'store']);
 });
 
 

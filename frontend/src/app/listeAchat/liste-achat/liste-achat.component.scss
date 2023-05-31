@@ -1,0 +1,139 @@
+.body {
+    //min-height: 85vh;
+    padding: 0 5% 2rem;
+  }
+  
+  .body .search-box {
+    display: flex;
+    align-items: center;
+    background: rgb(230 255 241);
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    box-shadow: 3px 1rem 1rem rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
+  }
+  
+  .search-box i {
+    background: rgb(230 255 241);
+    font-size: 1.4rem;
+    color: rgba(20, 20, 20, 0.658);
+  }
+  
+  .search-box input {
+    background: rgb(230 255 241);
+    width: 90%;
+    font-size: 1rem;
+    color: black;
+    padding-left: 3%;
+  }
+  
+  .body .title {
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .body .title p {
+    font-weight: bolder;
+  }
+  
+  .body .title a {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .body .title a i {
+    background-color: #5fcb9c;
+    border-radius: 50%;
+    color: white;
+  }
+  
+  .body .title a span {
+    font-size: 0.8rem;
+    margin-right: 5px;
+  }
+  
+  .card {
+    display: grid;
+    margin-top: 10%;
+    justify-content: space-between;
+    gap: 1rem;
+    overflow: auto;
+    height: 60vh;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: baseline;
+  }
+  
+  .card .empty-cellier {
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  .card .card-cellier {
+    background-color: #d1ffe7;
+    display: grid;
+  }
+  
+  .card .card-cellier mat-card-header {
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card .card-cellier mat-card-header mat-card-title {
+    font-size: 0.7rem;
+    line-height: 14px;
+  }
+  
+  .card .card-cellier mat-card-header a,
+  .card .card-cellier mat-card-footer a
+  {
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .card .card-cellier mat-card-header a i,
+  .card .card-cellier mat-card-footer a i
+  {
+    background-color: #2aab8b;
+    border-radius: 50%;
+  }
+  
+  
+  .card .card-cellier mat-card-content {
+    padding: 0 4px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+  }
+  
+  
+  
+  .card .card-cellier mat-card-content span {
+    font-weight: bolder;
+  }
+  
+  .card .card-cellier mat-card-content img {
+    width: 50%;
+  }
+  
+  .card .card-cellier mat-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .card .card-cellier mat-card-footer a {
+    font-weight: bolder;
+  }
+  
+  .card .card-cellier mat-card-footer span {
+    font-weight: bold;
+    margin: 2px 10px;
+  }
+  
