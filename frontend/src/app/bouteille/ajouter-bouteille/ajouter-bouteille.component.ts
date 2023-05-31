@@ -5,6 +5,7 @@ import {map, switchMap, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import { ApiVinoService } from 'src/app/services/api-vino.service';
 import {ActivatedRoute, Router} from "@angular/router";
+import { AuthService } from 'src/app/auth/auth-service';
 
 @Component({
   selector: 'app-ajouter-bouteille',
@@ -23,7 +24,7 @@ export class AjouterBouteilleComponent implements OnInit{
   cellier_id: any
 
   constructor(private http: HttpClient , private api:ApiVinoService,
-     private route: ActivatedRoute, private router: Router) {
+     private route: ActivatedRoute, private router: Router , private authService : AuthService) {
      this.formAjout = new FormGroup({
      
       quantite: new FormControl("", Validators.required),
@@ -38,7 +39,7 @@ export class AjouterBouteilleComponent implements OnInit{
   ngOnInit() {
 
     this.cellier_id = this.route.snapshot.paramMap.get('id');
-
+    this.authService.setId_cellier(this.cellier_id);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -72,14 +73,7 @@ export class AjouterBouteilleComponent implements OnInit{
   }
 
   ajouterBouteille(){
-    console.log(this.bouteilleSelected?.id);
-    
-    if(!this.bouteilleSelected?.id )
-    {
-      console.log('not empty');
-      
-    }
-    /*if (this.formAjout.valid) {
+    if (this.formAjout.valid) {
       let valueForm = this.formAjout.value;
       let body = {
         millesime: this.formAjout.value.millesime,
@@ -94,6 +88,6 @@ export class AjouterBouteilleComponent implements OnInit{
         .subscribe((result: any) => {
         this.router.navigate(['/cellier/' + this.cellier_id +'/bouteille'])
       })
-    }*/
+    }
   }
 }

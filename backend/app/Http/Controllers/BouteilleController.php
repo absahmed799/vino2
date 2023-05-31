@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\BouteilleCellier;
+use App\Models\BouteilleCellier;
+use Illuminate\Support\Carbon;
 
 class BouteilleController extends Controller
 {
@@ -25,40 +26,43 @@ class BouteilleController extends Controller
 
     public function store(Request $request)
 {
-    $this->validate($request, [
+    /*
+     $this->validate($request, [
         'nom' => ['required', 'string'],
         'description' => ['required', 'string'],
         'prix' => ['required', 'numeric'],
-        'type' => ['required', 'integer'],
-        'pays' => ['required', 'integer'],
+        'type' => ['required'],
+        'pays' => ['required' ],
         'millesime' => ['required'],
         'garde_jusqua' => ['required'],
         'date_achat' => ['required'],
         'quantite' => ['required'],
         'note' => ['required'],
     ]);
-
+*/
     $bouteille = Bouteille::create([
-        'bouteille_nom' => $request->input('nom'),
-        'description' => $request->input('description'),
-        'prix_saq' => $request->input('prix'),
-        'type_id' => $this->getTypeId($request->input('type')),
-        'pays_id' => $this->getPaysId($request->input('pays')),
+        'bouteille_nom' => $request->nom,
+        'description' => $request->description,
+        'prix_saq' => $request->prix,
+        'type_id' => $request->type,
+        'pays_id' => $request->pays,
         'utilisateur_id' => Auth::user()->id, // Replace with the actual user ID
-        'image_url' => 'assets/bouteille.webp'
+        'image_url' => 'https://www.saq.com/media/catalog/product/1/2/12824197-1_1578411313.png?quality=80&fit=bounds&height=166&width=111&canvas=111:166',
+        'code_SAQ'=>'000',
+        'format'=>'751'
     ]);
 
     $bouteilleCellier = BouteilleCellier::create([
-        'millesime' => $request->input('millesime'),
-        'quantite' => $request->input('quantite'),
-        'date_achat' => $request->input('date_achat'),
-        'garde_jusqua' => $request->input('garde_jusqua'),
-        'note' => $request->input('note'),
-        'cellier_id' => $request->input('cellier_id'),
+        'millesime' => $request->millesime,
+        'quantite' => $request->quantite,
+        'date_achat' => Carbon::createFromTimestampMs($request->date_achat),
+        'garde_jusqua' => $request->garde_jusqua,
+        'note' => $request->note,
+        'cellier_id' => $request->cellier_id,
         'bouteille_id' => $bouteille->id,
     ]); // Attach the bouteille to the cellier with additional data
 
-    return response()->json($bouteilleCellier, 201);
+    return response()->json('hello', 200);
 }
 
 

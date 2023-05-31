@@ -1,6 +1,6 @@
 
 <div class="body">
-  <p><strong>Ajouter un vin</strong></p>
+  <p><strong>Ajouter une bouteille personnelle (non listé)</strong></p>
   
 
   <form [formGroup]="formAjout" class="formulaire" (ngSubmit)="ajouterBouteille()">
@@ -18,13 +18,19 @@
 
     <mat-form-field class="">
       <mat-label>Type</mat-label>
-      <input matInput type="text"formControlName="type">
+      <mat-select formControlName="type">
+        <mat-option value="1">Vin rouge</mat-option>
+        <mat-option value="2">Vin blanc</mat-option>
+      </mat-select>
     </mat-form-field>
-
+    
     <mat-form-field class="">
       <mat-label>Pays</mat-label>
-      <input matInput type="text" formControlName="pays">
+      <mat-select formControlName="pays">
+        <mat-option *ngFor="let pays of paysList" [value]="pays.id">{{ pays.nom }}</mat-option>
+      </mat-select>
     </mat-form-field>
+    
     <mat-form-field class="">
       <mat-label>Description</mat-label>
       <input matInput type="text"formControlName="description">

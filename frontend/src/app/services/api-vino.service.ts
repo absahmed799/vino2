@@ -87,8 +87,12 @@ export class ApiVinoService {
   modifierBouteilleCellier(cellier_id: any, bouteille_id: any, body: object) {
     return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteilles/'+bouteille_id, body);
   }
-  afficherBouittelleNonLister(cellier_id: any, body:object){
+  ajouterBouittelleNonLister(cellier_id: any, body:object){
     return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteille', body);
   
+  }
+
+  getPaysList() {
+    return this.http.get(`${this.urlApi}/pays`);
   }
 }
