@@ -6,6 +6,8 @@
   height: 100vh;
   padding: 5%;
   box-sizing: border-box;
+  max-width: 100%; /* Ajoutez cette ligne */
+
 }
 
 .logo-container {
@@ -70,47 +72,8 @@
   font-size: 1.2rem;
 }
 
-@media (min-width: 768px) {
-  .container {
-    padding: 10% 20%;
-  }
 
-  .logo-container {
-    margin-top: 100px;
-  }
 
-  .notes.card h2 {
-    font-size: 2.5rem;
-    margin-bottom: 8%;
-  }
 
-  .notes.card p {
-    font-size: 2rem;
-  }
 
-  .center {
-    font-size: 2rem;
-  }
-}
 
-@media (min-width: 1200px) {
-  .container {
-    padding: 15% 25%;
-  }
-
-  .logo-container {
-    margin-top: 150px;
-  }
-
-  .notes.card h2 {
-    font-size: 3.5rem;
-  }
-
-  .notes.card p {
-    font-size: 2.5rem;
-  }
-
-  .center {
-    font-size: 2.5rem;
-  }
-}

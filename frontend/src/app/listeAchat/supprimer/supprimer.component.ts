@@ -14,9 +14,6 @@ export interface DialogData {
   styleUrls: ['./supprimer.component.scss']
 })
 export class SupprimerComponent {
-
-
-  private urlBackend: string = 'http://127.0.0.1:8000/api';
   bouteille_id: any
   nom: any
 
