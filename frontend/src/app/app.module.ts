@@ -5,9 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { EnregistrerComponent } from './auth/enregistrer/enregistrer.component';
-import { EnteteComponent } from './layout/entete/entete.component';
-import { MenuComponent } from './layout/menu/menu.component';
-import { NavigationComponent } from './layout/navigation/navigation.component';
 import { ListeCellierComponent } from './cellier/liste-cellier/liste-cellier.component';
 import { AjouterCellierComponent } from './cellier/ajouter-cellier/ajouter-cellier.component';
 import { ModifierCellierComponent } from './cellier/modifier-cellier/modifier-cellier.component';
@@ -48,9 +45,6 @@ import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-no
     AppComponent,
     LoginComponent,
     EnregistrerComponent,
-    EnteteComponent,
-    MenuComponent,
-    NavigationComponent,
     ListeCellierComponent,
     AjouterCellierComponent,
     ModifierCellierComponent,
