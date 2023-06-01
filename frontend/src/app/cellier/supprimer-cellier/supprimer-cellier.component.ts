@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import { ApiVinoService } from 'src/app/services/api-vino.service';
+import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 export interface DialogData {
   id: string;
@@ -24,7 +26,8 @@ export class SupprimerCellierComponent {
     public dialogRef: MatDialogRef<SupprimerCellierComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
-    private router: Router, private api:ApiVinoService
+    private router: Router, private api:ApiVinoService,
+    private authService:AuthService, private entete:EnteteAuthComponent
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +43,8 @@ export class SupprimerCellierComponent {
     
     this.api.supprimerCellier(id).subscribe();
     this.dialogRef.close();
+    this.authService.setMessage('Cellier est supprimer avec success');
+    this.entete.showMessage();
     this.router.navigate(['/cellier'])
   }
 }

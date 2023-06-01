@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
-
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 @Component({
   selector: 'app-ajouter-cellier',
   templateUrl: './ajouter-cellier.component.html',
@@ -17,11 +17,12 @@ export class AjouterCellierComponent {
   ajouterCellier = new FormGroup({
     nom: new FormControl('', Validators.required),
   });
-
+  message:any='';
   urlApi: string;
   private error: boolean = false;
 
   constructor(
+    private entete:EnteteAuthComponent,
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
@@ -42,7 +43,12 @@ export class AjouterCellierComponent {
       )
       .subscribe((result: any) => {
         this.error = false;
+        
+        this.authService.setMessage('Cellier ajouter avec success');
+        this.entete.showMessage();
         this.router.navigate(['/cellier']);
       });
   }
+
+  
 }

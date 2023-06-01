@@ -14,6 +14,12 @@ export class AuthService {
   profil$: Observable<string>;
   id_cellier: BehaviorSubject<string>;
   id_cellier$: Observable<string>;
+  loading: BehaviorSubject<boolean>;
+  loading$: Observable<boolean>;
+  message: BehaviorSubject<string>;
+  message$: Observable<string>;
+
+
   constructor(
     private http: HttpClient,
     private apiVinoService: ApiVinoService
@@ -26,7 +32,12 @@ export class AuthService {
     this.profil$ = this.profil.asObservable();
     this.id_cellier = new BehaviorSubject<string>('');
     this.id_cellier$ = this.profil.asObservable();
+    this.loading= new BehaviorSubject<boolean>(false);
+    this.loading$=this.loading.asObservable();
+    this.message = new BehaviorSubject<string>('');
+    this.message$ = this.profil.asObservable();
   }
+  
 
   setId_cellier(id_cellier: any) {
     this.id_cellier.next(id_cellier);
@@ -38,11 +49,22 @@ export class AuthService {
   setProfil(profil: any) {
     this.profil.next(profil);
   }
+  setLoading( status:boolean){
+    this.loading.next(status);
+  }
 
+  getLoading():Observable<boolean>{
+    return this.loading;
+  }
   getProfil(): Observable<any> {
     return this.profil;
   }
-
+ setMessage(message: any) {
+    this.message.next(message);
+  }
+  getMessage(): Observable<any> {
+    return this.message;
+  }
   setBearerToken(token: string) {
     sessionStorage.setItem('bearer_token', token);
   }

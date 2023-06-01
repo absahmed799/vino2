@@ -14,16 +14,17 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 export class ListeCellierComponent {
 
   ListeCelliers: any[] = [];
-  loading: boolean = true;
+  
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, public dialog: MatDialog ,private api:ApiVinoService) {
    
   }
 
   ngOnInit(): void {
+    this.authService.setLoading(true);
      this.api.listeCelliers().subscribe((liste:any)=>{
       console.log(liste);
       
-      this.loading = false;
+      this.authService.setLoading(false);
       this.ListeCelliers = liste;
     })
   }

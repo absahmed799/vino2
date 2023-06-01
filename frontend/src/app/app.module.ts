@@ -39,6 +39,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
 import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
@@ -51,6 +52,7 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
     ListeCellierComponent,
     AjouterCellierComponent,
     ModifierCellierComponent,
+    
     SupprimerCellierComponent,
     ListeBouteilleComponent,
     AjouterBouteilleComponent,
@@ -87,10 +89,11 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},EnteteAuthComponent
   ],
   bootstrap: [AppComponent],
 })
