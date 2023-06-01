@@ -19,8 +19,6 @@ export class EnteteAuthComponent {
   estUtilisateurConnecte(): boolean {
     return this.authService.estConnecte;
   }
-  
-  
 
   retourner(): void {
     this.location.back();
