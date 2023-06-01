@@ -48,12 +48,16 @@ $frontend-theme: mat.define-light-theme((
 /* Des @import: */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
-/* Des styles globales: */
-body{
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: "Roboto", "RobotoDraft", sans-serif;
 }
-
 
 /* Format des liens <a> */
 a {
@@ -67,16 +71,6 @@ a:hover {
 }
 
 /* ======================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: none;
-  outline: none;
-  scroll-behavior: smooth;
-  font-family: "Roboto", "RobotoDraft", sans-serif;
-}
 
 html, body {
   height: 100%;
@@ -88,14 +82,6 @@ body {
   width: 100%;
   height: 100%;
   background-attachment: fixed;
-
-  // margin: 0;
-  // font-family: Roboto, "Helvetica Neue", sans-serif;
-  // background-image: url(assets/vino-logo-background.svg), url(assets/vino-background.png);
-  // background-size: 25%, 100%;
-  // background-repeat: no-repeat;
-  // min-height: 100vh;
-  // background-position: center 10px, center;
 }
 
 .body {
@@ -134,6 +120,6 @@ body {
   margin-right: 30px;
 }
 
-//.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-//  background-color: white;
-//}
+.message{
+  color: darkblue;
+}
