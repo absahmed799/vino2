@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/auth/auth-service';
 })
 
 export class AjoutBouteilleComponent  {
-  private urlBackend: string = 'http://127.0.0.1:8000/api';
+  urlApi: string;
   myControl = new FormControl('');
   bouteilles: any[] = [];
   filteredOptions: Observable<any> | undefined;
@@ -24,8 +24,11 @@ export class AjoutBouteilleComponent  {
 
   utilisateur_id: any
 
-  constructor(private http: HttpClient , private api:ApiVinoService,
+  constructor(private http: HttpClient , private apiVinoService:ApiVinoService,
      private route: ActivatedRoute, private router: Router , private authService : AuthService) {
+    // URL du API backend dans le service api-vino
+    this.urlApi = this.apiVinoService.urlApi;
+    
      this.formAjout = new FormGroup({
      
       quantite: new FormControl("", Validators.required),
@@ -48,7 +51,7 @@ export class AjoutBouteilleComponent  {
   getBouteilles() {
     return this.bouteilles.length ?
       of(this.bouteilles) :
-      this.http.get<any>(this.urlBackend + '/bouteilles')
+      this.http.get<any>(this.urlApi + '/bouteilles')
         .pipe(
           tap(data => this.bouteilles = data)
         )
@@ -76,7 +79,7 @@ export class AjoutBouteilleComponent  {
         bouteille_id: this.bouteilleSelected.id
       }
       
-      this.api.ajouterBouteilleListeAchat( body)
+      this.apiVinoService.ajouterBouteilleListeAchat( body)
         .subscribe((result: any) => {
         this.router.navigate(['/listeAchat'])
       })
