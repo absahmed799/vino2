@@ -1,44 +1,51 @@
 <div class="page">
-  <span>
+  <div class="btnModifEfface">
     <!-- <a [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" class="modifier">Modifier</a> -->
-    <button mat-icon-button class="mat-button-rounded mat-raised-button"
+
+    <!-- <button mat-icon-button class="mat-button-rounded mat-raised-button"
       [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']"
-      routerLinkActive="actif"><mat-icon>edit</mat-icon></button>
+      routerLinkActive="actif"><mat-icon>edit</mat-icon></button> -->
+
+    <button mat-button [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" routerLinkActive="actif"><mat-icon>edit</mat-icon>Modifier</button>
+
     <!-- <i class="bx bx-x" (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"></i> -->
-    <button mat-icon-button class="mat-button-rounded mat-raised-button"
+
+    <!-- <button mat-icon-button class="mat-button-rounded mat-raised-button"
       (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"
-      routerLinkActive="actif"><mat-icon>close</mat-icon></button>
-  </span>
+      routerLinkActive="actif"><mat-icon>close</mat-icon></button> -->
+
+    <button color="warn" mat-button (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)" routerLinkActive="actif"><mat-icon>close</mat-icon>Effacer</button>
+  </div>
 
   <div class="body">
     <div class="produit">
       <h1 class="title-produit">{{ bouteilleCellier?.bouteille.bouteille_nom }}</h1>
 
       <div class="resume-produit">
-        <img [src]="bouteilleCellier?.bouteille.image_url" class="image_vin"  width="50" />
+        <img [src]="bouteilleCellier?.bouteille.image_url" class="image_vin" width="50" />
 
         <div class="resume">
           <h2>{{ bouteilleCellier?.bouteille.type.nom }}</h2>
 
           <div class="details">
             <div class="element">
-              <span>Volume</span>
+              <span><small>Volume:</small></span>
               <span>{{ bouteilleCellier?.bouteille.format }}</span>
             </div>
             <div class="element">
-              <span>Date d'achat</span>
+              <span><small>Date d'achat:</small></span>
               <span>{{ transformeDate(bouteilleCellier?.date_achat) }}</span>
             </div>
             <div class="element">
-              <span>Milesime</span>
+              <span><small>Millesime:</small></span>
               <span>{{ bouteilleCellier?.millesime }}</span>
             </div>
             <div class="element">
-              <span>Garde</span>
+              <span><small>Garde:</small></span>
               <span>{{ bouteilleCellier?.garde_jusqua }}</span>
             </div>
             <div class="element">
-              <span>Pays</span>
+              <span><small>Pays:</small></span>
               <span class="flag">
                 <span>{{ bouteilleCellier?.bouteille.pays.nom }}</span>
               </span>
@@ -50,20 +57,20 @@
               <i class="bx bx-minus"
                 (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite - 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
             </div>
-            <p>$ {{ (bouteilleCellier?.bouteille.prix_saq) }}</p>
+            <p>$ {{ (bouteilleCellier?.bouteille.prix_saq).toFixed(2) }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="description-note">
       <div class="description card">
-        <h2>Description</h2>
+        <h2>Description:</h2>
         <p>
           {{ bouteilleCellier?.bouteille.description }}
         </p>
       </div>
       <div class="notes card">
-        <h2>Notes</h2>
+        <h2>Notes:</h2>
         <p>
           {{ bouteilleCellier?.note }}
         </p>
@@ -72,4 +79,4 @@
   </div>
 </div>
 
-<app-footer-auth></app-footer-auth>
+<!-- <app-footer-auth></app-footer-auth> -->

@@ -1,0 +1,44 @@
+
+
+<div class="body">
+    <div class="search-box">
+      <i class="bx bx-search-alt"></i>
+      <input type="text" name="search" id="search" placeholder="Vin rouge" />
+    </div>
+  
+    <div class="title">
+     <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
+      <a [routerLink]="['ajouter']" ><span>Ajouter une bouteille</span><mat-icon>add_circle</mat-icon></a>
+    </div>
+  
+    <div class="card">
+      <!--<p class="empty-cellier" *ngIf="!bouteilles">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p>-->
+      <mat-card class="card-cellier" *ngFor="let bouteille of bouteilles">
+        <mat-card-header>
+          <mat-card-title>
+            {{ bouteille.bouteille.nom }}
+          </mat-card-title>
+          <a (click)="openDialog(bouteille.bouteille_id,  bouteille.cellier_id, bouteille?.bouteille.bouteille_nom)"><i class='bx bx-x' ></i></a>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="description">
+            
+              <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 8) + "..." }}</strong></p>
+              <p>{{ bouteille.bouteille.pays}}</p>
+              <strong>Code Saq:</strong><p><strong> {{ bouteille.bouteille.code_SAQ }}</strong></p>
+              <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
+            
+          </div>
+          <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">
+        </mat-card-content>
+        <mat-card-footer>
+          <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteilleListeAchat( bouteille.quantite + 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
+          <span>{{ bouteille.quantite }}</span>
+          <a><i class='bx bx-minus' (click)="modifierQuantiteBouteilleListeAchat( bouteille.quantite - 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+  
+  <app-footer-auth></app-footer-auth>
+  

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth-service';
 import { Router } from '@angular/router';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
+import { Observable, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 @Component({
@@ -12,6 +13,7 @@ import { tap } from 'rxjs/operators';
 export class FooterAuthComponent {
   nom: string = '';
   profil: any;
+  estUtilisateurConnecte$: Observable<boolean>;
   loading: boolean = false;
 
   constructor(
@@ -22,7 +24,9 @@ export class FooterAuthComponent {
     this.authService.getProfil().subscribe((profil) => {
       this.profil = profil;
       console.log(this.profil);
-    });
+    });;
+
+    this.estUtilisateurConnecte$ = this.authService.verifConnection();
   }
 
   ngOnInit() {
@@ -56,5 +60,10 @@ export class FooterAuthComponent {
         return false;
       }
     });
+  }
+
+  // Vérifier si l'utilisateur est connecté
+  estUtilisateurConnecte(): boolean {
+    return this.authService.estConnecte;
   }
 }

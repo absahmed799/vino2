@@ -40,6 +40,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
+import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
+import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +65,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     FooterAuthComponent,
     AProposComponent,
     AjoutBouteilleNonListerComponent,
+    ListeAchatComponent,
+    AjoutBouteilleComponent,
+    SupprimerComponent,
   ],
   imports: [
     BrowserModule,

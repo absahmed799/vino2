@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer" *ngIf="estUtilisateurConnecte()">
   <div class="menu">
 
     <a [matMenuTriggerFor]="menu" routerLinkActive="active"><mat-icon>menu</mat-icon></a>

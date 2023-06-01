@@ -2,37 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bouteille;
 use App\Models\ListeAchat;
+use App\Models\Utilisateur;
+use App\Models\BouteilleCellier;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ModelNotFoundException;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ListeAchatController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Afficher une liste de la ressource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Vu qu'il est dans un middleware Auth on peut récupérer l'utilisateur connecté directement via la facade Auth
-//        // Récupérer l'ID de l'utilisateur à partir de la requête
-//        $utilisateurId = $request->input('utilisateur_id');
+        $utilisateurId = auth()->user()->id;
 
-        try {
-            // Rechercher l'utilisateur
-            $utilisateur = Auth::user();
+        $listesAchat = ListeAchat::where('utilisateur_id', $utilisateurId)->get();
 
-            // Récupérer les listeachants de l'utilisateur
-            $listeachants = $utilisateur->listeachants()->withCount('bouteilles')->get();
-            foreach ($listeachants as $listeachant) {
-                $sumQuantite = BouteilleListeAchat::where('listeachant_id', $listeachant->id)->sum('quantite');
-                $listeachant->sumQuantite = $sumQuantite;
-            }
-            return response()->json($listeachants);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        foreach ($listesAchat as $listeAchat) {
+            $bouteille = Bouteille::find($listeAchat->bouteille_id);
+            $listeAchat->bouteille = $bouteille;
         }
+
+        return response()->json($listesAchat);
     }
 
     /**
@@ -43,17 +41,14 @@ class ListeAchatController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nom' => ['required', 'string'],
+        $listeAchat = ListeAchat::create([
+            'quantite' => $request->quantite,
+            'bouteille_id' => $request->bouteille_id,
+            'utilisateur_id' =>  Auth::user()->id,
         ]);
 
-        $listeachant = Auth::user()->listeachants()->create([
-            'nom' => $request->input('nom'),
-        ]);
-
-        return response()->json($listeachant, 201);
+        return response()->json('Ajout avec succes');
     }
-
 
     /**
      * Affiche la ressource spécifiée.
@@ -61,15 +56,21 @@ class ListeAchatController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function show($id)
+    public function show()
     {
         try {
-            // Rechercher le listeachant en utilisant à la fois l'ID du listeachant et l'ID de l'utilisateur
-            $listeachant = ListeAchat::findOrFail($id);
+            $utilisateurId = auth()->user()->id;
 
-            return response()->json($listeachant);
+            $listesAchat = ListeAchat::where('utilisateur_id', $utilisateurId)->get();
+
+            foreach ($listesAchat as $listeAchat) {
+                $bouteille = Bouteille::find($listeAchat->bouteille_id);
+                $listeAchat->bouteille = $bouteille;
+            }
+
+            return response()->json($listesAchat);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
+            return response()->json(['error' => 'La liste d\'achat n\'existe pas pour l\'utilisateur connecté.'], 404);
         }
     }
 
@@ -82,21 +83,7 @@ class ListeAchatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'nom' => ['required', 'string'],
-        ]);
-
-        try {
-            $listeachant = ListeAchat::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ce listeachant est inexistant ou n\'appartient pas à l\'utilisateur!'], 404);
-        }
-
-        $listeachant->update($request->all());
-
-        return response()->json($listeachant);
     }
-
 
     /**
      * Supprime la ressource spécifiée du stockage.
@@ -104,16 +91,98 @@ class ListeAchatController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy(int $id)
+
+    public function destroyBouteille($bouteilleId)
     {
         try {
-            $listeachant = ListeAchat::findOrFail($id);
+            $utilisateurId = auth()->user()->id;
+
+            $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+                ->where('bouteille_id', $bouteilleId)
+                ->firstOrFail();
+
+            $listeAchat->delete();
+
+            return response()->json(['message' => 'La bouteille a été supprimée de la liste d\'achat']);
         } catch (ModelNotFoundException $e) {
-            return response()->json(false, 404);
+            return response()->json(['error' => 'La bouteille n\'appartient pas à la liste d\'achat spécifiée ou la liste d\'achat n\'a pas été trouvée'], 404);
         }
-
-        $listeachant->forceDelete();
-
-        return response()->json(true, 204);
     }
+
+    // upDateQuantité bouteille listeAchat
+    public function updateQuantity(Request $request, $bouteilleId)
+{
+    $utilisateurId = auth()->user()->id;
+
+    $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+        ->where('bouteille_id', $bouteilleId)
+        ->firstOrFail();
+
+    // Mise à jour de la quantité dans le modèle ListeAchat
+    $listeAchat->quantite = $request->input('quantite');
+    $listeAchat->save();
+
+    return response()->json($listeAchat);
+}
+
+
+public function quantite($bouteilleId, Request $request)
+{
+    $utilisateurId = auth()->user()->id;
+
+    $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+        ->where('bouteille_id', $bouteilleId)
+        ->firstOrFail();
+
+    // Mise à jour de la quantité dans le modèle ListeAchat
+    $listeAchat->quantite = $request->input('quantite');
+    $listeAchat->save();
+
+    return response()->json($listeAchat->quantite);
+}
+
+
+    // Updated quantité pour liste  achat
+
+    // public function updateBouteille($bouteilleId, $action)
+    // {
+    //     try {
+    //         $utilisateurId = auth()->user()->id;
+
+    //         // Vérifier si la bouteille existe
+    //         $bouteille = Bouteille::findOrFail($bouteilleId);
+
+    //         // Vérifier si la bouteille existe dans la liste d'achat de l'utilisateur
+    //         $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+    //             ->where('bouteille_id', $bouteilleId)
+    //             ->first();
+
+    //         if ($listeAchat) {
+    //             if ($action === 'add') {
+    //                 // Ajouter 1 à la quantité de la bouteille dans la liste d'achat
+    //                 $listeAchat->quantite += 1;
+    //             } elseif ($action === 'remove') {
+    //                 if ($listeAchat->quantite > 1) {
+    //                     // Réduire la quantité de la bouteille dans la liste d'achat de 1
+    //                     $listeAchat->quantite -= 1;
+    //                 } else {
+    //                     // Supprimer l'entrée de la liste d'achat pour la bouteille
+    //                     $listeAchat->delete();
+    //                 }
+    //             }
+    //             $listeAchat->save();
+    //         } elseif ($action === 'add') {
+    //             // La bouteille n'existe pas encore dans la liste d'achat, donc créer une nouvelle entrée
+    //             $listeAchat = ListeAchat::create([
+    //                 'quantite' => 1,
+    //                 'bouteille_id' => $bouteilleId,
+    //                 'utilisateur_id' => $utilisateurId,
+    //             ]);
+    //         }
+
+    //         return response()->json(['message' => 'La quantité de la bouteille dans la liste d\'achat a été mise à jour']);
+    //     } catch (ModelNotFoundException $e) {
+    //         return response()->json(['error' => 'La bouteille spécifiée n\'existe pas.'], 404);
+    //     }
+    // }
 }
