@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Cellier;
 use App\Models\Utilisateur;
 use App\Models\Bouteille;
@@ -166,7 +166,8 @@ class BouteilleCellierController extends Controller
     }
     public function getUsersWithBottleQuantity()
     {
-        $users = Utilisateur::select('utilisateurs.nom', DB::raw('SUM(bouteilles_celliers.quantite) as total_quantity'))
+        $users = Utilisateur::select('utilisateurs.nom')
+            ->selectRaw('SUM(bouteilles_celliers.quantite) as total_quantity')
             ->join('celliers', 'utilisateurs.id', '=', 'celliers.utilisateur_id')
             ->join('bouteilles_celliers', 'celliers.id', '=', 'bouteilles_celliers.cellier_id')
             ->groupBy('utilisateurs.id', 'utilisateurs.nom')
