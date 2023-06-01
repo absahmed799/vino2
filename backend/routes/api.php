@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/celliers', [CellierController::class, 'store']);
     Route::put('/celliers/{id}', [CellierController::class, 'update']);
     Route::delete('/celliers/{id}', [CellierController::class, 'destroy']);
+    Route::get('/statistique', [BouteilleCellierController::class, 'getUsersWithCellarInfo']);
 
     Route::get('/celliers/{id}/bouteilles', [BouteilleCellierController::class, 'index']);
 
