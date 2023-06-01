@@ -5,6 +5,8 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 import { Observable, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
+import { Chart, BarController,BarElement, CategoryScale, LinearScale } from 'chart.js';
+Chart.register(BarController,BarElement, CategoryScale, LinearScale);
 @Component({
   selector: 'app-footer-auth',
   templateUrl: './footer-auth.component.html',
@@ -49,7 +51,7 @@ export class FooterAuthComponent {
   importationSaq() {
     this.authService.setLoading(true) 
     this.apiVinoService.importationSaq()
-      .pipe(finalize(() => this.loading = false)) // Hide loading bar
+      .pipe(finalize(() => this.authService.setLoading(false) )) // Hide loading bar
       .subscribe((resultat) => {
         console.log(resultat);
   

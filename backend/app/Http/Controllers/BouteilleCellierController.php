@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\Utilisateur;
 use App\Models\Bouteille;
 use App\Models\BouteilleCellier;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -152,6 +153,14 @@ class BouteilleCellierController extends Controller
         $bouteilleCellier->update(['quantite' => $request->post('quantite')]);
 
         return response()->json($bouteilleCellier->quantite);
+    }
+    public function getUsersWithCellarInfo()
+    {
+        $users = Utilisateur::withCount('celliers')->withCount('celliers as bouteille_count')->get();
+        // 'celliers_count' represents the number of cellars
+        // 'bouteille_count' represents the number of bottles in each cellar
+
+        return response()->json($users);
     }
 
 }

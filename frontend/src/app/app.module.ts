@@ -43,6 +43,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
 import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
+import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
     ListeAchatComponent,
     AjoutBouteilleComponent,
     SupprimerComponent,
+    AdminStatistiqueComponent,
   ],
   imports: [
     BrowserModule,
