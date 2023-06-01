@@ -49,7 +49,7 @@ class BouteilleController extends Controller
         'utilisateur_id' => Auth::user()->id, // Replace with the actual user ID
         'image_url' => 'https://www.saq.com/media/wysiwyg/placeholder/category/06.png',
         'code_SAQ'=>'000',
-        'format'=>'750 ml'
+        'format'=>$request->format,
     ]);
 
     $bouteilleCellier = BouteilleCellier::create([
