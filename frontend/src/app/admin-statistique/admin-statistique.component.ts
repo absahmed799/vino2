@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./admin-statistique.component.scss']
 })
 export class AdminStatistiqueComponent implements OnInit {
-  chart: Chart | null = null;
+  chart1: Chart | null = null;
+  chart2: Chart | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -21,15 +22,13 @@ export class AdminStatistiqueComponent implements OnInit {
     this.http.get<any>('http://127.0.0.1:8000/api/statistique/cellier').subscribe(users => {
       this.updateChartCellier(users);
       console.log(users);
-      
     });
-    
   }
+  
   retrieveUsersWithBouteilleInfo() {
     this.http.get<any>('http://127.0.0.1:8000/api/statistique/bouteille').subscribe(users => {
-     
       console.log(users);
-       this.updateChartBouteille(users);
+      this.updateChartBouteille(users);
     });
   }
 
@@ -43,8 +42,7 @@ export class AdminStatistiqueComponent implements OnInit {
           backgroundColor: '#0196FD',
           borderColor: '#0196FD',
           borderWidth: 1
-        },
-      
+        }
       ]
     };
 
@@ -60,11 +58,11 @@ export class AdminStatistiqueComponent implements OnInit {
       }
     };
 
-    if (this.chart) {
-      this.chart.data = chartData;
-      this.chart.update();
+    if (this.chart1) {
+      this.chart1.data = chartData;
+      this.chart1.update();
     } else {
-      this.chart = new Chart('myChart', chartConfig);
+      this.chart1 = new Chart('myChart1', chartConfig);
     }
   }
 
@@ -73,13 +71,13 @@ export class AdminStatistiqueComponent implements OnInit {
       labels: users.map(user => user.nom),
       datasets: [
         {
-          label: 'Number of Celliers',
-          data: users.map(user => user.celliers_count),
+          label: 'Number of Bouteilles',
+          data: users.map(user => user.total_quantity
+            ),
           backgroundColor: '#0196FD',
           borderColor: '#0196FD',
           borderWidth: 1
-        },
-      
+        }
       ]
     };
 
@@ -95,11 +93,11 @@ export class AdminStatistiqueComponent implements OnInit {
       }
     };
 
-    if (this.chart) {
-      this.chart.data = chartData;
-      this.chart.update();
+    if (this.chart2) {
+      this.chart2.data = chartData;
+      this.chart2.update();
     } else {
-      this.chart = new Chart('myChart1', chartConfig);
+      this.chart2 = new Chart('myChart2', chartConfig);
     }
   }
 }
