@@ -47,8 +47,7 @@ export class EnteteAuthComponent {
   }
 
   retourner(): void {
-    this.authService.setMessage('hello')
-    this.showMessage();
+    this.location.back();
   }
  
 }
