@@ -39,7 +39,8 @@ export class ListeBouteilleComponent {
       });
   }
 
-  modifierQuantiteBouteille(quantite: number, cellier: any, bouteille: any) {
+  modifierQuantiteBouteille(event:Event, quantite: number, cellier: any, bouteille: any) {
+    event.stopPropagation();
     this.apiVinoService
       .modifierQuantite({ quantite: quantite }, cellier, bouteille)
       .subscribe((result: any) => {
@@ -47,7 +48,8 @@ export class ListeBouteilleComponent {
       });
   }
 
-  openDialog(bouteille_id: any, cellier_id: any, nom: any) {
+  openDialog(event:Event, bouteille_id: any, cellier_id: any, nom: any) {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(SupprimerBouteilleComponent, {
       data: {
         bouteille_id: bouteille_id,

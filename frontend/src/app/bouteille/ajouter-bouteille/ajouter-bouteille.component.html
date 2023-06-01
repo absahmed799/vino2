@@ -2,9 +2,14 @@
 <div class="body">
   <div class="title">
     <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
-     <a [routerLink]="['nonlister']" ><span>Ajouter une bouteille personnelle (non listé)</span><mat-icon>add_circle</mat-icon></a>
+
+    <a [routerLink]="['nonlister']">
+      <mat-icon>add_circle</mat-icon><span> Ajouter une bouteille personnelle (non listé)</span>
+    </a>
+
+     <!-- <a [routerLink]="['nonlister']" ><span>Ajouter une bouteille personnelle (non listé)</span><mat-icon>add_circle</mat-icon></a> -->
    </div>
-  <p><strong>Ajouter une bouteille Listé</strong></p>
+  <h2><strong>Ajouter une bouteille Listé:</strong></h2>
   <div class="search-box">
     <i class="bx bx-search-alt"></i>
     <input type="text" placeholder="Rechercher une bouteille" matInput [formControl]="myControl"
