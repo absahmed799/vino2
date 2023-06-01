@@ -5,10 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { EnregistrerComponent } from './auth/enregistrer/enregistrer.component';
-
-import { FooterComponent } from './layout/footer/footer.component';
-import { MenuComponent } from './layout/menu/menu.component';
-import { NavigationComponent } from './layout/navigation/navigation.component';
 import { ListeCellierComponent } from './cellier/liste-cellier/liste-cellier.component';
 import { AjouterCellierComponent } from './cellier/ajouter-cellier/ajouter-cellier.component';
 import { ModifierCellierComponent } from './cellier/modifier-cellier/modifier-cellier.component';
@@ -22,11 +18,12 @@ import { AccueilComponent } from './layout/accueil/accueil.component';
 import { NonTrouverComponent } from './layout/non-trouver/non-trouver.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EnteteAuthComponent } from './layout/entete-auth/entete-auth.component';
 import { FooterAuthComponent } from './layout/footer-auth/footer-auth.component';
 import { AProposComponent } from './layout/a-propos/a-propos.component';
+import { PathLocationStrategy, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // Importez les modules Angular Material spécifiques dont nous avons besoin:
 import { MatIconModule } from '@angular/material/icon';
@@ -34,13 +31,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSelectModule } from "@angular/material/select";
-import {MatCardModule} from "@angular/material/card";
-import {MatMenuModule} from "@angular/material/menu";
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 import { AuthInterceptor } from './AuthInterceptor';
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
 import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
@@ -51,17 +48,12 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
     AppComponent,
     LoginComponent,
     EnregistrerComponent,
-   
-    FooterComponent,
-    MenuComponent,
-    NavigationComponent,
     ListeCellierComponent,
     AjouterCellierComponent,
     ModifierCellierComponent,
     SupprimerCellierComponent,
     ListeBouteilleComponent,
     AjouterBouteilleComponent,
-   
     ModifierBouteilleComponent,
     SupprimerBouteilleComponent,
     AfficherBouteilleComponent,
@@ -94,11 +86,12 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
     MatMenuModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

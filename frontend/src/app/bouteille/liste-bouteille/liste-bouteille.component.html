@@ -1,10 +1,10 @@
 
 
 <div class="body">
-  <div class="search-box">
+  <!-- <div class="search-box">
     <i class="bx bx-search-alt"></i>
     <input type="text" name="search" id="search" placeholder="Vin rouge" />
-  </div>
+  </div> -->
 
   <div class="title">
    <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
@@ -12,7 +12,7 @@
   </div>
 
   <div class="card">
-    <!--<p class="empty-cellier" *ngIf="!bouteilles">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p>-->
+    <!-- <p class="empty-cellier" *ngIf="!bouteilles">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p> -->
     <mat-card class="card-cellier" *ngFor="let bouteille of bouteilles">
       <mat-card-header>
         <mat-card-title>
@@ -29,7 +29,7 @@
             <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
           </a>
         </div>
-        <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">
+        <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img" height="105">
       </mat-card-content>
       <mat-card-footer>
         <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteille( bouteille.quantite + 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>

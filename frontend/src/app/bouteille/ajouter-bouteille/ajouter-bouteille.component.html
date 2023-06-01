@@ -27,7 +27,7 @@
 
     <mat-form-field class="">
       <mat-label>Millesime</mat-label>
-      <input matInput type="number" formControlName="millesime">
+      <input matInput type="number" formControlName="millesime" min="1800">
     </mat-form-field>
 
     <mat-form-field class="">
@@ -42,7 +42,7 @@
 
     <mat-form-field class="">
       <mat-label>Garde</mat-label>
-      <input matInput type="text" formControlName="garde_jusqua">
+      <input matInput type="number" formControlName="garde_jusqua" min="2023">
     </mat-form-field>
 
     <mat-form-field class="">
@@ -54,7 +54,7 @@
 
     <mat-form-field class="">
       <mat-label>Quantité</mat-label>
-      <input matInput type="number" formControlName="quantite">
+      <input matInput type="number" formControlName="quantite" min="1">
     </mat-form-field>
 
     <mat-form-field class="">
