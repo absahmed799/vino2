@@ -11,6 +11,8 @@ import { EMPTY, of, throwError } from 'rxjs';
 import { AuthService } from '../auth-service';
 import { Router } from '@angular/router';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
+import { FooterAuthComponent } from 'src/app/layout/footer-auth/footer-auth.component';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +34,9 @@ export class LoginComponent {
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
-    private apiVinoService: ApiVinoService
+    private apiVinoService: ApiVinoService,
+    private footer:FooterAuthComponent,
+    private entete:EnteteAuthComponent
   ) {}
 
   submitLogin() {
@@ -48,14 +52,18 @@ export class LoginComponent {
         })
       )
       .subscribe((result: any) => {
+        
         this.error = false;
         this.authService.setBearerToken(result.access_token);
         this.authService.setUserData(result.utilisateur.nom);
-        this.router.navigate(['/cellier']);
-
         this.apiVinoService.profile().subscribe((profil) => {
           this.authService.setProfil(profil.role_id);
+          this.authService.setNom(profil.nom)
+          this.authService.setMessage('  Bonjour '+profil.nom + '!! 😃');
+          this.entete.showMessage();
         });
+        this.footer.ngOnInit();
+        this.router.navigate(['/cellier']);
       });
   }
 

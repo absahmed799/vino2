@@ -18,7 +18,8 @@ export class AuthService {
   loading$: Observable<boolean>;
   message: BehaviorSubject<string>;
   message$: Observable<string>;
-
+  nom: BehaviorSubject<string>;
+  nom$: Observable<string>;
 
   constructor(
     private http: HttpClient,
@@ -36,6 +37,8 @@ export class AuthService {
     this.loading$=this.loading.asObservable();
     this.message = new BehaviorSubject<string>('');
     this.message$ = this.profil.asObservable();
+    this.nom = new BehaviorSubject<string>('');
+    this.nom$ = this.profil.asObservable();
   }
   
 
@@ -64,6 +67,12 @@ export class AuthService {
   }
   getMessage(): Observable<any> {
     return this.message;
+  }
+  setNom(nom: any) {
+    this.nom.next(nom);
+  }
+  getNom(): Observable<any> {
+    return this.nom;
   }
   setBearerToken(token: string) {
     sessionStorage.setItem('bearer_token', token);

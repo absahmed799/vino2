@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
 })
 export class FooterAuthComponent {
   nom: string = '';
-  profil: any;
+  profil: string='';
   estUtilisateurConnecte$: Observable<boolean>;
   loading: boolean = false;
 
@@ -21,16 +21,24 @@ export class FooterAuthComponent {
     private router: Router,
     private apiVinoService: ApiVinoService
   ) {
-    this.authService.getProfil().subscribe((profil) => {
-      this.profil = profil;
-      console.log(this.profil);
-    });;
-
+   
+   this.authService.getNom().subscribe((object)=>{
+    
+      this.nom = object;
+    
+   })
+   this.authService.getProfil().subscribe((object)=>{
+    
+    this.profil = object;
+  
+ })
     this.estUtilisateurConnecte$ = this.authService.verifConnection();
-  }
+   
+ }
 
   ngOnInit() {
-    this.nom = this.authService.getUserData() ?? '';
+    
+   
   }
 
   deconnexion() {
@@ -52,15 +60,7 @@ export class FooterAuthComponent {
       });
   }
 
-  verificationProfil() {
-    this.apiVinoService.profile().subscribe((profil) => {
-      if (profil.role_id == '1') {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }
+  
 
   // Vérifier si l'utilisateur est connecté
   estUtilisateurConnecte(): boolean {

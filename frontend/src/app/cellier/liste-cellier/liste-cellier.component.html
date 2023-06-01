@@ -2,7 +2,10 @@
   <!-- <div class="search-box">
         <mat-icon>search</mat-icon><input type="text" name="search" id="search" placeholder="Rechercher" />
       </div> -->
-
+      <div class="search-box">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher" />
+      </div>
   <div class="title">
     <h2>Mes Celliers</h2>
     <a routerLink="/cellier/ajouter"><i class='bx bx-plus'></i></a>

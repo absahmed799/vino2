@@ -93,7 +93,7 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: LocationStrategy, useClass: HashLocationStrategy},EnteteAuthComponent
+    {provide: LocationStrategy, useClass: HashLocationStrategy},FooterAuthComponent,EnteteAuthComponent
   ],
   bootstrap: [AppComponent],
 })
