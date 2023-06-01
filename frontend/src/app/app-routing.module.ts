@@ -17,6 +17,7 @@ import {AjouterBouteilleComponent} from "./bouteille/ajouter-bouteille/ajouter-b
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
 import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.component';
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
+import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
 
 
 //import { GardienRouteGuard } from './gardien-route.guard';
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path:"cellier/:cellier_id/bouteille/:bouteille_id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
   { path:"listeAchat", component:ListeAchatComponent, canActivate: [AuthGuard] },
   { path:"listeAchat/ajouter", component:AjoutBouteilleComponent, canActivate: [AuthGuard] },
-    //Routes pour Accueil
+  { path: "listeAchat/bouteille/:bouteille_id/", component: SupprimerComponent, canActivate: [AuthGuard] },
+      //Routes pour Accueil
   { path:"", component:AccueilComponent, canActivate:[GuestGuard]},
   { path:"accueil", component:AccueilComponent, canActivate:[GuestGuard]},
 

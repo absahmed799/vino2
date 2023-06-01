@@ -49,14 +49,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/bouteilles', [BouteilleController::class, 'store']);
     Route::put('/bouteilles/{id}', [BouteilleController::class, 'update']);
     Route::delete('/bouteilles/{id}', [BouteilleController::class, 'destroy']);
+    // Routes for ListeAchatController
     Route::post('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'store']);
     Route::get('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'show']);
     Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'update']);
     Route::put('/celliers/{cellier}/bouteilles/{bouteille_id}/quantite', [BouteilleCellierController::class,'updateQuantity']);
     Route::delete('/celliers/{cellier}/bouteilles/{bouteille_id}', [BouteilleCellierController::class,'destroy']);
     Route::put('/celliers/{cellier}/bouteille', [BouteilleController::class,'store']);
+
+    // Routes for ListeAchatController
     Route::get('/listeAchat', [ListeAchatController::class, 'index']);
     Route::post('/listeAchat/ajouter', [ListeAchatController::class, 'store']);
+    Route::get('/listeAchat/{id}', [ListeAchatController::class, 'show']);
+    Route::delete('/listeAchat/bouteille/{bouteilleId}', [ListeAchatController::class, 'destroyBouteille']);
+  
 });
 
 

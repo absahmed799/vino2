@@ -75,7 +75,6 @@ export class AjoutBouteilleComponent  {
         quantite: this.formAjout.value.quantite,
         bouteille_id: this.bouteilleSelected.id
       }
-      console.log(body);
       
       this.api.ajouterBouteilleListeAchat( body)
         .subscribe((result: any) => {

@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class ApiVinoService {
   public urlApi: string = 'http://127.0.0.1:8000/api'; // URL du API backend
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(utilisateur: any) {
     let headers = new HttpHeaders({
@@ -48,11 +48,11 @@ export class ApiVinoService {
 
     return this.http.put(
       this.urlApi +
-        '/celliers/' +
-        cellier_id +
-        '/bouteilles/' +
-        bouteille_id +
-        '/quantite',
+      '/celliers/' +
+      cellier_id +
+      '/bouteilles/' +
+      bouteille_id +
+      '/quantite',
       quantite
     );
   }
@@ -73,39 +73,38 @@ export class ApiVinoService {
     return this.http.get<any>(this.urlApi + '/import-products');
   }
   ajouterBouteille(cellier_id: number, body: object) {
-    return this.http.post(this.urlApi + '/celliers/'+ cellier_id +'/bouteilles', body);
+    return this.http.post(this.urlApi + '/celliers/' + cellier_id + '/bouteilles', body);
   }
 
   supprimerBouteille(bouteiile_id: number, cellier_id: number) {
     return this.http.delete(this.urlApi + '/celliers/' + cellier_id + '/bouteilles/' + bouteiile_id);
   }
 
-  afficherBouittelleCellier(cellier_id:any ,bouteille_id:any){
-    return this.http.get(this.urlApi+"/celliers/"+cellier_id+"/bouteilles/"+bouteille_id)
+  afficherBouittelleCellier(cellier_id: any, bouteille_id: any) {
+    return this.http.get(this.urlApi + "/celliers/" + cellier_id + "/bouteilles/" + bouteille_id)
   }
 
   modifierBouteilleCellier(cellier_id: any, bouteille_id: any, body: object) {
-    return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteilles/'+bouteille_id, body);
+    return this.http.put(this.urlApi + '/celliers/' + cellier_id + '/bouteilles/' + bouteille_id, body);
   }
-  ajouterBouittelleNonLister(cellier_id: any, body:object){
-    return this.http.put(this.urlApi + '/celliers/'+ cellier_id +'/bouteille', body);
-  
+  ajouterBouittelleNonLister(cellier_id: any, body: object) {
+    return this.http.put(this.urlApi + '/celliers/' + cellier_id + '/bouteille', body);
+
   }
 
   getPaysList() {
     return this.http.get(`${this.urlApi}/pays`);
   }
 
-  getBouteilleListeAchat(){
-    return this.http.get(this.urlApi+"/listeAchat")
+  getBouteilleListeAchat() {
+    return this.http.get(this.urlApi + "/listeAchat")
   }
 
-  ajouterBouteilleListeAchat( body: object) {
-    return this.http.post(this.urlApi + '/listeAchat/ajouter', body);
+  ajouterBouteilleListeAchat(data: object) {
+    return this.http.post(this.urlApi + '/listeAchat/ajouter', data);
   }
 
-  supprimerBouteilleListeAchat(bouteille_id: number) {
-    return this.http.delete(this.urlApi + '/listeAchat/bouteilles/' + bouteille_id);
+  supprimerBouteilleListeAchat(bouteilleId: number) {
+    return this.http.delete(this.urlApi + '/listeAchat/bouteille/' + bouteilleId);
   }
-
 }

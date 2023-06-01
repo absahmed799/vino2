@@ -6,7 +6,6 @@ import {ApiVinoService} from "../../services/api-vino.service";
 
 export interface DialogData {
   bouteille_id: any,
-  cellier_id: any,
   nom: string
 }
 @Component({
@@ -19,7 +18,6 @@ export class SupprimerComponent {
 
   private urlBackend: string = 'http://127.0.0.1:8000/api';
   bouteille_id: any
-  cellier_id: any
   nom: any
 
   constructor(
@@ -41,9 +39,19 @@ export class SupprimerComponent {
     this.dialogRef.close();
   }
 
-  supprimerBouteille(bouteiile_id: any, cellier_id: any) {
-    this.api.supprimerBouteille(bouteiile_id, cellier_id).subscribe();
-    this.dialogRef.close();
-    this.router.navigate(["/cellier", cellier_id ,"bouteille"])
+  supprimerBouteille(bouteille_id: number) {
+    this.api.supprimerBouteilleListeAchat(bouteille_id)
+      .subscribe(
+        response => {
+          console.log('La bouteille a été supprimée de la liste d\'achat');
+          // Réalisez les actions nécessaires après la suppression réussie
+          this.router.navigate(['/listeAchat'])
+
+        },
+        error => {
+          console.error('Une erreur s\'est produite lors de la suppression de la bouteille', error);
+          // Gérez les erreurs et affichez un message approprié à l'utilisateur
+        }
+      );
   }
 }

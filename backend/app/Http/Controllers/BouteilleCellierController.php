@@ -149,4 +149,5 @@ class BouteilleCellierController extends Controller
 
         return response()->json($bouteilleCellier->quantite);
     }
+
 }
