@@ -29,7 +29,7 @@
   form {
     margin-top: 5%;
     overflow: auto;
-    height: 58vh;
+    //height: 58vh;
   }
   
   form mat-form-field {
@@ -48,4 +48,6 @@
     border-radius: 6rem;
     box-shadow: 2px 1rem 1rem rgb(4 4 4 / 25%);
   }
-  
+  button{
+    margin-bottom: 50px;
+  }
