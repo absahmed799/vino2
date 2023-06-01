@@ -156,11 +156,22 @@ class BouteilleCellierController extends Controller
     }
     public function getUsersWithCellarInfo()
     {
-        $users = Utilisateur::withCount('celliers')->withCount('celliers as bouteille_count')->get();
-        // 'celliers_count' represents the number of cellars
-        // 'bouteille_count' represents the number of bottles in each cellar
+        {
+            $users = Utilisateur::withCount('celliers')->withCount('celliers as bouteille_count')->get();
+            // 'celliers_count' represents the number of cellars
+            // 'bouteille_count' represents the number of bottles in each cellar
+    
+            return response()->json($users);
+        }
+    }
+    public function getUsersWithBottleQuantity()
+    {
+        $users = Utilisateur::select('utilisateurs.nom', DB::raw('SUM(bouteilles_celliers.quantite) as total_quantity'))
+            ->join('celliers', 'utilisateurs.id', '=', 'celliers.utilisateur_id')
+            ->join('bouteilles_celliers', 'celliers.id', '=', 'bouteilles_celliers.cellier_id')
+            ->groupBy('utilisateurs.id', 'utilisateurs.nom')
+            ->get();
 
         return response()->json($users);
     }
-
 }
