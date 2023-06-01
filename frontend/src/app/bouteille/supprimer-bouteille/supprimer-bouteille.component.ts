@@ -1,39 +1,37 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {ApiVinoService} from "../../services/api-vino.service";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { ApiVinoService } from '../../services/api-vino.service';
 
 export interface DialogData {
-  bouteille_id: any,
-  cellier_id: any,
-  nom: string
+  bouteille_id: any;
+  cellier_id: any;
+  nom: string;
 }
 
 @Component({
   selector: 'app-supprimer-bouteille',
   templateUrl: './supprimer-bouteille.component.html',
-  styleUrls: ['./supprimer-bouteille.component.scss']
+  styleUrls: ['./supprimer-bouteille.component.scss'],
 })
 export class SupprimerBouteilleComponent {
-  private urlBackend: string = 'http://127.0.0.1:8000/api';
-  bouteille_id: any
-  cellier_id: any
-  nom: any
+  bouteille_id: any;
+  cellier_id: any;
+  nom: any;
 
   constructor(
     public dialogRef: MatDialogRef<SupprimerBouteilleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
     private router: Router,
-    private api:ApiVinoService
-  ) {
-  }
+    private apiVinoService: ApiVinoService
+  ) {}
 
   ngOnInit(): void {
-    this.bouteille_id = this.data.bouteille_id
-    this.cellier_id = this.data.cellier_id
-    this.nom = this.data.nom
+    this.bouteille_id = this.data.bouteille_id;
+    this.cellier_id = this.data.cellier_id;
+    this.nom = this.data.nom;
   }
 
   fermerBouteille() {
@@ -41,8 +39,10 @@ export class SupprimerBouteilleComponent {
   }
 
   supprimerBouteille(bouteiile_id: any, cellier_id: any) {
-    this.api.supprimerBouteille(bouteiile_id, cellier_id).subscribe();
+    this.apiVinoService
+      .supprimerBouteille(bouteiile_id, cellier_id)
+      .subscribe();
     this.dialogRef.close();
-    this.router.navigate(["/cellier", cellier_id ,"bouteille"])
+    this.router.navigate(['/cellier', cellier_id, 'bouteille']);
   }
 }

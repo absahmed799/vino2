@@ -29,7 +29,7 @@
             <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
           </a>
         </div>
-        <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">
+        <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img" height="105">
       </mat-card-content>
       <mat-card-footer>
         <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteille( bouteille.quantite + 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>

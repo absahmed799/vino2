@@ -1,68 +1,75 @@
 <div class="page">
-    <span>
-        <a [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" class="modifier">Modifier</a>
-        <i class="bx bx-x" (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"></i>
-      </span>
-  
-    <div class="body">
-      <div class="produit">
-        <h1 class="title-produit">{{ bouteilleCellier?.bouteille.bouteille_nom }}</h1>
-  
-        <div class="resume-produit">
-          <img [src]="bouteilleCellier?.bouteille.image_url" alt="vin.png" />
-  
-          <div class="resume">
-            <h2>{{ bouteilleCellier?.bouteille.type.nom }}</h2>
-  
-            <div class="details">
-              <div class="element">
-                <span>Volume</span>
-                <span>{{ bouteilleCellier?.bouteille.format }}</span>
-              </div>
-              <div class="element">
-                <span>Date d'achat</span>
-                <span>{{ transformeDate(bouteilleCellier?.date_achat) }}</span>
-              </div>
-              <div class="element">
-                <span>Milesime</span>
-                <span>{{ bouteilleCellier?.millesime }}</span>
-              </div>
-              <div class="element">
-                <span>Garde</span>
-                <span>{{ bouteilleCellier?.garde_jusqua }}</span>
-              </div>
-              <div class="element">
-                <span>Pays</span>
-                <span class="flag">
-                      <span>{{ bouteilleCellier?.bouteille.pays.nom }}</span>
-                </span>
-              </div>
-              <div class="element action-add">
-                <i class="bx bx-plus" (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite + 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
-                <span>{{ bouteilleCellier?.quantite }}</span>
-                <i class="bx bx-minus" (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite - 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
-              </div>
-              <p>$ {{ (bouteilleCellier?.bouteille.prix_saq) }}</p>
+  <span>
+    <!-- <a [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" class="modifier">Modifier</a> -->
+    <button mat-icon-button class="mat-button-rounded mat-raised-button"
+      [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']"
+      routerLinkActive="actif"><mat-icon>edit</mat-icon></button>
+    <!-- <i class="bx bx-x" (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"></i> -->
+    <button mat-icon-button class="mat-button-rounded mat-raised-button"
+      (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"
+      routerLinkActive="actif"><mat-icon>close</mat-icon></button>
+  </span>
+
+  <div class="body">
+    <div class="produit">
+      <h1 class="title-produit">{{ bouteilleCellier?.bouteille.bouteille_nom }}</h1>
+
+      <div class="resume-produit">
+        <img [src]="bouteilleCellier?.bouteille.image_url" alt="vin.png" />
+
+        <div class="resume">
+          <h2>{{ bouteilleCellier?.bouteille.type.nom }}</h2>
+
+          <div class="details">
+            <div class="element">
+              <span>Volume</span>
+              <span>{{ bouteilleCellier?.bouteille.format }}</span>
             </div>
+            <div class="element">
+              <span>Date d'achat</span>
+              <span>{{ transformeDate(bouteilleCellier?.date_achat) }}</span>
+            </div>
+            <div class="element">
+              <span>Milesime</span>
+              <span>{{ bouteilleCellier?.millesime }}</span>
+            </div>
+            <div class="element">
+              <span>Garde</span>
+              <span>{{ bouteilleCellier?.garde_jusqua }}</span>
+            </div>
+            <div class="element">
+              <span>Pays</span>
+              <span class="flag">
+                <span>{{ bouteilleCellier?.bouteille.pays.nom }}</span>
+              </span>
+            </div>
+            <div class="element action-add">
+              <i class="bx bx-plus"
+                (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite + 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
+              <span>{{ bouteilleCellier?.quantite }}</span>
+              <i class="bx bx-minus"
+                (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite - 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
+            </div>
+            <p>$ {{ (bouteilleCellier?.bouteille.prix_saq) }}</p>
           </div>
         </div>
       </div>
-      <div class="description-note">
-        <div class="description card">
-          <h2>Description</h2>
-          <p>
-            {{ bouteilleCellier?.bouteille.description }}
-          </p>
-        </div>
-        <div class="notes card">
-          <h2>Notes</h2>
-          <p>
-            {{ bouteilleCellier?.note }}
-          </p>
-        </div>
+    </div>
+    <div class="description-note">
+      <div class="description card">
+        <h2>Description</h2>
+        <p>
+          {{ bouteilleCellier?.bouteille.description }}
+        </p>
+      </div>
+      <div class="notes card">
+        <h2>Notes</h2>
+        <p>
+          {{ bouteilleCellier?.note }}
+        </p>
       </div>
     </div>
   </div>
-  
-  <app-footer-auth></app-footer-auth>
-  
+</div>
+
+<app-footer-auth></app-footer-auth>
