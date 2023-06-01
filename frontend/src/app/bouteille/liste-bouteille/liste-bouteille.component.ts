@@ -45,8 +45,8 @@ export class ListeBouteilleComponent {
   }
   filterBouteilles() {
     this.filteredBouteilles = this.bouteilles.filter((bouteille:any) =>
-    bouteille.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
-  );
+      bouteille.bouteille.bouteille_nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
   
   modifierQuantiteBouteille(event:Event, quantite: number, cellier: any, bouteille: any) {
