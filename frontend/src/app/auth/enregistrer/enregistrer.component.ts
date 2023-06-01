@@ -17,6 +17,7 @@ export class EnregistrerComponent {
   urlApi: string;
   error = false;
   message_error = '';
+  successMessage: string = '';
 
   passwordsDoNotMatch: boolean = false;
   checkPasswordsMatch(c: AbstractControl): ValidationErrors | null {
@@ -54,26 +55,30 @@ export class EnregistrerComponent {
       };
       let response = this.http.post<any>(this.urlApi + '/utilisateurs', this.enregistrer.value, httpOption).pipe(
         catchError(error => {
-          let handledError = this.handleError(error);
+          let handledError = this.handleError(error);  
           // Traiter l'erreur ici
           this.error = true;
           this.message_error = handledError;
           return EMPTY;
         })
       ).subscribe((result: any) => {
+        this.successMessage = "L'utilisateur a été ajouté avec succès."; // Placer le message ici
         this.error = false;
-        this.router.navigate(['/login'])
+        // Redirection après un délai de 2 secondes
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
       });
-
+  
     }
     else {
-
       if (this.enregistrer.hasError('passwordsDoNotMatch')){
         this.passwordsDoNotMatch = true;
       }
       this.enregistrer.markAllAsTouched();
     }
   }
+  
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -1,5 +1,42 @@
 @media (min-width: 220px) {
 
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .logo-container img {
+    max-height: 150px; /* Ajustez la hauteur du logo */
+  }
+
+  .smtitle {
+    padding: 2% 0; /* Ajustez l'espacement du titre */
+    font-size: 2rem; /* Ajustez la taille du titre */
+  }
+
+  .example-form {
+    width: 400px; /* Ajustez la largeur du formulaire */
+    max-width: 90%; /* Ajustez la largeur maximale du formulaire */
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Ajustez l'espacement entre le formulaire et le footer */
+  }
+
+  .footer button.mat-button-rounded {
+    margin-bottom: 10px; /* Ajustez l'espacement entre le bouton de connexion et les liens de redirection */
+  }
+
+  .footer .redirect p {
+    font-size: 1rem; /* Ajustez la taille du texte de redirection */
+  }
+  
   .logo-container {
     display: flex;
     justify-content: center;

@@ -39,6 +39,9 @@
         <button type="submit" class="">Enregistrer</button>
       </div> -->
       <p class="error-login" *ngIf="error">{{ message_error }}</p>
+      <div>
+        <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+      </div>
       <div class="redirect">
 
         <p class="reg_login"><small><a routerLink="/login">Avez-vous une compte?</a></small></p>
