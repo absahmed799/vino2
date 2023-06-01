@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth-service';
 import { Router } from '@angular/router';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
-
+import { finalize } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-footer-auth',
   templateUrl: './footer-auth.component.html',
@@ -11,20 +12,21 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 export class FooterAuthComponent {
   nom: string = '';
   profil: any;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private apiVinoService: ApiVinoService
   ) {
-    this.authService.getProfil().subscribe((profil)=>{
+    this.authService.getProfil().subscribe((profil) => {
       this.profil = profil;
       console.log(this.profil);
-    })
+    });
   }
 
   ngOnInit() {
-    this.nom = this.nom = this.authService.getUserData() ?? '';
+    this.nom = this.authService.getUserData() ?? '';
   }
 
   deconnexion() {
@@ -33,17 +35,21 @@ export class FooterAuthComponent {
   }
 
   importationSaq() {
-    this.apiVinoService.importationSaq().subscribe((resultat) => {
-      console.log(resultat);
-
-      if (resultat) {
-        console.log('Importation avec success!');
-      }
-    });
+    this.authService.setLoading(true) 
+    this.apiVinoService.importationSaq()
+      .pipe(finalize(() => this.loading = false)) // Hide loading bar
+      .subscribe((resultat) => {
+        console.log(resultat);
+  
+        if (resultat) {
+          this.authService.setLoading(false) 
+          console.log('Importation avec succès!');
+        }
+      });
   }
 
   verificationProfil() {
-    let profil = this.apiVinoService.profile().subscribe((profil) => {
+    this.apiVinoService.profile().subscribe((profil) => {
       if (profil.role_id == '1') {
         return true;
       } else {

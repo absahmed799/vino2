@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiVinoService } from '../../services/api-vino.service';
+import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 export interface DialogData {
   bouteille_id: any;
@@ -26,6 +28,7 @@ export class SupprimerBouteilleComponent {
     private http: HttpClient,
     private router: Router,
     private apiVinoService: ApiVinoService
+    ,private authService:AuthService, private entete:EnteteAuthComponent
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +46,8 @@ export class SupprimerBouteilleComponent {
       .supprimerBouteille(bouteiile_id, cellier_id)
       .subscribe();
     this.dialogRef.close();
+    this.authService.setMessage('Bouteille est supprimer avec success');
+    this.entete.showMessage();
     this.router.navigate(['/cellier', cellier_id, 'bouteille']);
   }
 }

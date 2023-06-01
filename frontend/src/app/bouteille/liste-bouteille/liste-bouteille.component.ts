@@ -26,6 +26,7 @@ export class ListeBouteilleComponent {
   ) {}
 
   ngOnInit() {
+    this.authService.setLoading(true);
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.getAllBouteille();
@@ -36,6 +37,7 @@ export class ListeBouteilleComponent {
       .listebouteilleCellier(this.id)
       .subscribe((result: any) => {
         this.bouteilles = result;
+        this.authService.setLoading(false);
       });
   }
 

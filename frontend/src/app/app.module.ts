@@ -39,7 +39,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-non-lister/ajout-bouteille-non-lister.component';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +48,7 @@ import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-no
     ListeCellierComponent,
     AjouterCellierComponent,
     ModifierCellierComponent,
+    
     SupprimerCellierComponent,
     ListeBouteilleComponent,
     AjouterBouteilleComponent,
@@ -81,10 +82,11 @@ import { AjoutBouteilleNonListerComponent } from './bouteille/ajout-bouteille-no
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},EnteteAuthComponent
   ],
   bootstrap: [AppComponent],
 })

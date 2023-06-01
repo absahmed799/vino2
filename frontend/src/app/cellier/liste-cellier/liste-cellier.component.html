@@ -7,17 +7,6 @@
     <h2>Mes Celliers</h2>
     <a routerLink="/cellier/ajouter"><i class='bx bx-plus'></i></a>
   </div>
-
-  <mat-card *ngIf="loading; else cellierList">
-    <mat-card-content>
-      <div class="loading-image center">
-        <img src="assets/loading.gif" alt="Loading Image"> 
-        <!-- <mat-icon>hourglass_top</mat-icon>-->
-      </div>
-
-    </mat-card-content>
-  </mat-card>
-  <ng-template #cellierList>
     <div class="card">
       <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer de Cellier....</p>
       <mat-card class="card-cellier" *ngFor="let cellier of ListeCelliers">
@@ -35,6 +24,6 @@
         </mat-card-footer>
       </mat-card>
     </div>
-  </ng-template>
+ 
 </div>
 
