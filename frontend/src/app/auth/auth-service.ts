@@ -12,7 +12,8 @@ export class AuthService {
   estConnecte: boolean = false;
   profil: BehaviorSubject<string>;
   profil$: Observable<string>;
-
+  id_cellier: BehaviorSubject<string>;
+  id_cellier$: Observable<string>;
   constructor(
     private http: HttpClient,
     private apiVinoService: ApiVinoService
@@ -23,8 +24,17 @@ export class AuthService {
     // Profil de utilisateur
     this.profil = new BehaviorSubject<string>('');
     this.profil$ = this.profil.asObservable();
+    this.id_cellier = new BehaviorSubject<string>('');
+    this.id_cellier$ = this.profil.asObservable();
   }
 
+  setId_cellier(id_cellier: any) {
+    this.id_cellier.next(id_cellier);
+  }
+
+  getId_cellier(): Observable<any> {
+    return this.id_cellier;
+  }
   setProfil(profil: any) {
     this.profil.next(profil);
   }

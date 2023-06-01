@@ -26,7 +26,7 @@
             <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 10) + "..." }}</strong></p>
             <p>{{ bouteille.bouteille.pays}}</p>
             <p><strong>{{ bouteille.bouteille.format }}</strong></p>
-            <span><strong>$ {{ (bouteille.bouteille.prix_saq * bouteille.quantite).toFixed(2) }}</strong></span>
+            <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
           </a>
         </div>
         <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">
