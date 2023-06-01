@@ -53,6 +53,8 @@ class BouteilleCellierController extends Controller
 
         return response()->json($bouteilleCellier);
     }
+
+    
     public function updateQuantity(Request $request,  $cellier, $bouteilleId)
     {
         // Find the associated BouteilleCellier for the Cellier and bouteille_id
@@ -77,6 +79,8 @@ class BouteilleCellierController extends Controller
 
         return response()->json($bouteilleCellier);
     }
+
+
     public function update(Request $request,  $cellier, $bouteilleId)
     {
         // Find the associated BouteilleCellier for the Cellier and bouteille_id
