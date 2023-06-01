@@ -51,6 +51,7 @@ export class AjoutBouteilleNonListerComponent implements OnInit {
       garde_jusqua: new FormControl('', [Validators.required]),
       millesime: new FormControl('', [Validators.required]),
       note: new FormControl('', Validators.required),
+      format: new FormControl('', Validators.required),
     });
   }
 
@@ -83,6 +84,8 @@ export class AjoutBouteilleNonListerComponent implements OnInit {
         quantite: this.formAjout.value.quantite.toString(),
         note: this.formAjout.value.note.toString(),
         cellier_id: this.cellier_id.toString(),
+        format:this.formAjout.value.format.toString()
+        
       };
       console.log(body);
 
