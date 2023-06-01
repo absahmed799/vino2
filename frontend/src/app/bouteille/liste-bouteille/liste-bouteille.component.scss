@@ -67,6 +67,10 @@
   align-items: baseline;
 }
 
+.card-cellier {
+  cursor: pointer;
+}
+
 .card .empty-cellier {
   font-weight: bold;
   font-style: italic;
@@ -89,19 +93,16 @@
 }
 
 .card .card-cellier mat-card-header a,
-.card .card-cellier mat-card-footer a
-{
+.card .card-cellier mat-card-footer a {
   font-size: 1.5rem;
   color: white;
 }
 
 .card .card-cellier mat-card-header a i,
-.card .card-cellier mat-card-footer a i
-{
+.card .card-cellier mat-card-footer a i {
   background-color: #2aab8b;
   border-radius: 50%;
 }
-
 
 .card .card-cellier mat-card-content {
   padding: 0 4px;
@@ -110,8 +111,6 @@
   align-items: center;
   text-align: center;
 }
-
-
 
 .card .card-cellier mat-card-content span {
   font-weight: bolder;
@@ -136,4 +135,12 @@
 .card .card-cellier mat-card-footer span {
   font-weight: bold;
   margin: 2px 10px;
+}
+
+.fermer-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  z-index: 1;
 }
