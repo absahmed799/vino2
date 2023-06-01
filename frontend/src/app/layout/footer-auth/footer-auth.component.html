@@ -6,15 +6,15 @@
       <button mat-menu-item routerLink="/a-propos" routerLinkActive="active"><mat-icon>info</mat-icon>À Propos</button>
       <button mat-menu-item><mat-icon>flag</mat-icon>Signaler une erreur</button>
     </mat-menu>
-    
+
     <a routerLink="/cellier" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}"><mat-icon>home</mat-icon></a>
 
     <a [matMenuTriggerFor]="profile" routerLinkActive="active"><mat-icon>settings</mat-icon></a>
     <mat-menu #profile="matMenu">
       <button mat-menu-item><mat-icon>person</mat-icon>Nom: <strong> {{ nom }}</strong></button>
-      <button mat-menu-item *ngIf="profil != '2' " (click)="importationSaq()"><mat-icon>sync</mat-icon>Importation SAQ</button>
-      <button mat-menu-item *ngIf="profil != '2' " routerLink="/statistique"><mat-icon>equalizer</mat-icon>Satistique</button>
+      <button mat-menu-item *ngIf="role === 1 " (click)="importationSaq()"><mat-icon>sync</mat-icon>Importation SAQ</button>
+      <button mat-menu-item *ngIf="role === 1 " routerLink="/statistique"><mat-icon>equalizer</mat-icon>Satistique</button>
       <button mat-menu-item (click)="deconnexion()"><mat-icon>logout</mat-icon>Déconnexion</button>
     </mat-menu>
 
