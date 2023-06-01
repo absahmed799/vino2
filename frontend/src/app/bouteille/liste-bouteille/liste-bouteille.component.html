@@ -5,7 +5,10 @@
     <i class="bx bx-search-alt"></i>
     <input type="text" name="search" id="search" placeholder="Vin rouge" />
   </div> -->
-
+  <div class="search-box">
+    <i class="bx bx-search-alt"></i>
+    <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher" (input)="filterBouteilles()" />
+  </div>
   <div class="title">
     <!-- <button mat-button [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" routerLinkActive="actif"><mat-icon>edit</mat-icon>Modifier</button> -->
 
@@ -15,7 +18,7 @@
 
   <div class="card">
     <!-- <p class="empty-cellier" *ngIf="!bouteilles">Vous n'avez pas encore enregistrer de bouteille pour ce Cellier....</p> -->
-    <mat-card [routerLink]="['/cellier/' + bouteille.cellier_id+ '/bouteille/' + bouteille.bouteille_id]" class="card-cellier" *ngFor="let bouteille of bouteilles">
+    <mat-card [routerLink]="['/cellier/' + bouteille.cellier_id+ '/bouteille/' + bouteille.bouteille_id]" class="card-cellier" *ngFor="let bouteille of filteredBouteilles ">
       <mat-card-header>
         <mat-card-title>
           {{ bouteille.bouteille.nom }}

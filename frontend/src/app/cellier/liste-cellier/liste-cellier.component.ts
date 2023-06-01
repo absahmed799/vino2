@@ -14,7 +14,8 @@ import { ApiVinoService } from 'src/app/services/api-vino.service';
 export class ListeCellierComponent {
 
   ListeCelliers: any[] = [];
-  
+  filteredCelliers: any[] = [];
+  searchTerm: string = '';
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, public dialog: MatDialog ,private api:ApiVinoService) {
    
   }
@@ -26,6 +27,7 @@ export class ListeCellierComponent {
       
       this.authService.setLoading(false);
       this.ListeCelliers = liste;
+      this.filteredCelliers = liste;
     })
   }
 
@@ -39,5 +41,10 @@ export class ListeCellierComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit()
     });
+  }
+  filterCelliers(): void {
+    this.filteredCelliers = this.ListeCelliers.filter((cellier) =>
+      cellier.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

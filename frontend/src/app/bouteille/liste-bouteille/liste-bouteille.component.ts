@@ -15,6 +15,8 @@ import { SupprimerBouteilleComponent } from '../supprimer-bouteille/supprimer-bo
 export class ListeBouteilleComponent {
   id: any;
   bouteilles: any;
+  filteredBouteilles: any[] = []; // Add a new array to store filtered bouteilles
+  searchTerm: string = '';
 
   constructor(
     private http: HttpClient,
@@ -37,10 +39,16 @@ export class ListeBouteilleComponent {
       .listebouteilleCellier(this.id)
       .subscribe((result: any) => {
         this.bouteilles = result;
+        this.filteredBouteilles = result;
         this.authService.setLoading(false);
       });
   }
-
+  filterBouteilles() {
+    this.filteredBouteilles = this.bouteilles.filter((bouteille:any) =>
+    bouteille.nom.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  }
+  
   modifierQuantiteBouteille(event:Event, quantite: number, cellier: any, bouteille: any) {
     event.stopPropagation();
     this.apiVinoService

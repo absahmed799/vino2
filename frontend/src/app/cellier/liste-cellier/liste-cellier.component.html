@@ -4,7 +4,8 @@
       </div> -->
       <div class="search-box">
         <mat-icon>search</mat-icon>
-        <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher" />
+        <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher" (input)="filterCelliers()" />
+
       </div>
   <div class="title">
     <h2>Mes Celliers</h2>
@@ -12,7 +13,7 @@
   </div>
     <div class="card">
       <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer de Cellier....</p>
-      <mat-card class="card-cellier" *ngFor="let cellier of ListeCelliers">
+      <mat-card class="card-cellier" *ngFor="let cellier of filteredCelliers">
         <mat-card-header>
           <mat-card-title>{{ cellier.nom }}</mat-card-title>
           <a (click)="openDialog(cellier.id, cellier.nom)"><i class='bx bx-x'></i></a>
