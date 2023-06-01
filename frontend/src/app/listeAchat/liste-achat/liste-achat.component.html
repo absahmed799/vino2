@@ -22,19 +22,19 @@
         </mat-card-header>
         <mat-card-content>
           <div class="description">
-            <a [routerLink]="['/cellier/' + bouteille.cellier_id+ '/bouteille/' + bouteille.bouteille_id]">
-              <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 10) + "..." }}</strong></p>
+            
+              <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 8) + "..." }}</strong></p>
               <p>{{ bouteille.bouteille.pays}}</p>
-              <p><strong>{{ bouteille.bouteille.format }}</strong></p>
+              <strong>Code Saq:</strong><p><strong> {{ bouteille.bouteille.code_SAQ }}</strong></p>
               <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
-            </a>
+            
           </div>
           <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">
         </mat-card-content>
         <mat-card-footer>
-          <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteille( bouteille.quantite + 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
+          <a><i class='bx bx-plus'  (click)="modifierQuantiteBouteilleListeAchat( bouteille.quantite + 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
           <span>{{ bouteille.quantite }}</span>
-          <a><i class='bx bx-minus' (click)="modifierQuantiteBouteille( bouteille.quantite - 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
+          <a><i class='bx bx-minus' (click)="modifierQuantiteBouteilleListeAchat( bouteille.quantite - 1, bouteille.cellier_id, bouteille.bouteille_id)"></i></a>
         </mat-card-footer>
       </mat-card>
     </div>

@@ -61,7 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/listeAchat', [ListeAchatController::class, 'index']);
     Route::post('/listeAchat/ajouter', [ListeAchatController::class, 'store']);
     Route::get('/listeAchat/{id}', [ListeAchatController::class, 'show']);
-    Route::delete('/listeAchat/bouteille/{bouteilleId}', [ListeAchatController::class, 'destroyBouteille']);
+Route::delete('/listeAchat/bouteille/{bouteilleId}', [ListeAchatController::class, 'destroyBouteille']);
+Route::put('/listeAchat/bouteille/{bouteille_id}/quantite', [ListeAchatController::class, 'updateQuantity']);
   
 });
 

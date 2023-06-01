@@ -15,16 +15,16 @@ export class ListeAchatComponent {
 
   id: any;
   bouteilles: any
-
+  listeAchat: any
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private route: ActivatedRoute, private api:ApiVinoService, public dialog: MatDialog) {
 
   }
 
   ngOnInit() {
-      this.getAllBouteille();
+      this.BouteilleListeAchat();
   }
 
-  getAllBouteille() {
+  BouteilleListeAchat() {
     this.api.getBouteilleListeAchat().subscribe((result: any) => {
       this.bouteilles = result
       console.log( this.bouteilles);
@@ -32,9 +32,9 @@ export class ListeAchatComponent {
     });
   }
 
-  modifierQuantiteBouteille(quantite:number,cellier:any , bouteille:any) {
-    this.api.modifierQuantite({quantite:quantite}, cellier,bouteille).subscribe((result: any) => {
-      this.getAllBouteille()
+  modifierQuantiteBouteilleListeAchat(quantite:number, listeAchat: any , bouteille:any) {
+    this.api.modifierQuantiteListeAchat({quantite:quantite}, listeAchat,bouteille).subscribe((result: any) => {
+      this.BouteilleListeAchat()
 
     });
   }
@@ -49,7 +49,7 @@ export class ListeAchatComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getAllBouteille()
+      this.BouteilleListeAchat()
     });
   }
 

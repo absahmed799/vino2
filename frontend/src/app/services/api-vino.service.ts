@@ -107,4 +107,11 @@ export class ApiVinoService {
   supprimerBouteilleListeAchat(bouteilleId: number) {
     return this.http.delete(this.urlApi + '/listeAchat/bouteille/' + bouteilleId);
   }
+
+  modifierQuantiteListeAchat(quantite: any,listeAchat:any, bouteilleId: any) {
+    console.log(quantite);
+
+    return this.http.put(
+      this.urlApi +'/listeAchat/bouteille/' + bouteilleId + '/quantite/',quantite);
+  }
 }

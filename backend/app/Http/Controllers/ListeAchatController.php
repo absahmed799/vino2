@@ -109,47 +109,80 @@ class ListeAchatController extends Controller
         }
     }
 
+    // upDateQuantité bouteille listeAchat
+    public function updateQuantity(Request $request, $bouteilleId)
+{
+    $utilisateurId = auth()->user()->id;
 
-    // quantité updated
-    public function updateBouteille($bouteilleId, $action)
-    {
-        try {
-            $utilisateurId = auth()->user()->id;
+    $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+        ->where('bouteille_id', $bouteilleId)
+        ->firstOrFail();
 
-            // Vérifier si la bouteille existe
-            $bouteille = Bouteille::findOrFail($bouteilleId);
+    // Mise à jour de la quantité dans le modèle ListeAchat
+    $listeAchat->quantite = $request->input('quantite');
+    $listeAchat->save();
 
-            // Vérifier si la bouteille existe dans la liste d'achat de l'utilisateur
-            $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
-                ->where('bouteille_id', $bouteilleId)
-                ->first();
+    return response()->json($listeAchat);
+}
 
-            if ($listeAchat) {
-                if ($action === 'add') {
-                    // Ajouter 1 à la quantité de la bouteille dans la liste d'achat
-                    $listeAchat->quantite += 1;
-                } elseif ($action === 'remove') {
-                    if ($listeAchat->quantite > 1) {
-                        // Réduire la quantité de la bouteille dans la liste d'achat de 1
-                        $listeAchat->quantite -= 1;
-                    } else {
-                        // Supprimer l'entrée de la liste d'achat pour la bouteille
-                        $listeAchat->delete();
-                    }
-                }
-                $listeAchat->save();
-            } elseif ($action === 'add') {
-                // La bouteille n'existe pas encore dans la liste d'achat, donc créer une nouvelle entrée
-                $listeAchat = ListeAchat::create([
-                    'quantite' => 1,
-                    'bouteille_id' => $bouteilleId,
-                    'utilisateur_id' => $utilisateurId,
-                ]);
-            }
 
-            return response()->json(['message' => 'La quantité de la bouteille dans la liste d\'achat a été mise à jour']);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'La bouteille spécifiée n\'existe pas.'], 404);
-        }
-    }
+public function quantite($bouteilleId, Request $request)
+{
+    $utilisateurId = auth()->user()->id;
+
+    $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+        ->where('bouteille_id', $bouteilleId)
+        ->firstOrFail();
+
+    // Mise à jour de la quantité dans le modèle ListeAchat
+    $listeAchat->quantite = $request->input('quantite');
+    $listeAchat->save();
+
+    return response()->json($listeAchat->quantite);
+}
+
+
+    // Updated quantité pour liste  achat
+
+    // public function updateBouteille($bouteilleId, $action)
+    // {
+    //     try {
+    //         $utilisateurId = auth()->user()->id;
+
+    //         // Vérifier si la bouteille existe
+    //         $bouteille = Bouteille::findOrFail($bouteilleId);
+
+    //         // Vérifier si la bouteille existe dans la liste d'achat de l'utilisateur
+    //         $listeAchat = ListeAchat::where('utilisateur_id', $utilisateurId)
+    //             ->where('bouteille_id', $bouteilleId)
+    //             ->first();
+
+    //         if ($listeAchat) {
+    //             if ($action === 'add') {
+    //                 // Ajouter 1 à la quantité de la bouteille dans la liste d'achat
+    //                 $listeAchat->quantite += 1;
+    //             } elseif ($action === 'remove') {
+    //                 if ($listeAchat->quantite > 1) {
+    //                     // Réduire la quantité de la bouteille dans la liste d'achat de 1
+    //                     $listeAchat->quantite -= 1;
+    //                 } else {
+    //                     // Supprimer l'entrée de la liste d'achat pour la bouteille
+    //                     $listeAchat->delete();
+    //                 }
+    //             }
+    //             $listeAchat->save();
+    //         } elseif ($action === 'add') {
+    //             // La bouteille n'existe pas encore dans la liste d'achat, donc créer une nouvelle entrée
+    //             $listeAchat = ListeAchat::create([
+    //                 'quantite' => 1,
+    //                 'bouteille_id' => $bouteilleId,
+    //                 'utilisateur_id' => $utilisateurId,
+    //             ]);
+    //         }
+
+    //         return response()->json(['message' => 'La quantité de la bouteille dans la liste d\'achat a été mise à jour']);
+    //     } catch (ModelNotFoundException $e) {
+    //         return response()->json(['error' => 'La bouteille spécifiée n\'existe pas.'], 404);
+    //     }
+    // }
 }
