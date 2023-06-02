@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Titre Erreur</mat-label>
+      <input matInput type="text" id="titre_erreur" name="titre_erreur" [(ngModel)]="signaler.titre_erreur" required>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Description Erreur</mat-label>
+      <textarea matInput id="description_erreur" name="description_erreur" [(ngModel)]="signaler.description_erreur" required></textarea>
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+  

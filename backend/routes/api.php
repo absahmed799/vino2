@@ -13,7 +13,7 @@ use App\Http\Controllers\ListeAchatController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\SAQController;
 
-
+use App\Http\Controllers\SignalerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/statistique/cellier', [BouteilleCellierController::class, 'getUsersWithCellarInfo']);
     Route::get('/statistique/bouteille', [BouteilleCellierController::class, 'getUsersWithBottleQuantity']);
 
-    
-    Route::get('/celliers/{id}/bouteilles', [BouteilleCellierController::class, 'index']);
+    Route::post('/signaler', [SignalerController::class, 'create']);
+    Route::get('/signaler', [SignalerController::class, 'index']);
 
     // Routes for BouteilleController
     Route::get('/bouteilles', [BouteilleController::class, 'index']);

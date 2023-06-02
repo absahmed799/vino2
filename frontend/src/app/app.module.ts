@@ -44,7 +44,9 @@ import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.compon
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
 import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
 import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique.component';
-
+import { SignalerErreurComponent } from './signaler-erreur/signaler-erreur.component';
+import { TableSignalerComponent } from './table-signaler/table-signaler.component';
+import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,8 @@ import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique
     AjoutBouteilleComponent,
     SupprimerComponent,
     AdminStatistiqueComponent,
+    SignalerErreurComponent,
+    TableSignalerComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,7 @@ import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatTableModule,
 
     // Importez les modules Angular Material ici:
     MatIconModule,
