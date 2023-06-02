@@ -14,7 +14,7 @@
     <mat-menu #profile="matMenu">
       <button mat-menu-item><mat-icon>person</mat-icon>Nom: <strong> {{ nom }}</strong></button>
       <button mat-menu-item *ngIf="role === 1 " (click)="importationSaq()"><mat-icon>sync</mat-icon>Importation SAQ</button>
-      <button mat-menu-item *ngIf="role === 1 " routerLink="/statistique"><mat-icon>equalizer</mat-icon>Satistique</button>
+      <button mat-menu-item *ngIf="role === 1 " routerLink="/statistique"><mat-icon>equalizer</mat-icon>Statistiques</button>
       
       <button mat-menu-item *ngIf="role === 1 " routerLink="/table-signaler"><mat-icon>flag</mat-icon>Liste des erreurs</button>
       <button mat-menu-item (click)="deconnexion()"><mat-icon>logout</mat-icon>Déconnexion</button>

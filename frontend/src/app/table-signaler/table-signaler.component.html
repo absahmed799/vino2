@@ -1,23 +1,27 @@
-<div class="padding150">
+<div class="padding150 body">
+    <h2>Liste des erreurs signalées</h2>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ">
         <!-- Table columns -->
-        <ng-container matColumnDef="titre_erreur">
+      <ng-container matColumnDef="titre_erreur">
         <th mat-header-cell *matHeaderCellDef>Titre Erreur</th>
         <td mat-cell *matCellDef="let signaler">{{ signaler.titre_erreur }}</td>
-        </ng-container>
-        <ng-container matColumnDef="description_erreur">
+      </ng-container>
+      <ng-container matColumnDef="description_erreur">
         <th mat-header-cell *matHeaderCellDef>Description Erreur</th>
         <td mat-cell *matCellDef="let signaler">{{ signaler.description_erreur }}</td>
-        </ng-container>
-        <ng-container matColumnDef="utilisateur_id">
+      </ng-container>
+      <ng-container matColumnDef="utilisateur_id">
         <th mat-header-cell *matHeaderCellDef>Utilisateur ID</th>
         <td mat-cell *matCellDef="let signaler">{{ signaler.utilisateur_id }}</td>
-        </ng-container>
+      </ng-container>
     
         <!-- Table rows -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</div>
 
-  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>
