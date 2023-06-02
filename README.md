@@ -2,10 +2,15 @@
 
 Gestionnaire des bouteilles de vin à partir d’une application Web.
 
+Notre projet vise à offrir une solution pratique et conviviale pour gérer votre collection de vins préférés. Vous pourrez enregistrer, organiser et suivre les détails de vos bouteilles de vin, y compris leur origine, leur millésime, leurs notes de dégustation, etc. 
+
+Projet developpé pour le cours de Projet Web 2 du programme "Conception et programation Web" au Collége de Maisonneuve.
+
 ### 🔧 Outils de base
 
  * Laravel 9 LTS (backend)
- * Angular.io (frontend)
+ * Angular.io 15 (frontend)
+ * Material Design
 
 ---
 
@@ -59,7 +64,7 @@ Installer les dépendances node
 $ npm install
 ```
 
-Lancer le serveur Angular (Facultatif : requis uniquement pendant le développement)
+Lancer le serveur frontend Angular (Facultatif : requis uniquement pendant le développement)
 ```sh
 $ ng serve
 ```
@@ -113,7 +118,7 @@ Lancer la migration de la base de données
 $ php artisan migrate
 ```
 
-Lancer le serveur Angular
+Lancer le serveur backend
 ```sh
 $ php artisan serve
 ```
