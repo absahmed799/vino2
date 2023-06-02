@@ -36,7 +36,7 @@ const routes: Routes = [
   { path:"cellier/:id/bouteille", component: ListeBouteilleComponent, canActivate: [AuthGuard] },
   { path:"cellier/:id/bouteille/ajouter", component: AjouterBouteilleComponent, canActivate: [AuthGuard] },
   { path:"cellier/:id/bouteille/ajouter/nonlister", component: AjoutBouteilleNonListerComponent, canActivate: [AuthGuard] },
-  { path:"cellier/:cellier_id/bouteille/:bouteille_id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
+  { path:"cellier/:cellier_id/bouteille/:bouteille_id", component: AfficherBouteilleComponent },
   { path:"cellier/:cellier_id/bouteille/:bouteille_id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
   { path:"listeAchat", component:ListeAchatComponent, canActivate: [AuthGuard] },
   { path:"signaler", component:SignalerErreurComponent, canActivate: [AuthGuard] },

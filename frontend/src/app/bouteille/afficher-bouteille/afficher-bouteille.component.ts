@@ -55,7 +55,16 @@ export class AfficherBouteilleComponent {
         this.ngOnInit();
       });
   }
-
+  shareOnFacebook() {
+    console.log(window.location.href);
+    
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+    window.open(url, '_blank');
+  }
+  shareOnInstagram() {
+    const url = `https://www.instagram.com/share?url=${window.location.href}`;
+    window.open(url, '_blank');
+  }
   retourner(): void {
     this.location.back();
   }

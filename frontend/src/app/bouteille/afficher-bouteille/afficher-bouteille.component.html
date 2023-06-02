@@ -5,7 +5,7 @@
     <!-- <button mat-icon-button class="mat-button-rounded mat-raised-button"
       [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']"
       routerLinkActive="actif"><mat-icon>edit</mat-icon></button> -->
-
+      
     <button mat-button [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" routerLinkActive="actif"><mat-icon>edit</mat-icon>Modifier</button>
 
     <!-- <i class="bx bx-x" (click)="openDialog(bouteilleCellier?.bouteille_id,  bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille.bouteille_nom)"></i> -->
@@ -62,6 +62,15 @@
         </div>
       </div>
     </div>
+    <div class="partage">
+      <button mat-button (click)="shareOnFacebook()">
+      <mat-icon>facebook</mat-icon>Share on Facebook
+    </button>
+    <button mat-button (click)="shareOnInstagram()">
+      <mat-icon>share</mat-icon>Share on Instagram
+    </button>
+    </div>
+    
     <div class="description-note">
       <div class="description card">
         <h2>Description:</h2>
