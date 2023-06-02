@@ -1,22 +1,22 @@
 <div class="title">
-    <h2>Mes Celliers</h2>
+  <h2>Signaler une erreur</h2>
 </div>
-<div >
-    <form class="form-container" class="container"(ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Titre Erreur</mat-label>
-        <input matInput type="text" id="titre_erreur" name="titre_erreur" [(ngModel)]="signaler.titre_erreur" required>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-label>Description Erreur</mat-label>
-        <textarea matInput id="description_erreur" name="description_erreur" [(ngModel)]="signaler.description_erreur" required></textarea>
-      </mat-form-field>
-      
-      <div>
-        <button mat-raised-button color="primary" type="submit">Submit</button>
-      </div>
-      
-    </form>
-  </div>
+<div class="body">
+  <form class="form-container" class="container"(ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Titre Erreur</mat-label>
+      <input matInput type="text" id="titre_erreur" name="titre_erreur" [(ngModel)]="signaler.titre_erreur" required>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Description Erreur</mat-label>
+      <textarea matInput id="description_erreur" name="description_erreur" [(ngModel)]="signaler.description_erreur" required></textarea>
+    </mat-form-field>
+    
+    <div class="btn">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+    
+  </form>
+</div>
   
