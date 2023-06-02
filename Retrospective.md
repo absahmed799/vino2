@@ -75,7 +75,7 @@
 
 ## Rétrospective Sprint 3
 
-###Points réussis
+### Points réussis
 - Améliorer la maîtrise des commandes Git et de l'utilisation de Git Project pour une meilleure gestion et organisation du travail.
 - S'assurer que tous les membres de l'équipe comprennent et utilisent correctement les fonctionnalités de Git et Git Project, notamment la création et la gestion des branches, les pull requests, la résolution des conflits, etc.
 - Encourager la documentation et le partage des connaissances sur l'utilisation de Git et Git Project au sein de l'équipe afin de favoriser une meilleure collaboration et une gestion plus efficace du code source.
@@ -86,12 +86,12 @@
 - Intégration réussie de la fonctionnalité de suppression de bouteille du cellier.
 - Mise à jour de la documentation pour refléter les changements et les nouvelles fonctionnalités.
 
-###Difficultés
+### Difficultés
 - Problèmes de performance lors de l'affichage des résultats de recherche avec un grand nombre de vins dans le cellier.
 - Gestion des erreurs d'API lors de l'importation de vins depuis la SAQ.
 - Communication et coordination efficaces au sein de l'équipe en raison de la charge de travail et des délais serrés.
 
-###Améliorations 
+### Améliorations 
 - Renforcer la communication et la coordination au sein de l'équipe en organisant des réunions régulières et en utilisant des outils de gestion de projet efficaces.
 - Améliorer le design et l'interface utilisateur pour rendre l'application plus attrayante et conviviale.
 - Effectuer des tests approfondis pour s'assurer du bon fonctionnement de toutes les fonctionnalités.
