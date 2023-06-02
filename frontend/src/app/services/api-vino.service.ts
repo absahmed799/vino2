@@ -114,4 +114,13 @@ export class ApiVinoService {
     return this.http.put(
       this.urlApi +'/listeAchat/bouteille/' + bouteilleId + '/quantite/',quantite);
   }
+  getCellierState(){
+    return this.http.get(this.urlApi +'/statistique/cellier')
+  }
+  getBouteilleState(){
+    return this.http.get(this.urlApi +'/statistique/bouteille')
+  }
+  getSignalerData(){
+    return this.http.get(this.urlApi +'/signaler')
+  }
 }

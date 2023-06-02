@@ -19,6 +19,8 @@ import { ListeAchatComponent } from './listeAchat/liste-achat/liste-achat.compon
 import { AjoutBouteilleComponent } from './listeAchat/ajout-bouteille/ajout-bouteille.component';
 import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
 import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique.component';
+import { SignalerErreurComponent } from './signaler-erreur/signaler-erreur.component';
+import { TableSignalerComponent } from './table-signaler/table-signaler.component';
 
 
 //import { GardienRouteGuard } from './gardien-route.guard';
@@ -37,6 +39,8 @@ const routes: Routes = [
   { path:"cellier/:cellier_id/bouteille/:bouteille_id", component: AfficherBouteilleComponent, canActivate: [AuthGuard] },
   { path:"cellier/:cellier_id/bouteille/:bouteille_id/edit", component: ModifierBouteilleComponent, canActivate: [AuthGuard]  },
   { path:"listeAchat", component:ListeAchatComponent, canActivate: [AuthGuard] },
+  { path:"signaler", component:SignalerErreurComponent, canActivate: [AuthGuard] },
+  { path:"table-signaler", component:TableSignalerComponent, canActivate: [AuthGuard] },
   { path:"statistique", component:AdminStatistiqueComponent, canActivate: [AuthGuard] },
   { path:"listeAchat/ajouter", component:AjoutBouteilleComponent, canActivate: [AuthGuard] },
   { path: "listeAchat/bouteille/:bouteille_id/", component: SupprimerComponent, canActivate: [AuthGuard] },
