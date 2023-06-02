@@ -1,4 +1,4 @@
-# Projet Web 2: Vino 🍷
+# Projet: Vino 🍷
 
 Gestionnaire des bouteilles de vin à partir d’une application Web.
 
