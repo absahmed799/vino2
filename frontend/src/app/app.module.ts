@@ -46,7 +46,8 @@ import { SupprimerComponent } from './listeAchat/supprimer/supprimer.component';
 import { AdminStatistiqueComponent } from './admin-statistique/admin-statistique.component';
 import { SignalerErreurComponent } from './signaler-erreur/signaler-erreur.component';
 import { TableSignalerComponent } from './table-signaler/table-signaler.component';
-import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from "@angular/material/paginator"; // Import MatTableModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,7 @@ import { MatTableModule } from '@angular/material/table'; // Import MatTableModu
     ListeCellierComponent,
     AjouterCellierComponent,
     ModifierCellierComponent,
-    
+
     SupprimerCellierComponent,
     ListeBouteilleComponent,
     AjouterBouteilleComponent,
@@ -75,29 +76,30 @@ import { MatTableModule } from '@angular/material/table'; // Import MatTableModu
     SignalerErreurComponent,
     TableSignalerComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatTableModule,
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatTableModule,
 
-    // Importez les modules Angular Material ici:
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatCardModule,
-    MatMenuModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatProgressBarModule,
-  ],
+        // Importez les modules Angular Material ici:
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatMenuModule,
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatProgressBarModule,
+        MatPaginatorModule,
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {provide: LocationStrategy, useClass: HashLocationStrategy},FooterAuthComponent,EnteteAuthComponent
