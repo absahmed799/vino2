@@ -1,10 +1,8 @@
-
-
 <div class="body">
-    <div class="search-box">
+    <!-- <div class="search-box">
       <i class="bx bx-search-alt"></i>
-      <input type="text" name="search" id="search" placeholder="Vin rouge" />
-    </div>
+      <input type="text" name="search" id="search" placeholder="Rechercher dans le panier" />
+    </div> -->
   
     <div class="title">
      <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
@@ -26,7 +24,7 @@
               <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 8) + "..." }}</strong></p>
               <p>{{ bouteille.bouteille.pays}}</p>
               <strong>Code Saq:</strong><p><strong> {{ bouteille.bouteille.code_SAQ }}</strong></p>
-              <span><strong>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</strong></span>
+              <span><strong>$ {{ bouteille.bouteille.prix_saq }}</strong></span>
             
           </div>
           <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img">

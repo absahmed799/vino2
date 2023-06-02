@@ -13,34 +13,37 @@ Chart.register(BarController,BarElement, CategoryScale, LinearScale);
   styleUrls: ['./footer-auth.component.scss'],
 })
 export class FooterAuthComponent {
-  nom: string = '';
+  nom: string|null = '';
   profil: string='';
   estUtilisateurConnecte$: Observable<boolean>;
   loading: boolean = false;
+
+  role: number = 0;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private apiVinoService: ApiVinoService
   ) {
-   
-   this.authService.getNom().subscribe((object)=>{
-    
-      this.nom = object;
-    
-   })
+
+    this.authService.getRole().subscribe((role)=>{
+      this.role = role
+    });
+
+    this.authService.getNom().subscribe((nom)=>{
+      this.nom = nom
+    });
+
    this.authService.getProfil().subscribe((object)=>{
-    
+
     this.profil = object;
-  
+
  })
     this.estUtilisateurConnecte$ = this.authService.verifConnection();
-   
+
  }
 
   ngOnInit() {
-    
-   
   }
 
   deconnexion() {
@@ -49,20 +52,20 @@ export class FooterAuthComponent {
   }
 
   importationSaq() {
-    this.authService.setLoading(true) 
+    this.authService.setLoading(true)
     this.apiVinoService.importationSaq()
       .pipe(finalize(() => this.authService.setLoading(false) )) // Hide loading bar
       .subscribe((resultat) => {
         console.log(resultat);
-  
+
         if (resultat) {
-          this.authService.setLoading(false) 
+          this.authService.setLoading(false)
           console.log('Importation avec succès!');
         }
       });
   }
 
-  
+
 
   // Vérifier si l'utilisateur est connecté
   estUtilisateurConnecte(): boolean {

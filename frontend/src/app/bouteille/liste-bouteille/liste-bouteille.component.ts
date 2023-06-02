@@ -17,6 +17,7 @@ export class ListeBouteilleComponent {
   bouteilles: any;
   filteredBouteilles: any[] = []; // Add a new array to store filtered bouteilles
   searchTerm: string = '';
+  cellierNom: string = '';
 
   constructor(
     private http: HttpClient,
@@ -40,6 +41,10 @@ export class ListeBouteilleComponent {
       .subscribe((result: any) => {
         this.bouteilles = result;
         this.filteredBouteilles = result;
+        this.apiVinoService.getCellierParid(this.id).subscribe((cellier: any) => {
+          this.cellierNom = cellier?.nom;
+        });
+
         this.authService.setLoading(false);
       });
   }

@@ -4,7 +4,7 @@
       </div> -->
       <div class="search-box">
         <mat-icon>search</mat-icon>
-        <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher" (input)="filterCelliers()" />
+        <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher un cellier" (input)="filterCelliers()" />
 
       </div>
   <div class="title">
@@ -12,7 +12,7 @@
     <a routerLink="/cellier/ajouter"><i class='bx bx-plus'></i></a>
   </div>
     <div class="card">
-      <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer de Cellier....</p>
+      <p class="empty-cellier" *ngIf="ListeCelliers.length === 0">Vous n'avez pas encore enregistrer un Cellier...</p>
       <mat-card class="card-cellier" *ngFor="let cellier of filteredCelliers">
         <mat-card-header>
           <mat-card-title>{{ cellier.nom }}</mat-card-title>
