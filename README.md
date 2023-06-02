@@ -4,7 +4,7 @@ Gestionnaire des bouteilles de vin à partir d’une application Web.
 
 Notre projet vise à offrir une solution pratique et conviviale pour gérer votre collection de vins préférés. Vous pourrez enregistrer, organiser et suivre les détails de vos bouteilles de vin, y compris leur origine, leur millésime, leurs notes de dégustation, etc. 
 
-Projet developpé pour le cours de Projet Web 2 du programme "Conception et programation Web" au Collége de Maisonneuve.
+Projet developpé pour le cours de Projet Web 2 du programme "Conception et programmation de sites Web" au Collége de Maisonneuve.
 
 ### 🔧 Outils de base
 
