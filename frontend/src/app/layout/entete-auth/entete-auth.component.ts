@@ -25,7 +25,7 @@ export class EnteteAuthComponent {
        setTimeout(() => {
       
       this.message = ''; // Clear the message after 3 seconds
-    }, 3000); // 3000 milliseconds = 3 seconds
+    }, 4000); // 3000 milliseconds = 3 seconds
     });
   
   }

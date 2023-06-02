@@ -46,7 +46,7 @@ export class SupprimerBouteilleComponent {
       .supprimerBouteille(bouteiile_id, cellier_id)
       .subscribe();
     this.dialogRef.close();
-    this.authService.setMessage('Bouteille est supprimer avec success');
+    this.authService.setMessage('Bouteille est supprimer avec succés');
     this.entete.showMessage();
     this.router.navigate(['/cellier', cellier_id, 'bouteille']);
   }

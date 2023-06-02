@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../auth/auth-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { ApiVinoService } from 'src/app/services/api-vino.service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 @Component({
   selector: 'app-modifier-cellier',
@@ -20,7 +21,8 @@ export class ModifierCellierComponent {
   nom: any ;
   id: any;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private route: ActivatedRoute , private api:ApiVinoService) {
+  constructor(private http: HttpClient, private authService: AuthService,
+    private entete:EnteteAuthComponent, private router: Router, private route: ActivatedRoute , private api:ApiVinoService) {
   }
 
   ngOnInit() {
@@ -35,6 +37,8 @@ export class ModifierCellierComponent {
     
       this.api.editCellier(this.id, this.modifierCellier.value).subscribe((result: any) => {
         this.router.navigate(['/cellier'])
+        this.authService.setMessage('Cellier est modifié avec succés');
+        this.entete.showMessage();
       });
   }
 }

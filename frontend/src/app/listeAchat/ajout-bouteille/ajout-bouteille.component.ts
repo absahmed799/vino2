@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import { ApiVinoService } from 'src/app/services/api-vino.service';
 import {ActivatedRoute, Router} from "@angular/router";
 import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 @Component({
   selector: 'app-ajout-bouteille',
@@ -25,7 +26,7 @@ export class AjoutBouteilleComponent  {
   utilisateur_id: any
 
   constructor(private http: HttpClient , private apiVinoService:ApiVinoService,
-     private route: ActivatedRoute, private router: Router , private authService : AuthService) {
+     private route: ActivatedRoute, private router: Router , private authService : AuthService, private entete:EnteteAuthComponent) {
     // URL du API backend dans le service api-vino
     this.urlApi = this.apiVinoService.urlApi;
     
@@ -82,6 +83,8 @@ export class AjoutBouteilleComponent  {
       this.apiVinoService.ajouterBouteilleListeAchat( body)
         .subscribe((result: any) => {
         this.router.navigate(['/listeAchat'])
+        this.authService.setMessage("La Bouteille est ajouté avec succés" );
+            this.entete.showMessage();
       })
     }
   }

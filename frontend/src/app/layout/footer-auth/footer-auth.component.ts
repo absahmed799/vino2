@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 import { Chart, BarController,BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { EnteteAuthComponent } from '../entete-auth/entete-auth.component';
 Chart.register(BarController,BarElement, CategoryScale, LinearScale);
 @Component({
   selector: 'app-footer-auth',
@@ -23,7 +24,8 @@ export class FooterAuthComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private apiVinoService: ApiVinoService
+    private apiVinoService: ApiVinoService,
+    private entete:EnteteAuthComponent
   ) {
 
     this.authService.getRole().subscribe((role)=>{
@@ -59,7 +61,9 @@ export class FooterAuthComponent {
         console.log(resultat);
 
         if (resultat) {
-          this.authService.setLoading(false)
+          this.authService.setLoading(false);
+          this.authService.setMessage('Importation avec succès!');
+          this.entete.showMessage();
           console.log('Importation avec succès!');
         }
       });

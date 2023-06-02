@@ -43,7 +43,7 @@ export class SupprimerCellierComponent {
     
     this.api.supprimerCellier(id).subscribe();
     this.dialogRef.close();
-    this.authService.setMessage('Cellier est supprimer avec success');
+    this.authService.setMessage('Cellier est supprimer avec succés');
     this.entete.showMessage();
     this.router.navigate(['/cellier'])
   }
