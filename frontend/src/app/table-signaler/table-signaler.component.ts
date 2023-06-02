@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../auth/auth-service';
+import {MatPaginator} from "@angular/material/paginator";
 
 interface Signaler {
   titre_erreur: string;
@@ -14,12 +15,19 @@ interface Signaler {
   templateUrl: './table-signaler.component.html',
   styleUrls: ['./table-signaler.component.scss']
 })
-export class TableSignalerComponent implements OnInit {
+export class TableSignalerComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Signaler> = new MatTableDataSource<Signaler>([]);
   displayedColumns: string[] = ['titre_erreur', 'description_erreur', 'utilisateur_id'];
   
+  @ViewChild(MatPaginator) paginator: MatPaginator | null ;
+
   constructor(private http: HttpClient,private authService:AuthService) { 
     this.authService.setLoading(true);
+    this.paginator = null;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
  
   ngOnInit() {
