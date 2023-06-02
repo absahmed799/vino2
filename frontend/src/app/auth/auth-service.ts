@@ -21,6 +21,8 @@ export class AuthService {
   nom: BehaviorSubject<string>;
   nom$: Observable<string>;
 
+  role: BehaviorSubject<number>;
+
   constructor(
     private http: HttpClient,
     private apiVinoService: ApiVinoService
@@ -33,14 +35,14 @@ export class AuthService {
     this.profil$ = this.profil.asObservable();
     this.id_cellier = new BehaviorSubject<string>('');
     this.id_cellier$ = this.profil.asObservable();
-    this.loading= new BehaviorSubject<boolean>(false);
-    this.loading$=this.loading.asObservable();
+    this.loading = new BehaviorSubject<boolean>(false);
+    this.loading$ = this.loading.asObservable();
     this.message = new BehaviorSubject<string>('');
     this.message$ = this.profil.asObservable();
     this.nom = new BehaviorSubject<string>('');
     this.nom$ = this.profil.asObservable();
+    this.role = new BehaviorSubject(0);
   }
-  
 
   setId_cellier(id_cellier: any) {
     this.id_cellier.next(id_cellier);
@@ -52,17 +54,17 @@ export class AuthService {
   setProfil(profil: any) {
     this.profil.next(profil);
   }
-  setLoading( status:boolean){
+  setLoading(status: boolean) {
     this.loading.next(status);
   }
 
-  getLoading():Observable<boolean>{
+  getLoading(): Observable<boolean> {
     return this.loading;
   }
   getProfil(): Observable<any> {
     return this.profil;
   }
- setMessage(message: any) {
+  setMessage(message: any) {
     this.message.next(message);
   }
   getMessage(): Observable<any> {
@@ -74,6 +76,15 @@ export class AuthService {
   getNom(): Observable<any> {
     return this.nom;
   }
+
+  setRole(role: any) {
+    this.role.next(role);
+  }
+
+  getRole(): Observable<number> {
+    return this.role;
+  }
+
   setBearerToken(token: string) {
     sessionStorage.setItem('bearer_token', token);
   }
@@ -100,12 +111,15 @@ export class AuthService {
       }),
       map((result) => {
         this.setUserData(result.nom);
+        this.setNom(result.nom);
+        this.setRole(result.role_id);
         return result !== false;
       })
     );
   }
 
   removeBearerToken(): void {
+    sessionStorage.removeItem('role');
     this.http.post<any>(this.urlApi + '/logout', {}).subscribe();
     sessionStorage.removeItem('bearer_token');
   }
