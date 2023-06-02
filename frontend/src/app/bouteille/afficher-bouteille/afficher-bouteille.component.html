@@ -57,7 +57,7 @@
               <i class="bx bx-minus"
                 (click)="modifierQuantiteBouteille( bouteilleCellier?.quantite - 1, bouteilleCellier?.cellier_id, bouteilleCellier?.bouteille_id)"></i>
             </div>
-            <p>$ {{ (bouteilleCellier?.bouteille.prix_saq).toFixed(2) }}</p>
+            <p>$ {{ bouteilleCellier?.bouteille.prix_saq }}</p>
           </div>
         </div>
       </div>

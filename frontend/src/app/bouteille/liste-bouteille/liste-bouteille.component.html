@@ -7,10 +7,11 @@
   </div> -->
   <div class="search-box">
     <i class="bx bx-search-alt"></i>
-    <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Vin rouge" (input)="filterBouteilles()" />
+    <input type="text" [(ngModel)]="searchTerm" name="search" id="search" placeholder="Rechercher dans ce cellier" (input)="filterBouteilles()" />
   </div>
   <div class="title">
     <!-- <button mat-button [routerLink]="['/cellier/' + cellier_id + '/bouteille/' + bouteille_id +'/edit']" routerLinkActive="actif"><mat-icon>edit</mat-icon>Modifier</button> -->
+  <h2>{{ cellierNom }}</h2>
 
    <!--<p>{{ bouteille.bouteille?.nom }}</p>-->
     <button mat-button [routerLink]="['ajouter']" ><mat-icon>add_circle</mat-icon>Ajouter une bouteille</button>
@@ -32,7 +33,7 @@
             <p><strong>{{ bouteille.bouteille.bouteille_nom.substring(0, 10) + "..." }}</strong></p>
             <p>{{ bouteille.bouteille.pays}}</p>
             <p>{{ bouteille.bouteille.format }}</p>
-            <span>$ {{ (bouteille.bouteille.prix_saq ).toFixed(2) }}</span>
+            <span>$ {{ bouteille.bouteille.prix_saq }}</span>
           </a>
         </div>
         <img mat-card-image [src]="bouteille.bouteille.image_url" alt="vin img" >
