@@ -123,4 +123,7 @@ export class ApiVinoService {
   getSignalerData(){
     return this.http.get(this.urlApi +'/signaler')
   }
+  deleteAllListeAchat(){
+    return this.http.delete(this.urlApi+'/listeAchat')
+  }
 }

@@ -62,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/celliers/{cellier}/bouteilles', [BouteilleCellierController::class,'index']);
     // Routes for ListeAchatController
     Route::get('/listeAchat', [ListeAchatController::class, 'index']);
+    Route::delete('/listeAchat', [ListeAchatController::class, 'clean']);
     Route::post('/listeAchat/ajouter', [ListeAchatController::class, 'store']);
     Route::get('/listeAchat/{id}', [ListeAchatController::class, 'show']);
 Route::delete('/listeAchat/bouteille/{bouteilleId}', [ListeAchatController::class, 'destroyBouteille']);

@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiVinoService } from 'src/app/services/api-vino.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 @Component({
   selector: 'app-ajout-bouteille-non-lister',
@@ -32,6 +33,7 @@ export class AjoutBouteilleNonListerComponent implements OnInit {
   cellier_id: any;
 
   constructor(
+    private entete:EnteteAuthComponent,
     private http: HttpClient,
     private apiVinoService: ApiVinoService,
     private route: ActivatedRoute,
@@ -93,6 +95,8 @@ export class AjoutBouteilleNonListerComponent implements OnInit {
         .ajouterBouittelleNonLister(this.cellier_id, body)
         .subscribe((result: any) => {
           this.router.navigate(['/cellier/' + this.cellier_id + '/bouteille']);
+          this.authService.setMessage('Bouteille est ajouter avec succés');
+          this.entete.showMessage();
         });
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth-service';
 
 @Component({
   selector: 'app-admin-statistique',
@@ -11,7 +12,9 @@ export class AdminStatistiqueComponent implements OnInit {
   chart1: Chart | null = null;
   chart2: Chart | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService:AuthService) { 
+    this.authService.setLoading(true);
+  }
 
   ngOnInit() {
     this.retrieveUsersWithCellarInfo();
@@ -21,7 +24,7 @@ export class AdminStatistiqueComponent implements OnInit {
   retrieveUsersWithCellarInfo() {
     this.http.get<any>('http://127.0.0.1:8000/api/statistique/cellier').subscribe(users => {
       this.updateChartCellier(users);
-      console.log(users);
+      
     });
   }
   
@@ -29,6 +32,7 @@ export class AdminStatistiqueComponent implements OnInit {
     this.http.get<any>('http://127.0.0.1:8000/api/statistique/bouteille').subscribe(users => {
       console.log(users);
       this.updateChartBouteille(users);
+      this.authService.setLoading(false);
     });
   }
 

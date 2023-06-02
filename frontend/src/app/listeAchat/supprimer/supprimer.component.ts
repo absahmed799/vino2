@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiVinoService} from "../../services/api-vino.service";
+import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 export interface DialogData {
   bouteille_id: any,
@@ -22,7 +24,9 @@ export class SupprimerComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private http: HttpClient,
     private router: Router,
-    private api:ApiVinoService
+    private api:ApiVinoService,
+    private authService:AuthService,
+    private entete:EnteteAuthComponent
   ) {
   }
 
@@ -40,9 +44,12 @@ export class SupprimerComponent {
     this.api.supprimerBouteilleListeAchat(bouteille_id)
       .subscribe(
         response => {
+          this.fermerBouteille() ;
           console.log('La bouteille a été supprimée de la liste d\'achat');
           // Réalisez les actions nécessaires après la suppression réussie
           this.router.navigate(['/listeAchat'])
+          this.authService.setMessage('Bouteille est supprimer avec succés');
+          this.entete.showMessage();
 
         },
         error => {

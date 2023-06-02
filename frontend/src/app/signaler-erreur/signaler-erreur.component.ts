@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth-service';
+import { EnteteAuthComponent } from '../layout/entete-auth/entete-auth.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signaler-erreur',
@@ -9,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class SignalerErreurComponent {
   signaler: any = {}; // Object to store form data
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService:AuthService,private entete:EnteteAuthComponent,private router:Router) { }
 
   onSubmit() {
     if (this.validateForm()) {
@@ -18,9 +21,9 @@ export class SignalerErreurComponent {
       this.http.post('http://127.0.0.1:8000/api/signaler', this.signaler)
         .subscribe(
           response => {
-            console.log('Signaler added successfully');
-            // Reset form fields
-            this.signaler = {};
+            this.router.navigate(['/cellier']);
+            this.authService.setMessage("L'erreur a été signaler avec succés" );
+            this.entete.showMessage();
           },
           error => {
             console.log('Error adding signaler:', error);

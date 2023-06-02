@@ -103,7 +103,7 @@ export class AjouterBouteilleComponent implements OnInit {
       this.apiVinoService
         .ajouterBouteille(this.cellier_id, body)
         .subscribe((result: any) => {
-          this.authService.setMessage('Bouteille est ajouté avec success');
+          this.authService.setMessage('Bouteille est ajouté avec succés');
           this.entete.showMessage();
           this.router.navigate(['/cellier/' + this.cellier_id + '/bouteille']);
         });

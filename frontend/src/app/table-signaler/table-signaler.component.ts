@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from '../auth/auth-service';
 
 interface Signaler {
   titre_erreur: string;
@@ -16,11 +17,13 @@ interface Signaler {
 export class TableSignalerComponent implements OnInit {
   dataSource: MatTableDataSource<Signaler> = new MatTableDataSource<Signaler>([]);
   displayedColumns: string[] = ['titre_erreur', 'description_erreur', 'utilisateur_id'];
-
-  constructor(private http: HttpClient) { }
-
+  
+  constructor(private http: HttpClient,private authService:AuthService) { 
+    this.authService.setLoading(true);
+  }
+ 
   ngOnInit() {
-    this.fetchData();
+    this.fetchData(); 
   }
 
   fetchData() {
@@ -28,6 +31,7 @@ export class TableSignalerComponent implements OnInit {
       .subscribe(
         data => {
           this.dataSource.data = data;
+          this.authService.setLoading(false);
         },
         error => {
           console.log('Error fetching signaler data:', error);

@@ -44,7 +44,7 @@ export class AjouterCellierComponent {
       .subscribe((result: any) => {
         this.error = false;
         
-        this.authService.setMessage('Cellier ajouter avec success');
+        this.authService.setMessage('Cellier ajouter avec succés');
         this.entete.showMessage();
         this.router.navigate(['/cellier']);
       });

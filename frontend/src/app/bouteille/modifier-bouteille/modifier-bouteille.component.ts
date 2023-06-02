@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiVinoService} from "../../services/api-vino.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from 'src/app/auth/auth-service';
+import { EnteteAuthComponent } from 'src/app/layout/entete-auth/entete-auth.component';
 
 @Component({
   selector: 'app-modifier-bouteille',
@@ -15,7 +17,8 @@ export class ModifierBouteilleComponent {
   bouteille_id: any
   formModifier: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiVinoService) {
+  constructor(private router: Router, private route: ActivatedRoute,
+    private authService:AuthService,private entete:EnteteAuthComponent, private api: ApiVinoService) {
 
 
     this.formModifier = new FormGroup({
@@ -53,6 +56,8 @@ export class ModifierBouteilleComponent {
       this.api.modifierBouteilleCellier(this.cellier_id, this.bouteille_id, body)
         .subscribe(result => {
           this.router.navigate(['/cellier/' + this.cellier_id+ '/bouteille/' + this.bouteille_id])
+          this.authService.setMessage('Bouteille est modifié avec succés');
+          this.entete.showMessage();
         })
     }
   }
